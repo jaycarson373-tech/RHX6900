@@ -23,7 +23,7 @@ const basket: BasketCoin[] = [
     lane: "Core",
     allocation: "22%",
     thesis: "Holder alignment, meme energy, and the distribution rail.",
-    color: "#111111",
+    color: "#e8ff17",
   },
   {
     symbol: "SOL",
@@ -161,8 +161,68 @@ const steps: AirdropStep[] = [
 const lanes = [
   { label: "RWA sleeve", value: "29%", copy: "ONDO, LINK, CFG, PYTH" },
   { label: "Core reserves", value: "31%", copy: "RHI6900, BTC, ETH, SOL" },
-  { label: "Degen growth", value: "25%", copy: "JUP, RENDER, WIF, BONK" },
+  { label: "Meme conveyor", value: "25%", copy: "WIF, BONK, PEPE, POPCAT" },
   { label: "Execution cash", value: "3%", copy: "USDC routing buffer" },
+];
+
+const dashboardStats = [
+  { label: "Index treasury", value: "$690,420", detail: "+18.7% draft cycle" },
+  { label: "Holder wallets", value: "6,900", detail: "snapshot-ready" },
+  { label: "Airdrop assets", value: "14", detail: "coins in rotation" },
+  { label: "Meme sleeve", value: "25%", detail: "high-beta belt" },
+];
+
+const dashboardFeed = [
+  { asset: "RHI6900", route: "Core weight", amount: "22.0%", status: "Active" },
+  { asset: "ONDO", route: "RWA route", amount: "8.0%", status: "Queued" },
+  { asset: "WIF", route: "Meme belt", amount: "3.0%", status: "Live" },
+  { asset: "BONK", route: "Meme belt", amount: "3.0%", status: "Live" },
+  { asset: "LINK", route: "RWA oracle", amount: "7.0%", status: "Queued" },
+];
+
+const memeCoins = [
+  {
+    symbol: "WIF",
+    name: "dogwifhat",
+    allocation: "3%",
+    copy: "Solana meme beta with deep cultural liquidity.",
+    color: "#c8965a",
+  },
+  {
+    symbol: "BONK",
+    name: "Bonk",
+    allocation: "3%",
+    copy: "Solana-native community flow and distribution density.",
+    color: "#f0be35",
+  },
+  {
+    symbol: "PEPE",
+    name: "Pepe",
+    allocation: "2%",
+    copy: "Ethereum meme benchmark for pure attention markets.",
+    color: "#74d65d",
+  },
+  {
+    symbol: "POPCAT",
+    name: "Popcat",
+    allocation: "2%",
+    copy: "High-beta Solana meme momentum sleeve.",
+    color: "#f2a2c4",
+  },
+  {
+    symbol: "MOG",
+    name: "Mog Coin",
+    allocation: "2%",
+    copy: "Culture coin exposure for aggressive rotations.",
+    color: "#8f78ff",
+  },
+  {
+    symbol: "SPX",
+    name: "SPX6900",
+    allocation: "2%",
+    copy: "Index-adjacent meme reflexivity for the 6900 lane.",
+    color: "#e8ff17",
+  },
 ];
 
 const faqs = [
@@ -185,10 +245,10 @@ const faqs = [
 ];
 
 const navLinks = [
+  { label: "Dashboard", href: "#dashboard" },
   { label: "Basket", href: "#basket" },
+  { label: "Memes", href: "#memes" },
   { label: "Airdrops", href: "#airdrops" },
-  { label: "Rules", href: "#rules" },
-  { label: "FAQ", href: "#faq" },
 ];
 
 const statStyle = (accent: string): CSSProperties =>
@@ -245,7 +305,7 @@ export default function Home() {
             <div className="hero-notes" aria-label="Index highlights">
               <span>Wallet-native rewards</span>
               <span>RWA sleeve</span>
-              <span>Custom rebalance</span>
+              <span>Neon meme belt</span>
             </div>
           </div>
 
@@ -260,7 +320,7 @@ export default function Home() {
               <div className="terminal-total">
                 <span>Projected index pool</span>
                 <strong>$690,420</strong>
-                <em>draft treasury preview</em>
+                <em>neon dashboard preview</em>
               </div>
 
               <div className="terminal-metrics">
@@ -342,6 +402,81 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section flush-top dashboard-section" id="dashboard">
+        <div className="layout-rail">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">/ DASHBOARD /</div>
+              <h2>Index-style dashboard for the RHI6900 machine.</h2>
+            </div>
+            <p>
+              A holder-facing control room that makes the index feel live:
+              treasury preview, airdrop flow, basket weights, and the meme belt
+              all in one scan.
+            </p>
+          </div>
+
+          <div className="dashboard-shell">
+            <div className="dashboard-topline">
+              {dashboardStats.map((stat) => (
+                <article className="dashboard-stat" key={stat.label}>
+                  <span>{stat.label}</span>
+                  <strong>{stat.value}</strong>
+                  <em>{stat.detail}</em>
+                </article>
+              ))}
+            </div>
+
+            <div className="dashboard-body">
+              <article className="dashboard-chart-card">
+                <div className="panel-head">
+                  <span>Basket conveyor</span>
+                  <b>Weights</b>
+                </div>
+                <div className="dashboard-chart">
+                  {basket.slice(0, 12).map((coin, index) => (
+                    <div className="dashboard-bar" key={coin.symbol}>
+                      <span
+                        style={
+                          {
+                            "--coin-accent": coin.color,
+                            "--bar-height": `${30 + ((index * 19) % 56)}%`,
+                          } as CSSProperties
+                        }
+                      />
+                      <b>{coin.symbol}</b>
+                    </div>
+                  ))}
+                </div>
+                <div className="dashboard-heat">
+                  <span>RWA rails</span>
+                  <span>Core reserves</span>
+                  <span>Meme belt</span>
+                  <span>Dry powder</span>
+                </div>
+              </article>
+
+              <aside className="dashboard-feed">
+                <div className="panel-head">
+                  <span>Holder flow</span>
+                  <b>Cycle 01</b>
+                </div>
+                {dashboardFeed.map((item) => (
+                  <div className="feed-item" key={`${item.asset}-${item.route}`}>
+                    <span>
+                      <b>{item.asset}</b>
+                      <em>{item.route}</em>
+                    </span>
+                    <strong>{item.amount}</strong>
+                    <i>{item.status}</i>
+                  </div>
+                ))}
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section" id="rules">
         <div className="layout-rail">
           <div className="section-head">
@@ -408,6 +543,49 @@ export default function Home() {
                 <p>{coin.thesis}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section flush-top meme-section" id="memes">
+        <div className="layout-rail">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">/ MEME CONVEYOR /</div>
+              <h2>Meme coins ride the belt.</h2>
+            </div>
+            <p>
+              The meme sleeve is treated like a moving conveyor: high-beta
+              attention coins rotate through the RHI6900 index without hiding
+              the core RWA and reserve rails.
+            </p>
+          </div>
+
+          <div className="conveyor-shell" aria-label="Meme coin conveyor belt">
+            <div className="conveyor-track">
+              {[...memeCoins, ...memeCoins].map((coin, index) => (
+                <article
+                  className="meme-card"
+                  key={`${coin.symbol}-${index}`}
+                  style={statStyle(coin.color)}
+                >
+                  <span className="coin-avatar" aria-hidden="true">
+                    {coin.symbol.slice(0, 2)}
+                  </span>
+                  <div>
+                    <b>{coin.symbol}</b>
+                    <em>{coin.name}</em>
+                  </div>
+                  <strong>{coin.allocation}</strong>
+                  <p>{coin.copy}</p>
+                </article>
+              ))}
+            </div>
+            <div className="conveyor-rollers" aria-hidden="true">
+              {Array.from({ length: 16 }).map((_, index) => (
+                <span key={index} />
+              ))}
+            </div>
           </div>
         </div>
       </section>

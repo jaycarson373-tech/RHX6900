@@ -36,6 +36,10 @@ test("server-renders the RHI6900 index site", async () => {
   assert.match(html, /Robin Hood Index/);
   assert.match(html, /Holder airdrops/);
   assert.match(html, /Coins we are in, plus RWA/);
+  assert.match(html, /Index-style dashboard/);
+  assert.match(html, /Meme coins ride the belt/);
+  assert.match(html, /PEPE/);
+  assert.match(html, /SPX6900/);
   assert.match(html, /ONDO/);
   assert.match(html, /Centrifuge/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|SkeletonPreview/i);
@@ -54,4 +58,7 @@ test("removes disposable starter dependencies and imports", async () => {
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.match(css, /hero-terminal/);
   assert.match(css, /basket-table/);
+  assert.match(css, /dashboard-shell/);
+  assert.match(css, /conveyor-track/);
+  assert.match(css, /#e8ff17/);
 });

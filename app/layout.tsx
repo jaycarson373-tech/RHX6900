@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 const siteTitle = "RHI6900 | Robin Hood Index";
 const siteDescription =
-  "A custom holder airdrop index for RHI6900, conviction coins, RWA assets, and Robin Hood-style crypto exposure.";
+  "A neon Robin Hood-style holder airdrop index for RHI6900, conviction coins, RWA assets, and meme-belt crypto exposure.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: siteTitle,
       description:
-        "Hold RHI6900 and follow a custom Robin Hood index of coins, RWA plays, reserves, and meme beta.",
+        "Hold RHI6900 and follow a neon custom Robin Hood index with a dashboard, RWA sleeve, and meme conveyor.",
       images: [
         {
           url: "/og.png",
@@ -51,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: siteTitle,
       description:
-        "A holder airdrop index for coins we are in, RWA rails, and high-conviction crypto exposure.",
+        "A holder airdrop index for coins we are in, RWA rails, and a meme conveyor belt.",
       images: ["/og.png"],
     },
     icons: {
@@ -62,7 +62,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#e9e7df",
+  themeColor: "#e8ff17",
 };
 
 export default function RootLayout({
