@@ -25,33 +25,27 @@ async function render() {
   );
 }
 
-test("server-renders the RHX6900 index site", async () => {
+test("server-renders the RHX6900 treasury experience", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>RHX6900 \| Robinhood Index 6900<\/title>/i);
-  assert.match(html, /RHX6900/);
-  assert.match(html, /Robinhood Index 6900/);
-  assert.match(html, /STOP TRADING\. BELIEVE IN SOMETHING\./);
-  assert.match(html, /RHX6900 tracks Wishbone/);
-  assert.match(html, /HOW RHX6900 WORKS/);
-  assert.match(html, /Five coins\. One equal-weight index/);
+  assert.match(html, /<title>RHX6900 \| Robinhood Ecosystem Treasury<\/title>/i);
+  assert.match(html, /STOP TRADING/);
+  assert.match(html, /BELIEVE IN SOMETHING/);
+  assert.match(html, /Protocol fees continuously acquire/);
+  assert.match(html, /CURRENT TREASURY HOLDINGS/);
+  assert.match(html, /FEES BECOME HOLDINGS/);
+  assert.match(html, /CREATOR FEES/);
+  assert.match(html, /AUTO BUY/);
+  assert.match(html, /NEXT AIRDROP/);
+  assert.match(html, /THE NEXT DISTRIBUTION IS FORMING/);
   assert.match(html, /PROOF, NOT PROMISES/);
-  assert.match(html, /Awaiting first purchase/);
-  assert.match(html, /Awaiting first distribution/);
-  assert.match(html, /EVERY 15 MINUTES, HOLDERS RECEIVE THE ECOSYSTEM/);
-  assert.match(html, /CURRENT RHX6900 COINS/);
-  assert.match(html, /RHX6900 live dashboard/);
-  assert.match(html, /rhx6900-logo\.jpg/);
-  assert.match(html, /RHX6900 live flow/);
-  assert.match(html, /5 ACTIVE COINS/);
-  assert.match(html, /Hold RHX6900\. Receive the ecosystem/);
-  assert.match(html, /THE RHX6900 MEME CONVEYOR/);
+  assert.match(html, /THE MEME ARCHIVE NEVER CLOSES/);
   assert.match(html, /CONSECUTIVE HOLD BONUS/);
-  assert.match(html, /6 months/);
-  assert.match(html, /10x/);
+  assert.match(html, /6 months/i);
+  assert.match(html, /10x/i);
   assert.match(html, /WISHBONE/);
   assert.match(html, /TENDIES/);
   assert.match(html, /CASHCAT/);
@@ -66,11 +60,13 @@ test("server-renders the RHX6900 index site", async () => {
   assert.match(html, /coins\/juggernaut\.jpg/);
   assert.match(html, /rhx-meme-anime-blonde\.jpg/);
   assert.match(html, /rhx-meme-moon\.jpg/);
+  assert.match(html, /og\.png/);
+  assert.doesNotMatch(html, /Robinhood Index 6900|CURRENT RHX6900 COINS/i);
   assert.doesNotMatch(html, /ONDO|Centrifuge|PENDLE|USDC/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|SkeletonPreview/i);
 });
 
-test("removes disposable starter dependencies and imports", async () => {
+test("ships the redesigned motion and responsive presentation", async () => {
   const [page, layout, packageJson, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
@@ -78,18 +74,22 @@ test("removes disposable starter dependencies and imports", async () => {
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
+  assert.match(page, /import\("gsap"\)/);
+  assert.match(page, /lucide-react/);
+  assert.match(page, /setInterval/);
+  assert.match(layout, /\/og\.png/);
+  assert.match(packageJson, /"gsap"/);
+  assert.match(packageJson, /"lucide-react"/);
+  assert.match(css, /hero-scene/);
+  assert.match(css, /rhx-cathedral-hero\.png/);
+  assert.match(css, /holding-card/);
+  assert.match(css, /treasury-flow/);
+  assert.match(css, /countdown-orbit/);
+  assert.match(css, /archive-track/);
+  assert.match(css, /scroll-snap-type/);
+  assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /#efff00/);
   assert.doesNotMatch(page, /_sites-preview|SkeletonPreview|react-loading-skeleton/);
   assert.doesNotMatch(layout, /codex-preview|Starter Project/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  assert.match(css, /hero-terminal/);
-  assert.match(css, /basket-table/);
-  assert.match(css, /dashboard-shell/);
-  assert.match(css, /meme-gallery-track/);
-  assert.match(css, /engine-grid/);
-  assert.match(css, /terminal-panel/);
-  assert.match(css, /header-socials/);
-  assert.match(css, /#efff00/);
-  assert.match(css, /hero-logo-lockup/);
-  assert.match(css, /terminal-logo-strip/);
-  assert.match(css, /RHX6900 two-tone interface/);
 });

@@ -1,753 +1,568 @@
-import type { CSSProperties } from "react";
+"use client";
 
-type BasketCoin = {
+import type { CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  Activity,
+  ArrowDown,
+  CircleDollarSign,
+  Coins,
+  Send,
+  ShieldCheck,
+  Timer,
+  Vault,
+  WalletCards,
+} from "lucide-react";
+
+type TreasuryCoin = {
   symbol: string;
   name: string;
-  lane: string;
-  allocation: string;
-  thesis: string;
+  weight: string;
   contract: string;
   image: string;
-  color: string;
+  trend: number[];
 };
 
-type AirdropStep = {
-  number: string;
-  title: string;
-  body: string;
-  tag: string;
-};
-
-type HolderBonus = {
-  window: string;
-  multiplier: string;
-  copy: string;
-};
-
-const basket: BasketCoin[] = [
+const holdings: TreasuryCoin[] = [
   {
     symbol: "WISHBONE",
     name: "Wishbone",
-    lane: "Robinhood",
-    allocation: "20%",
-    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    weight: "20%",
     contract: "0x77581054581B9c525E7dd7a0155DE43867532d03",
     image: "/coins/wishbone.jpg",
-    color: "#efff00",
+    trend: [18, 34, 26, 48, 42, 62, 54, 72, 65, 84, 78, 96],
   },
   {
     symbol: "TENDIES",
     name: "Tendies",
-    lane: "Robinhood",
-    allocation: "20%",
-    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    weight: "20%",
     contract: "0x45242320DBB855EeA8Fd36804C6487E10E97FCF9",
     image: "/coins/tendies.jpg",
-    color: "#efff00",
+    trend: [28, 22, 42, 35, 56, 48, 68, 62, 74, 70, 88, 92],
   },
   {
     symbol: "CASHCAT",
     name: "Cashcat",
-    lane: "Robinhood",
-    allocation: "20%",
-    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    weight: "20%",
     contract: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
     image: "/coins/cashcat.jpg",
-    color: "#efff00",
+    trend: [20, 38, 30, 44, 58, 50, 64, 72, 68, 82, 76, 94],
   },
   {
     symbol: "HOODRAT",
     name: "Hoodrat",
-    lane: "Robinhood",
-    allocation: "20%",
-    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    weight: "20%",
     contract: "0x8e62F281f282686fCa6dCB39288069a93fC23F1c",
     image: "/coins/hoodrat.jpg",
-    color: "#efff00",
+    trend: [24, 30, 44, 36, 52, 64, 58, 76, 70, 86, 80, 98],
   },
   {
     symbol: "JUGGERNAUT",
     name: "Juggernaut",
-    lane: "Robinhood",
-    allocation: "20%",
-    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    weight: "20%",
     contract: "0xD7321801CAae694090694Ff55A9323139F043B88",
     image: "/coins/juggernaut.jpg",
-    color: "#efff00",
+    trend: [16, 28, 24, 40, 36, 54, 50, 68, 64, 80, 74, 90],
   },
 ];
 
-const steps: AirdropStep[] = [
-  {
-    number: "01",
-    title: "Index",
-    body: "Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut each hold an equal 20% target weight.",
-    tag: "5 COINS",
-  },
-  {
-    number: "02",
-    title: "Accumulate",
-    body: "Protocol fees are used to purchase selected coins currently active within RHX6900.",
-    tag: "PURCHASE",
-  },
-  {
-    number: "03",
-    title: "Distribute",
-    body: "Every 15 minutes, accumulated assets are distributed proportionally to eligible RHX6900 holders.",
-    tag: "AIRDROP",
-  },
-  {
-    number: "04",
-    title: "Verify",
-    body: "Index composition, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain.",
-    tag: "ON-CHAIN",
-  },
+const holdBonuses = [
+  ["1 DAY", "1.5X"],
+  ["1 WEEK", "2X"],
+  ["1 MONTH", "3X"],
+  ["3 MONTHS", "5X"],
+  ["6 MONTHS", "10X"],
 ];
 
-const holderBonuses: HolderBonus[] = [
-  { window: "1 day", multiplier: "1.5x", copy: "First streak bonus for continuous RHX6900 holders." },
-  { window: "1 week", multiplier: "2x", copy: "Seven straight days unlock a stronger reward share." },
-  { window: "1 month", multiplier: "3x", copy: "Monthly conviction earns triple airdrop weight." },
-  { window: "3 months", multiplier: "5x", copy: "Quarter-long holders get serious priority." },
-  { window: "6 months", multiplier: "10x", copy: "Maximum diamond-hand multiplier for the strongest streaks." },
-];
-
-const lanes = [
-  { label: "Active Coins", value: "5", copy: "Coins currently active in RHX6900" },
-  { label: "Next Airdrop", value: "15m", copy: "Automatic holder distributions" },
-  { label: "Index Weight", value: "20%", copy: "Equal target weight per coin" },
-  { label: "Eligible Holders", value: "1M+", copy: "Minimum RHX6900 balance" },
-];
-
-const dashboardStats = [
-  { label: "Active Coins", value: String(basket.length), detail: "currently active" },
-  { label: "Next Airdrop", value: "15m", detail: "automatic distribution" },
-  { label: "Index Weight", value: "20%", detail: "equal weight per coin" },
-  { label: "Eligible Holders", value: "1M+", detail: "minimum RHX6900 balance" },
-];
-
-const dashboardFeed = [
-  { asset: "Assets Accumulated", route: "Awaiting first purchase", amount: "Live", status: "On-chain" },
-  { asset: "Assets Distributed", route: "Awaiting first distribution", amount: "0", status: "Pending" },
-  { asset: "Treasury Wallet", route: "Live data connecting", amount: "Public", status: "Soon" },
-  { asset: "Latest Transaction", route: "Transaction not yet available", amount: "--", status: "Pending" },
-];
-
-const engineCards = [
-  ["Index", "Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut each hold an equal 20% target weight."],
-  ["Accumulate", "Protocol fees are used to purchase selected coins currently active within RHX6900."],
-  ["Distribute", "Every 15 minutes, accumulated assets are distributed proportionally to eligible RHX6900 holders."],
-  ["Verify", "Index composition, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain."],
-];
-
-const receiptRows = [
-  { time: "Pending", wallet: "Eligible holders", asset: "Live data connecting", amount: "Awaiting first distribution", tx: "Transaction not yet available" },
-  { time: "Pending", wallet: "Treasury wallet", asset: "Awaiting first purchase", amount: "No completed rounds yet", tx: "On-chain soon" },
-];
-
-const terminalLines = [
-  "Live data connecting...",
-  "Awaiting first purchase...",
-  "Awaiting first distribution...",
-  "Transaction not yet available...",
-];
-
-const memeArt = [
-  {
-    src: "/memes/rhx-meme-anime-blonde.jpg",
-    alt: "RHX6900 neon market meme with a blonde anime character",
-  },
-  {
-    src: "/memes/rhx-meme-anime-red.jpg",
-    alt: "RHX6900 neon market meme with a red-haired anime character",
-  },
-  {
-    src: "/memes/rhx-meme-chair.jpg",
-    alt: "RHX6900 market meme with a holder seated in front of neon charts",
-  },
-  {
-    src: "/memes/rhx-meme-well-done.jpg",
-    alt: "RHX6900 well done holder meme",
-  },
-  {
-    src: "/memes/rhx-meme-moon.jpg",
-    alt: "RHX6900 moon landing meme",
-  },
-  {
-    src: "/memes/rhx-meme-tendies.jpg",
-    alt: "RHX6900 and Tendies neon anime meme",
-  },
-];
+const protocolStats = [
+  ["Treasury Value", "$", 0, "Awaiting first purchase"],
+  ["Coins Purchased", "", 0, "Live data connecting"],
+  ["Total Airdrops", "", 0, "No completed rounds"],
+  ["Total Holders", "", 0, "Holder scan connecting"],
+  ["Protocol Revenue", "$", 0, "Awaiting first fee"],
+] as const;
 
 const faqs = [
   {
-    q: "What is RHX6900?",
-    a: "RHX6900 is a Robinhood ecosystem protocol that uses fees to acquire selected coins and automatically airdrop the accumulated assets to eligible holders.",
+    question: "What is RHX6900?",
+    answer:
+      "RHX6900 is a Robinhood ecosystem treasury. Protocol fees acquire selected memecoins and distribute accumulated assets to eligible holders.",
   },
   {
-    q: "How do airdrops work?",
-    a: "Every 15 minutes, assets accumulated during the previous round are distributed proportionally to eligible RHX6900 holders.",
+    question: "What does the treasury hold?",
+    answer:
+      "Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut. Each asset has a 20% target weight.",
   },
   {
-    q: "Do holders need to stake or claim?",
-    a: "No. RHX6900 is designed for automatic distributions. Eligible holders do not need to stake or manually claim each round.",
+    question: "How often are assets distributed?",
+    answer:
+      "Every 15 minutes. Eligible holders receive the assets accumulated during the previous round automatically.",
   },
   {
-    q: "Which coins are in RHX6900?",
-    a: "The current RHX6900 index is Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut, weighted equally at 20% each.",
+    question: "Do I need to stake or claim?",
+    answer:
+      "No. Eligibility is based on holding at least 1,000,000 RHX6900. Distributions are designed to arrive automatically.",
   },
   {
-    q: "Can holders verify activity?",
-    a: "Yes. Active coins, treasury purchases, balances, completed airdrops, eligible holders, and transaction receipts are tracked on-chain.",
+    question: "How do hold bonuses work?",
+    answer:
+      "Wallets that continuously remain above the holder gate earn higher distribution weight, from 1.5x after one day to 10x after six months.",
   },
 ];
 
-const navLinks = [
-  { label: "Dashboard", href: "#dashboard" },
-  { label: "How It Works", href: "#engine" },
-  { label: "Coins", href: "#basket" },
-  { label: "Memes", href: "#memes" },
+const memeArt = [
+  "/memes/rhx-meme-anime-blonde.jpg",
+  "/memes/rhx-meme-anime-red.jpg",
+  "/memes/rhx-meme-chair.jpg",
+  "/memes/rhx-meme-well-done.jpg",
+  "/memes/rhx-meme-moon.jpg",
+  "/memes/rhx-meme-tendies.jpg",
 ];
 
-const socialLinks = [
-  { label: "X", href: "https://x.com/rhx6900_", aria: "Open RHX6900 on X" },
-  { label: "TG", href: "https://t.me/rhx6900", aria: "Open RHX6900 on Telegram" },
-];
+const feathers = Array.from({ length: 26 }, (_, index) => ({
+  x: (index * 37) % 100,
+  delay: (index * 1.7) % 14,
+  duration: 14 + (index % 7) * 2.1,
+  drift: -70 + (index % 8) * 20,
+  scale: 0.45 + (index % 5) * 0.16,
+}));
 
-const statStyle = (accent: string): CSSProperties =>
-  ({
-    "--coin-accent": accent,
-  }) as CSSProperties;
+const particles = Array.from({ length: 42 }, (_, index) => ({
+  x: (index * 43) % 100,
+  y: (index * 29) % 100,
+  delay: (index * 0.8) % 9,
+  size: 1 + (index % 3),
+}));
+
+const cityBlocks = Array.from({ length: 28 }, (_, index) => 26 + ((index * 47) % 150));
+
+function SceneSeal() {
+  return (
+    <div className="scene-seal" aria-hidden="true">
+      <span />
+      <img src="/icon-512.png" alt="" />
+      <span />
+    </div>
+  );
+}
+
+function Counter({ prefix, value }: { prefix: string; value: number }) {
+  return (
+    <strong className="stat-value" data-prefix={prefix} data-count={value}>
+      {prefix}{value.toLocaleString()}
+    </strong>
+  );
+}
 
 export default function Home() {
-  const logoAlt = "RHX6900 neon coin logo";
+  const heroRef = useRef<HTMLElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
+  const [secondsLeft, setSecondsLeft] = useState(900);
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const elapsed = Math.floor(Date.now() / 1000) % 900;
+      setSecondsLeft(elapsed === 0 ? 900 : 900 - elapsed);
+    };
+
+    updateCountdown();
+    const timer = window.setInterval(updateCountdown, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    const cursor = cursorRef.current;
+
+    const handlePointer = (event: PointerEvent) => {
+      if (cursor) {
+        cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+      }
+
+      if (hero) {
+        const rect = hero.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+        hero.style.setProperty("--parallax-x", x.toFixed(3));
+        hero.style.setProperty("--parallax-y", y.toFixed(3));
+      }
+    };
+
+    window.addEventListener("pointermove", handlePointer, { passive: true });
+    return () => window.removeEventListener("pointermove", handlePointer);
+  }, []);
+
+  useEffect(() => {
+    let dispose = () => {};
+
+    void (async () => {
+      const gsapModule = await import("gsap");
+      const triggerModule = await import("gsap/ScrollTrigger");
+      const gsap = gsapModule.default;
+      const ScrollTrigger = triggerModule.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+
+      const context = gsap.context(() => {
+        gsap.fromTo(
+          ".hero-emblem, .hero-kicker, .hero-title, .hero-copyline, .hero-actions, .hero-protocol-strip",
+          { autoAlpha: 0, y: 34 },
+          { autoAlpha: 1, y: 0, duration: 1.15, stagger: 0.11, ease: "power3.out" },
+        );
+
+        gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => {
+          gsap.fromTo(
+            element,
+            { autoAlpha: 0, y: 64 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: { trigger: element, start: "top 84%", once: true },
+            },
+          );
+        });
+
+        gsap.utils.toArray<HTMLElement>(".holding-card").forEach((card, index) => {
+          gsap.fromTo(
+            card,
+            { autoAlpha: 0, y: 72, rotateY: index % 2 === 0 ? -5 : 5 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              rotateY: 0,
+              duration: 1.05,
+              delay: index * 0.06,
+              ease: "power3.out",
+              scrollTrigger: { trigger: card, start: "top 90%", once: true },
+            },
+          );
+        });
+
+        document.querySelectorAll<HTMLElement>("[data-count]").forEach((element) => {
+          const target = Number(element.dataset.count ?? 0);
+          const prefix = element.dataset.prefix ?? "";
+          const state = { value: 0 };
+          gsap.to(state, {
+            value: target,
+            duration: 1.8,
+            ease: "power2.out",
+            scrollTrigger: { trigger: element, start: "top 92%", once: true },
+            onUpdate: () => {
+              element.textContent = `${prefix}${Math.round(state.value).toLocaleString()}`;
+            },
+          });
+        });
+      }, rootRef);
+
+      dispose = () => context.revert();
+    })();
+
+    return () => dispose();
+  }, []);
+
+  const minutes = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
+  const seconds = String(secondsLeft % 60).padStart(2, "0");
+  const progress = ((900 - secondsLeft) / 900) * 360;
 
   return (
-    <main>
+    <main ref={rootRef}>
+      <div className="cursor-glow" ref={cursorRef} aria-hidden="true" />
+
       <header className="site-header">
-        <div className="header-shell">
-          <a className="brand-logo-link" href="#top" aria-label="RHX6900 home">
-            <span className="brand-mark" aria-hidden="true">
-              <img src="/rhx6900-logo.jpg" alt="" />
-            </span>
+        <a className="header-brand" href="#top" aria-label="RHX6900 home">
+          <img src="/rhx6900-logo.jpg" alt="" />
+          <span>RHX6900</span>
+        </a>
+
+        <nav className="site-nav" aria-label="Primary navigation">
+          <a href="#holdings">Holdings</a>
+          <a href="#treasury">Treasury</a>
+          <a href="#airdrops">Airdrops</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div className="header-socials" aria-label="Social links">
+          <a href="https://x.com/rhx6900_" target="_blank" rel="noreferrer" aria-label="RHX6900 on X">
+            X
           </a>
-
-          <nav className="topnav" aria-label="Primary navigation">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="header-socials" aria-label="Social links">
-            {socialLinks.map((link) => (
-              <a key={link.label} href={link.href} aria-label={link.aria} target="_blank" rel="noreferrer">
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <a href="https://t.me/rhx6900" target="_blank" rel="noreferrer" aria-label="RHX6900 on Telegram">
+            <Send size={15} strokeWidth={2.2} />
+            <span>TG</span>
+          </a>
         </div>
       </header>
 
-      <section className="hero" id="top">
-        <div className="hero-body">
-          <div className="hero-copy">
-            <div className="hero-logo-lockup">
-              <img src="/rhx6900-logo.jpg" alt={logoAlt} />
-            </div>
-            <div className="eyebrow">ROBINHOOD INDEX 6900</div>
-            <h1>RHX6900</h1>
-            <div className="manifesto-line">STOP TRADING. BELIEVE IN SOMETHING.</div>
-            <p className="hero-lede">
-              RHX6900 tracks Wishbone, Tendies, Cashcat, Hoodrat, and
-              Juggernaut at an equal 20% weight. Protocol fees acquire the five
-              active coins, and accumulated assets are airdropped directly to
-              eligible RHX6900 holders every 15 minutes.
-            </p>
-            <div className="hero-actions" aria-label="Primary actions">
-              <a className="button button-dark" href="#airdrops">
-                Airdrops every 15 minutes
-              </a>
-              <a className="button button-light" href="#basket">
-                Current coins
-              </a>
-            </div>
-            <div className="hero-notes" aria-label="RHX6900 utility">
-              <span>5 ACTIVE COINS</span>
-              <span>20% EACH</span>
-              <span>AIRDROPS EVERY 15 MINUTES</span>
-            </div>
+      <section className="hero-scene" id="top" ref={heroRef}>
+        <div className="hero-background" aria-hidden="true" />
+        <div className="hero-rays" aria-hidden="true" />
+        <div className="fog fog-one" aria-hidden="true" />
+        <div className="fog fog-two" aria-hidden="true" />
+        <div className="particle-field" aria-hidden="true">
+          {particles.map((particle, index) => (
+            <i
+              key={index}
+              style={
+                {
+                  "--x": `${particle.x}%`,
+                  "--y": `${particle.y}%`,
+                  "--delay": `${particle.delay}s`,
+                  "--size": `${particle.size}px`,
+                } as CSSProperties
+              }
+            />
+          ))}
+        </div>
+        <div className="feather-field" aria-hidden="true">
+          {feathers.map((feather, index) => (
+            <i
+              key={index}
+              style={
+                {
+                  "--x": `${feather.x}%`,
+                  "--delay": `${feather.delay}s`,
+                  "--duration": `${feather.duration}s`,
+                  "--drift": `${feather.drift}px`,
+                  "--scale": feather.scale,
+                } as CSSProperties
+              }
+            />
+          ))}
+        </div>
+
+        <div className="hero-content">
+          <div className="hero-emblem">
+            <span className="emblem-ring" aria-hidden="true" />
+            <img src="/rhx6900-logo.jpg" alt="RHX6900" />
+          </div>
+          <div className="hero-kicker">Robinhood Ecosystem Treasury</div>
+          <h1 className="hero-title">
+            <span>STOP TRADING.</span>
+            <span>BELIEVE IN SOMETHING.</span>
+          </h1>
+          <p className="hero-copyline">
+            Protocol fees continuously acquire the strongest Robinhood ecosystem memecoins.
+            <br />
+            Every 15 minutes they are distributed to RHX6900 holders.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-button" href="#holdings">
+              <Coins size={18} />
+              Current Holdings
+            </a>
+            <a className="secondary-button" href="#airdrops">
+              <Timer size={18} />
+              View Airdrops
+            </a>
+          </div>
+          <div className="hero-protocol-strip" aria-label="Protocol summary">
+            <span><b>5</b> Treasury Assets</span>
+            <span><b>20%</b> Each</span>
+            <span><b>15M</b> Distribution Cycle</span>
+          </div>
+        </div>
+
+        <a className="scroll-cue" href="#holdings" aria-label="Scroll to current holdings">
+          <ArrowDown size={18} />
+        </a>
+      </section>
+
+      <SceneSeal />
+
+      <section className="scene holdings-scene" id="holdings">
+        <div className="scene-backdrop" aria-hidden="true" />
+        <div className="section-shell">
+          <div className="section-intro reveal">
+            <span className="section-number">01 / HOLDINGS</span>
+            <h2>CURRENT TREASURY HOLDINGS</h2>
+            <p>Five Robinhood ecosystem assets. Equal conviction. Twenty percent each.</p>
           </div>
 
-          <div className="hero-visual">
-            <div className="coin-halo" aria-hidden="true">
-              <img src="/icon-512.png" alt="" />
-            </div>
-
-            <div className="hero-terminal" aria-label="RHX6900 live dashboard">
-              <div className="browser-bar">
-                <span />
-                <span />
-                <span />
-                <strong>rhx6900.rhx</strong>
-              </div>
-              <div className="terminal-content">
-                <div className="terminal-logo-strip">
-                  <img src="/rhx6900-logo.jpg" alt={logoAlt} />
+          <div className="holdings-grid" aria-label="Current treasury holdings">
+            {holdings.map((coin, index) => (
+              <article className="holding-card" key={coin.symbol} style={{ "--delay": `${index * -0.8}s` } as CSSProperties}>
+                <div className="card-reflection" aria-hidden="true" />
+                <div className="coin-portrait">
+                  <span className="portrait-orbit" aria-hidden="true" />
+                  <img src={coin.image} alt={`${coin.name} logo`} loading="lazy" />
+                </div>
+                <div className="holding-title">
                   <div>
-                    <span>Live panel</span>
-                    <strong>RHX6900 live flow</strong>
+                    <span>{coin.symbol}</span>
+                    <h3>{coin.name}</h3>
                   </div>
+                  <strong>{coin.weight}</strong>
                 </div>
-
-              <div className="terminal-total">
-                <span>Assets Accumulated</span>
-                <strong>Live</strong>
-                <em>Awaiting first purchase</em>
-              </div>
-
-              <div className="terminal-metrics">
-                <div>
-                  <span>Next cycle</span>
-                  <strong>15 min</strong>
+                <div className="holding-metrics">
+                  <span><small>24H</small><b>LIVE</b></span>
+                  <span><small>MARKET CAP</small><b>CONNECTING</b></span>
+                  <span><small>LAST PURCHASED</small><b>AWAITING</b></span>
                 </div>
-                <div>
-                  <span>Active Coins</span>
-                  <strong>{basket.length}</strong>
+                <div className="micro-chart" aria-label={`${coin.name} live chart connecting`}>
+                  {coin.trend.map((height, barIndex) => (
+                    <i key={barIndex} style={{ height: `${height}%`, animationDelay: `${barIndex * 0.08}s` }} />
+                  ))}
                 </div>
-              </div>
-
-              <div className="allocation-chart" aria-label="Allocation bars">
-                {basket.map((coin) => (
-                  <span
-                    key={coin.symbol}
-                    style={
-                      {
-                        "--coin-accent": coin.color,
-                        "--bar-height": "58%",
-                      } as CSSProperties
-                    }
-                  />
-                ))}
-              </div>
-
-              <div className="terminal-grid">
-                <div className="portfolio-panel">
-                  <div className="panel-head">
-                    <span>Top basket</span>
-                    <b>Allocation</b>
-                  </div>
-                  <div className="coin-list compact">
-                    {basket.slice(0, 6).map((coin) => (
-                      <div className="coin-row" key={coin.symbol}>
-                        <span
-                          className="coin-avatar"
-                          style={statStyle(coin.color)}
-                          aria-hidden="true"
-                        >
-                          <img src={coin.image} alt="" />
-                        </span>
-                        <span>
-                          <b>{coin.symbol}</b>
-                          <em>{coin.lane}</em>
-                        </span>
-                        <strong>{coin.allocation}</strong>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="wallet-panel">
-                  <div className="panel-head">
-                    <span>Holder wallet</span>
-                    <b>Airdrop</b>
-                  </div>
-                  <div className="wallet-balance">
-                    <span>Assets Distributed</span>
-                    <strong>0</strong>
-                    <em>Awaiting first distribution</em>
-                  </div>
-                  <div className="wallet-icons" aria-label="Wallet assets">
-                    {basket.slice(0, 5).map((coin) => (
-                      <span
-                        key={coin.symbol}
-                        style={statStyle(coin.color)}
-                        aria-label={coin.symbol}
-                      >
-                        <img src={coin.image} alt="" />
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                <code>{coin.contract}</code>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section flush-top dashboard-section" id="dashboard">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ DASHBOARD /</div>
-              <h2>RHX6900 live dashboard.</h2>
-            </div>
-            <p>
-              Track active coins, treasury purchases, balances, completed
-              airdrops, eligible holders, and transaction receipts as RHX6900
-              goes live on-chain.
-            </p>
+      <SceneSeal />
+
+      <section className="scene treasury-scene" id="treasury">
+        <div className="scene-backdrop" aria-hidden="true" />
+        <div className="section-shell treasury-shell">
+          <div className="section-intro centered reveal">
+            <span className="section-number">02 / THE MACHINE</span>
+            <h2>FEES BECOME HOLDINGS.</h2>
+            <p>One automated treasury flow. Visible from acquisition to distribution.</p>
           </div>
 
-          <div className="dashboard-shell">
-            <div className="dashboard-topline">
-              {dashboardStats.map((stat) => (
-                <article className="dashboard-stat" key={stat.label}>
-                  <span>{stat.label}</span>
-                  <strong>{stat.value}</strong>
-                  <em>{stat.detail}</em>
-                </article>
-              ))}
-            </div>
-
-            <div className="dashboard-body">
-              <article className="dashboard-chart-card">
-                <div className="panel-head">
-                  <span>Active Coins</span>
-                  <b>RHX6900</b>
-                </div>
-                <div className="dashboard-chart">
-                  {basket.map((coin) => (
-                    <div className="dashboard-bar" key={coin.symbol}>
-                      <span
-                        style={
-                          {
-                            "--coin-accent": coin.color,
-                            "--bar-height": "68%",
-                          } as CSSProperties
-                        }
-                      />
-                      <b>{coin.symbol}</b>
+          <div className="treasury-flow reveal" aria-label="Treasury money flow">
+            {[
+              [CircleDollarSign, "CREATOR FEES", "Protocol revenue enters"],
+              [Vault, "TREASURY", "Capital accumulates"],
+              [Coins, "AUTO BUY", "Five memecoins acquired"],
+              [WalletCards, "DISTRIBUTION", "Sent every 15 minutes"],
+            ].map(([Icon, title, description], index) => {
+              const FlowIcon = Icon as typeof CircleDollarSign;
+              return (
+                <div className="flow-stage" key={String(title)}>
+                  <article className="flow-node">
+                    <span><FlowIcon size={28} /></span>
+                    <small>0{index + 1}</small>
+                    <h3>{String(title)}</h3>
+                    <p>{String(description)}</p>
+                  </article>
+                  {index < 3 && (
+                    <div className="flow-connector" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
                     </div>
-                  ))}
+                  )}
                 </div>
-                <div className="dashboard-heat">
-                  {basket.map((coin) => (
-                    <span key={coin.symbol}>{coin.name}</span>
-                  ))}
-                </div>
-              </article>
-
-              <aside className="dashboard-feed">
-                <div className="panel-head">
-                  <span>Holder flow</span>
-                  <b>Cycle 01</b>
-                </div>
-                {dashboardFeed.map((item) => (
-                  <div className="feed-item" key={`${item.asset}-${item.route}`}>
-                    <span>
-                      <b>{item.asset}</b>
-                      <em>{item.route}</em>
-                    </span>
-                    <strong>{item.amount}</strong>
-                    <i>{item.status}</i>
-                  </div>
-                ))}
-              </aside>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="section flush-top engine-section" id="engine">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ HOW RHX6900 WORKS /</div>
-              <h2>Five coins. One equal-weight index.</h2>
-            </div>
-            <p>
-              RHX6900 holds five Robinhood ecosystem coins at a 20% target
-              weight each, accumulated through protocol fees and distributed
-              to eligible holders.
-            </p>
+      <SceneSeal />
+
+      <section className="scene airdrop-scene" id="airdrops">
+        <div className="scene-backdrop" aria-hidden="true" />
+        <div className="section-shell airdrop-shell">
+          <div className="section-intro centered reveal">
+            <span className="section-number">03 / LIVE ROUND</span>
+            <h2>THE NEXT DISTRIBUTION IS FORMING.</h2>
           </div>
 
-          <div className="engine-grid">
-            {engineCards.map(([title, copy]) => (
-              <article className="engine-card" key={title}>
-                <small>{title}</small>
-                <p>{copy}</p>
-              </article>
+          <div className="countdown-layout reveal">
+            <div
+              className="countdown-orbit"
+              style={{ "--progress": `${progress}deg` } as CSSProperties}
+              aria-label={`${minutes} minutes and ${seconds} seconds until the next distribution`}
+            >
+              <div className="countdown-inner">
+                <small>NEXT AIRDROP</small>
+                <time>{minutes}:{seconds}</time>
+                <span>ROUND ACTIVE</span>
+              </div>
+            </div>
+
+            <div className="round-details">
+              <div><span>Current Round Value</span><strong>CONNECTING</strong></div>
+              <div><span>Eligible Wallets</span><strong>SCANNING</strong></div>
+              <div><span>Coins Being Distributed</span><strong>5 ASSETS</strong></div>
+              <div><span>Holder Gate</span><strong>1M+ RHX6900</strong></div>
+            </div>
+          </div>
+
+          <p className="bonus-label reveal">CONSECUTIVE HOLD BONUS</p>
+          <div className="bonus-rail reveal" aria-label="Consecutive holder bonuses">
+            {holdBonuses.map(([window, multiplier]) => (
+              <div key={window}>
+                <span>{window}</span>
+                <strong>{multiplier}</strong>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section flush-top receipts-section">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ TRANSPARENCY /</div>
-              <h2>PROOF, NOT PROMISES.</h2>
-            </div>
-            <p>
-              Track active coins, treasury purchases, balances, completed
-              airdrops, eligible holders, and transaction receipts directly
-              on-chain.
-            </p>
+      <SceneSeal />
+
+      <section className="scene stats-scene" id="stats">
+        <div className="scene-backdrop" aria-hidden="true" />
+        <div className="section-shell">
+          <div className="section-intro reveal">
+            <span className="section-number">04 / PROTOCOL</span>
+            <h2>PROOF, NOT PROMISES.</h2>
+            <p>Live treasury data will populate here as the protocol begins acquiring and distributing assets.</p>
           </div>
 
-          <div className="receipts-layout">
-            <article className="terminal-panel">
-              <div className="terminal-head">
-                <span>Live data</span>
-                <b>Connecting</b>
-              </div>
-              <div className="terminal-feed">
-                {terminalLines.map((line, index) => (
-                  <div className={index === 1 ? "is-active" : ""} key={line}>
-                    <span>{`00:0${index + 3}:90`}</span>
-                    <strong>{line}</strong>
-                  </div>
-                ))}
-              </div>
-            </article>
-
-            <article className="receipt-table">
-              <div className="terminal-head">
-                <span>Latest Transaction</span>
-                <b>Pending</b>
-              </div>
-              <div className="receipt-row receipt-head">
-                <span>Time</span>
-                <span>Wallet</span>
-                <span>Asset</span>
-                <span>Amount</span>
-                <span>Tx</span>
-              </div>
-              {receiptRows.map((row) => (
-                <div className="receipt-row" key={`${row.time}-${row.asset}`}>
-                  <span>{row.time}</span>
-                  <span>{row.wallet}</span>
-                  <span>{row.asset}</span>
-                  <span>{row.amount}</span>
-                  <span>{row.tx}</span>
-                </div>
-              ))}
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="section rules-section" id="rules">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ ELIGIBILITY /</div>
-              <h2>Hold RHX6900. Receive the ecosystem.</h2>
-            </div>
-            <p>
-              RHX6900 keeps the rules simple: fees acquire ecosystem assets,
-              eligible holders receive them automatically, and each round can be
-              verified on-chain.
-            </p>
-          </div>
-
-          <div className="lane-grid">
-            {lanes.map((lane) => (
-              <article className="lane-card" key={lane.label}>
-                <span>{lane.label}</span>
-                <strong>{lane.value}</strong>
-                <p>{lane.copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section flush-top basket-section" id="basket">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ CURRENT COINS /</div>
-              <h2>CURRENT RHX6900 COINS</h2>
-            </div>
-            <p>
-              The five Robinhood ecosystem coins currently active in RHX6900.
-              Every coin has an equal 20% target weight.
-            </p>
-          </div>
-
-          <div className="basket-table">
-            <div className="basket-row basket-row-head">
-              <span>Asset</span>
-              <span>Contract</span>
-              <span>Weight</span>
-              <span>Role</span>
-            </div>
-            {basket.map((coin) => (
-              <article className="basket-row" key={coin.symbol}>
-                <div className="asset-cell">
-                  <span
-                    className="coin-avatar"
-                    style={statStyle(coin.color)}
-                    aria-hidden="true"
-                  >
-                    <img src={coin.image} alt="" />
-                  </span>
-                  <span>
-                    <b>{coin.symbol}</b>
-                    <em>{coin.name}</em>
-                  </span>
-                </div>
-                <code className="contract-address">{coin.contract}</code>
-                <strong>{coin.allocation}</strong>
-                <p>{coin.thesis}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section flush-top airdrops-section" id="airdrops">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ HOLDER AIRDROPS /</div>
-              <h2>EVERY 15 MINUTES, HOLDERS RECEIVE THE ECOSYSTEM.</h2>
-            </div>
-            <p>
-              Hold RHX6900 and remain eligible for automatic distributions. No
-              staking and no claiming. Each round distributes the assets
-              accumulated during the previous 15 minutes.
-            </p>
-          </div>
-
-          <div className="process-grid">
-            {steps.map((step) => (
-              <article className="process-card" key={step.number}>
-                <span>{step.number}</span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                  <b>{step.tag}</b>
-                </div>
+          <div className="stats-grid reveal">
+            {protocolStats.map(([label, prefix, value, note]) => (
+              <article key={label}>
+                <span>{label}</span>
+                <Counter prefix={prefix} value={value} />
+                <small>{note}</small>
               </article>
             ))}
           </div>
 
-          <div className="holder-bonus-panel" aria-label="Consecutive holder bonus multipliers">
-            <div>
-              <div className="eyebrow">/ CONSECUTIVE HOLD BONUS /</div>
-              <h3>Longer holds hit harder.</h3>
-              <p>
-                Wallets that keep the 1M+ RHX6900 gate intact across consecutive
-                snapshots earn boosted airdrop weight when the five active
-                Robinhood ecosystem coins are accumulated by RHX6900.
-              </p>
-            </div>
-            <div className="holder-bonus-grid">
-              {holderBonuses.map((bonus) => (
-                <article className="holder-bonus-card" key={bonus.window}>
-                  <span>{bonus.window}</span>
-                  <strong>{bonus.multiplier}</strong>
-                  <p>{bonus.copy}</p>
-                </article>
-              ))}
-            </div>
+          <div className="proof-strip reveal">
+            <span><Activity size={18} /> Treasury purchases</span>
+            <span><ShieldCheck size={18} /> Holder eligibility</span>
+            <span><WalletCards size={18} /> Distribution receipts</span>
           </div>
         </div>
       </section>
 
-      <section className="section flush-top rebalance-section">
-        <div className="layout-rail">
-          <div className="rebalance-panel">
-            <div>
-              <div className="eyebrow">/ INDEX COMPOSITION /</div>
-              <h2>Five coins. Twenty percent each.</h2>
-              <p>
-                RHX6900 keeps the index clear and equal: Wishbone, Tendies,
-                Cashcat, Hoodrat, and Juggernaut at a 20% target weight each.
-              </p>
-            </div>
-            <div className="rebalance-stack" aria-label="RHX6900 index coins">
-              {basket.map((coin, index) => (
-                <span key={coin.symbol}>
-                  <b>{String(index + 1).padStart(2, "0")}</b>
-                  {coin.name} / {coin.allocation}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <SceneSeal />
 
-      <section className="section flush-top meme-section" id="memes">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ MEME TRANSMISSION /</div>
-              <h2>THE RHX6900 MEME CONVEYOR.</h2>
-            </div>
-            <p>
-              Culture moves the ecosystem. The RHX6900 meme feed runs around
-              the clock beside the five-coin equal-weight index.
-            </p>
+      <section className="scene archive-scene" id="archive">
+        <div className="scene-backdrop" aria-hidden="true" />
+        <div className="section-shell">
+          <div className="section-intro reveal">
+            <span className="section-number">05 / CULTURE</span>
+            <h2>THE MEME ARCHIVE NEVER CLOSES.</h2>
           </div>
 
-          <div className="meme-gallery-shell" aria-label="RHX6900 meme conveyor">
-            <div className="meme-gallery-track">
+          <div className="archive-belt reveal" aria-label="RHX6900 meme archive">
+            <div className="archive-track">
               {[0, 1].map((sequence) => (
-                <div
-                  className="meme-gallery-sequence"
-                  key={sequence}
-                  aria-hidden={sequence === 1}
-                >
-                  {memeArt.map((item, index) => (
-                    <figure
-                      className="meme-gallery-card"
-                      key={`${sequence}-${item.src}`}
-                    >
-                      <img
-                        src={item.src}
-                        alt={sequence === 0 ? item.alt : ""}
-                        loading="lazy"
-                      />
-                      <figcaption>
-                        <span>RHX6900</span>
-                        <b>{String(index + 1).padStart(2, "0")}</b>
-                      </figcaption>
+                <div className="archive-sequence" key={sequence} aria-hidden={sequence === 1}>
+                  {memeArt.map((src, index) => (
+                    <figure key={`${sequence}-${src}`}>
+                      <img src={src} alt={sequence === 0 ? `RHX6900 meme ${index + 1}` : ""} loading="lazy" />
+                      <figcaption>RHX6900 / {String(index + 1).padStart(2, "0")}</figcaption>
                     </figure>
                   ))}
                 </div>
               ))}
             </div>
-            <div className="meme-gallery-belt" aria-hidden="true">
-              {Array.from({ length: 20 }).map((_, index) => (
-                <span key={index} />
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="section flush-top faq-section" id="faq">
-        <div className="layout-readable">
-          <div className="section-head centered">
-            <div>
-              <div className="eyebrow">/ FAQ /</div>
-              <h2>Clear enough for holders.</h2>
-            </div>
+      <section className="faq-scene" id="faq">
+        <div className="section-shell faq-shell">
+          <div className="section-intro centered reveal">
+            <span className="section-number">06 / QUESTIONS</span>
+            <h2>KNOW WHAT YOU HOLD.</h2>
           </div>
 
-          <div className="faq-list">
-            {faqs.map((item) => (
-              <details key={item.q}>
-                <summary>{item.q}</summary>
-                <p>{item.a}</p>
+          <div className="faq-list reveal">
+            {faqs.map((item, index) => (
+              <details key={item.question}>
+                <summary><span>0{index + 1}</span>{item.question}</summary>
+                <p>{item.answer}</p>
               </details>
             ))}
           </div>
@@ -755,16 +570,19 @@ export default function Home() {
       </section>
 
       <footer className="site-footer">
-        <div className="layout-rail">
-          <a className="brand-logo-link" href="#top" aria-label="RHX6900 home">
-            <span className="brand-mark" aria-hidden="true">
-              <img src="/rhx6900-logo.jpg" alt="" />
-            </span>
-          </a>
-          <p>
-            RHX6900 tracks active coins, treasury purchases, eligible holders,
-            completed airdrops, and transaction receipts directly on-chain.
-          </p>
+        <div className="city-silhouette" aria-hidden="true">
+          {cityBlocks.map((height, index) => <i key={index} style={{ height }} />)}
+        </div>
+        <div className="footer-glow" aria-hidden="true" />
+        <div className="footer-content">
+          <img src="/rhx6900-logo.jpg" alt="RHX6900" loading="lazy" />
+          <span>ROBINHOOD ECOSYSTEM TREASURY</span>
+          <h2>STOP TRADING.<br />BELIEVE IN SOMETHING.</h2>
+          <div className="footer-links">
+            <a href="https://x.com/rhx6900_" target="_blank" rel="noreferrer">X</a>
+            <a href="https://t.me/rhx6900" target="_blank" rel="noreferrer">TELEGRAM</a>
+            <a href="#top">RETURN TO THE ALTAR</a>
+          </div>
         </div>
       </footer>
     </main>

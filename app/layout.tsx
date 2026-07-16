@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "RHX6900 | Robinhood Index 6900";
+const siteTitle = "RHX6900 | Robinhood Ecosystem Treasury";
 const siteDescription =
-  "RHX6900 tracks Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut at an equal 20% weight, with holder airdrops every 15 minutes.";
+  "Protocol fees continuously acquire selected Robinhood ecosystem memecoins. Every 15 minutes, they are distributed to eligible RHX6900 holders.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -39,10 +39,10 @@ export async function generateMetadata(): Promise<Metadata> {
       description: siteDescription,
       images: [
         {
-          url: "/rhx6900-logo.jpg",
-          width: 1254,
-          height: 1254,
-          alt: "RHX6900 neon coin logo for RHX6900",
+          url: "/og.png",
+          width: 1672,
+          height: 941,
+          alt: "RHX6900 cathedral with the words Stop Trading. Believe in Something.",
         },
       ],
     },
@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: siteTitle,
       description: siteDescription,
-      images: ["/rhx6900-logo.jpg"],
+      images: ["/og.png"],
     },
     icons: {
       icon: [
