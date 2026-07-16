@@ -65,7 +65,7 @@ export async function runEpoch(date = new Date()) {
       }))
     );
     console.log(
-      `[${epochId}] snapshot 1M+ eligible holders: ${eligibleHolders.length}/${balanceEligibleHolders.length} after holder-state rules`
+      `[${epochId}] snapshot ${config.eligibilityMin.toLocaleString()}+ eligible holders: ${eligibleHolders.length}/${balanceEligibleHolders.length} after holder-state rules`
     );
     const holders = selectRewardRecipients(epochId, eligibleHolders, config.maxWalletsPerEpoch);
     console.log(`[${epochId}] selected eligible holder reward recipients: ${holders.length}`);

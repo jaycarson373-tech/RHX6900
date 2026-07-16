@@ -23,11 +23,19 @@ type TreasuryCoin = {
   trend: number[];
 };
 
+type DexPair = {
+  chainId?: string;
+  baseToken?: { address?: string };
+  marketCap?: number;
+  fdv?: number;
+  liquidity?: { usd?: number };
+};
+
 const holdings: TreasuryCoin[] = [
   {
     symbol: "WISHBONE",
     name: "Wishbone",
-    weight: "20%",
+    weight: "10%",
     contract: "0x77581054581B9c525E7dd7a0155DE43867532d03",
     image: "/coins/wishbone.jpg",
     trend: [18, 34, 26, 48, 42, 62, 54, 72, 65, 84, 78, 96],
@@ -35,7 +43,7 @@ const holdings: TreasuryCoin[] = [
   {
     symbol: "TENDIES",
     name: "Tendies",
-    weight: "20%",
+    weight: "10%",
     contract: "0x45242320DBB855EeA8Fd36804C6487E10E97FCF9",
     image: "/coins/tendies.jpg",
     trend: [28, 22, 42, 35, 56, 48, 68, 62, 74, 70, 88, 92],
@@ -43,7 +51,7 @@ const holdings: TreasuryCoin[] = [
   {
     symbol: "CASHCAT",
     name: "Cashcat",
-    weight: "20%",
+    weight: "10%",
     contract: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
     image: "/coins/cashcat.jpg",
     trend: [20, 38, 30, 44, 58, 50, 64, 72, 68, 82, 76, 94],
@@ -51,7 +59,7 @@ const holdings: TreasuryCoin[] = [
   {
     symbol: "HOODRAT",
     name: "Hoodrat",
-    weight: "20%",
+    weight: "10%",
     contract: "0x8e62F281f282686fCa6dCB39288069a93fC23F1c",
     image: "/coins/hoodrat.jpg",
     trend: [24, 30, 44, 36, 52, 64, 58, 76, 70, 86, 80, 98],
@@ -59,12 +67,62 @@ const holdings: TreasuryCoin[] = [
   {
     symbol: "JUGGERNAUT",
     name: "Juggernaut",
-    weight: "20%",
+    weight: "10%",
     contract: "0xD7321801CAae694090694Ff55A9323139F043B88",
     image: "/coins/juggernaut.jpg",
     trend: [16, 28, 24, 40, 36, 54, 50, 68, 64, 80, 74, 90],
   },
+  {
+    symbol: "HAN",
+    name: "HAN",
+    weight: "10%",
+    contract: "0x3746a5ebCA295Dee695dd1bcba50A8626Df3099C",
+    image: "/coins/han.jpg",
+    trend: [20, 26, 34, 30, 48, 44, 62, 56, 72, 68, 84, 90],
+  },
+  {
+    symbol: "VEX",
+    name: "VEX",
+    weight: "10%",
+    contract: "0x8Ff92566f2e81BDd68EDfAa8cde73942A723796b",
+    image: "/coins/vex.jpg",
+    trend: [18, 30, 24, 42, 38, 58, 52, 70, 64, 82, 76, 94],
+  },
+  {
+    symbol: "WOOD",
+    name: "WOOD",
+    weight: "10%",
+    contract: "0xF8BC08092C06dB6148114DCf82AF881F1085f92b",
+    image: "/coins/wood.jpg",
+    trend: [22, 28, 38, 34, 50, 46, 66, 60, 78, 72, 88, 96],
+  },
+  {
+    symbol: "ARROW",
+    name: "Arrow",
+    weight: "10%",
+    contract: "0xf2915d1e3C1B0c769d0c756Ec43F1c1f6c99cD03",
+    image: "/coins/arrow.jpg",
+    trend: [16, 24, 32, 28, 46, 40, 60, 54, 74, 68, 86, 92],
+  },
+  {
+    symbol: "WALLET",
+    name: "Wallet",
+    weight: "10%",
+    contract: "0x0339f5459FC690aC85F1782e15782A151b4A9E1b",
+    image: "/coins/wallet.jpg",
+    trend: [24, 20, 36, 30, 52, 46, 64, 58, 76, 70, 90, 96],
+  },
 ];
+
+function formatMarketCap(value?: number) {
+  if (!value) return "AWAITING DATA";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+    maximumFractionDigits: 2,
+  }).format(value);
+}
 
 const holdBonuses = [
   ["1 DAY", "1.5X"],
@@ -91,7 +149,7 @@ const faqs = [
   {
     question: "What does the treasury hold?",
     answer:
-      "Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut. Each asset has a 20% target weight.",
+      "Wishbone, Tendies, Cashcat, Hoodrat, Juggernaut, HAN, VEX, WOOD, Arrow, and Wallet. Each coin targets 10% over time.",
   },
   {
     question: "How often are assets distributed?",
@@ -101,12 +159,17 @@ const faqs = [
   {
     question: "Do I need to stake or claim?",
     answer:
-      "No. Hold at least 1,000,000 RHX6900 to qualify.",
+      "No. Hold at least 2,500,000 RHX6900 to qualify.",
   },
   {
     question: "How do hold bonuses work?",
     answer:
       "Continuous holders earn 1.5x after one day, up to 10x after six months.",
+  },
+  {
+    question: "Why is only one coin distributed per cycle?",
+    answer:
+      "To reduce gas, each 15-minute cycle distributes one treasury coin. Rotation targets 10% for each coin over time.",
   },
 ];
 
@@ -153,6 +216,7 @@ export default function Home() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLElement>(null);
   const [secondsLeft, setSecondsLeft] = useState(900);
+  const [marketCaps, setMarketCaps] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -163,6 +227,40 @@ export default function Home() {
     updateCountdown();
     const timer = window.setInterval(updateCountdown, 1000);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    void Promise.all(
+      holdings.map(async (coin) => {
+        const response = await fetch(
+          `https://api.dexscreener.com/latest/dex/tokens/${coin.contract}`,
+          { signal: controller.signal },
+        );
+        if (!response.ok) return [coin.contract.toLowerCase(), 0] as const;
+
+        const data = (await response.json()) as { pairs?: DexPair[] };
+        const address = coin.contract.toLowerCase();
+        const pair = (data.pairs ?? [])
+          .filter(
+            (candidate) =>
+              candidate.chainId === "robinhood" &&
+              candidate.baseToken?.address?.toLowerCase() === address,
+          )
+          .sort((a, b) => (b.liquidity?.usd ?? 0) - (a.liquidity?.usd ?? 0))[0];
+
+        return [address, pair?.marketCap ?? pair?.fdv ?? 0] as const;
+      }),
+    )
+      .then((entries) => setMarketCaps(Object.fromEntries(entries)))
+      .catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === "AbortError")) {
+          console.warn("Market-cap data unavailable", error);
+        }
+      });
+
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
@@ -259,6 +357,12 @@ export default function Home() {
   const minutes = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
   const seconds = String(secondsLeft % 60).padStart(2, "0");
   const progress = ((900 - secondsLeft) / 900) * 360;
+  const hasAllMarketCaps = holdings.every(
+    (coin) => (marketCaps[coin.contract.toLowerCase()] ?? 0) > 0,
+  );
+  const totalMarketCap = hasAllMarketCaps
+    ? Object.values(marketCaps).reduce((total, value) => total + value, 0)
+    : 0;
 
   return (
     <main ref={rootRef}>
@@ -333,8 +437,8 @@ export default function Home() {
             </a>
           </div>
           <div className="hero-protocol-strip" aria-label="Protocol summary">
-            <span><b>5</b> Treasury Assets</span>
-            <span><b>20%</b> Each</span>
+            <span><b>10</b> Treasury Assets</span>
+            <span><b>10%</b> Each</span>
             <span><b>15M</b> Distribution Cycle</span>
           </div>
         </div>
@@ -352,7 +456,11 @@ export default function Home() {
           <div className="section-intro reveal">
             <span className="section-number">01 / HOLDINGS</span>
             <h2>CURRENT TREASURY HOLDINGS</h2>
-            <p>Five coins. 20% each.</p>
+            <p>Ten coins. 10% each over time.</p>
+            <div className="total-market-cap">
+              <span>TOTAL MARKET CAP</span>
+              <strong>{formatMarketCap(totalMarketCap)}</strong>
+            </div>
           </div>
 
           <div className="holdings-grid" aria-label="Current treasury holdings">
@@ -372,7 +480,7 @@ export default function Home() {
                 </div>
                 <div className="holding-metrics">
                   <span><small>24H</small><b>AWAITING DATA</b></span>
-                  <span><small>MARKET CAP</small><b>AWAITING DATA</b></span>
+                  <span><small>MARKET CAP</small><b>{formatMarketCap(marketCaps[coin.contract.toLowerCase()])}</b></span>
                   <span><small>LAST PURCHASED</small><b>NONE YET</b></span>
                 </div>
                 <div className="micro-chart" aria-label={`${coin.name} live chart connecting`}>
@@ -453,8 +561,8 @@ export default function Home() {
             <div className="round-details">
               <div><span>Current Round Value</span><strong>AWAITING DATA</strong></div>
               <div><span>Eligible Wallets</span><strong>AWAITING DATA</strong></div>
-              <div><span>Coins Being Distributed</span><strong>5 ASSETS</strong></div>
-              <div><span>Holder Gate</span><strong>1M+ RHX6900</strong></div>
+              <div><span>Coins Being Distributed</span><strong>1 PER CYCLE</strong></div>
+              <div><span>Holder Gate</span><strong>2.5M+ RHX6900</strong></div>
             </div>
           </div>
 
@@ -466,6 +574,10 @@ export default function Home() {
                 <strong>{multiplier}</strong>
               </div>
             ))}
+          </div>
+          <div className="cycle-rule reveal">
+            <strong>ONE TOKEN PER CYCLE</strong>
+            <p>To reduce gas, each 15-minute cycle distributes one treasury coin. Rotation targets 10% for each coin over time.</p>
           </div>
         </div>
       </section>

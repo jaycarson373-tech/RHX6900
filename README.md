@@ -5,10 +5,10 @@ RHX6900 is a Robinhood Index 6900 site plus a Railway-ready Solana airdrop worke
 The worker is built for the RH holder loop:
 
 - every 15 minutes, snapshot holders of the RHX6900 source token;
-- require at least `1,000,000` source tokens for eligibility;
+- require at least `2,500,000` source tokens for eligibility;
 - use one active RH meme coin reward mint at a time;
 - compute proportional holder payouts;
-- boost consecutive 1M+ holders at 1 day, 1 week, 1 month, 3 months, and 6 months;
+- boost consecutive 2.5M+ holders at 1 day, 1 week, 1 month, 3 months, and 6 months;
 - write dry-run, planned, settled, and failed payout receipts to Supabase;
 - keep live buys and live sends disabled until env gates are explicitly flipped.
 
@@ -57,7 +57,7 @@ BUY_ENABLED=false
 AIRDROP_ENABLED=false
 
 EPOCH_MINUTES=15
-ELIGIBILITY_MIN=1000000
+ELIGIBILITY_MIN=2500000
 MAX_WALLETS_PER_EPOCH=200
 MAX_HOLDER_PCT=5
 EXCLUDE_WALLETS=

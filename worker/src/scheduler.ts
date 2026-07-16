@@ -13,6 +13,7 @@ console.log(
 console.log(`Source token mint: ${config.sourceTokenMint.toBase58()}`);
 console.log(`Active reward mint: ${config.rewardTokenMint.toBase58()} (${config.rewardSymbol})`);
 console.log(`Eligibility gate: holder must hold ${config.eligibilityMin.toLocaleString()} ${config.sourceSymbol} tokens`);
+console.log(`Gas rule: ${config.rewardTokensPerCycle} active reward token per cycle.`);
 
 async function loop() {
   await runEpoch();

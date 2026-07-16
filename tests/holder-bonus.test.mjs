@@ -20,6 +20,8 @@ function daysAgo(nowMs, days) {
 
 test("defaults the active reward symbol to Tendies", () => {
   assert.equal(config.rewardSymbol, "TENDIES");
+  assert.equal(config.eligibilityMin, 2_500_000);
+  assert.equal(config.rewardTokensPerCycle, 1);
 });
 
 test("uses the RHX holder streak bonus ladder", () => {
