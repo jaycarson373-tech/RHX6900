@@ -75,18 +75,18 @@ const holdBonuses = [
 ];
 
 const protocolStats = [
-  ["Treasury Value", "$", 0, "Awaiting first purchase"],
-  ["Coins Purchased", "", 0, "Live data connecting"],
-  ["Total Airdrops", "", 0, "No completed rounds"],
-  ["Total Holders", "", 0, "Holder scan connecting"],
-  ["Protocol Revenue", "$", 0, "Awaiting first fee"],
+  ["Treasury Value", "$", 0, "No purchases yet"],
+  ["Coins Purchased", "", 0, "No purchases yet"],
+  ["Total Airdrops", "", 0, "No airdrops yet"],
+  ["Total Holders", "", 0, "Awaiting holder data"],
+  ["Protocol Revenue", "$", 0, "No fees yet"],
 ] as const;
 
 const faqs = [
   {
     question: "What is RHX6900?",
     answer:
-      "RHX6900 is a Robinhood ecosystem treasury. Protocol fees acquire selected memecoins and distribute accumulated assets to eligible holders.",
+      "RHX6900 uses creator fees to buy Robinhood ecosystem memecoins and airdrop them to eligible holders.",
   },
   {
     question: "What does the treasury hold?",
@@ -96,17 +96,17 @@ const faqs = [
   {
     question: "How often are assets distributed?",
     answer:
-      "Every 15 minutes. Eligible holders receive the assets accumulated during the previous round automatically.",
+      "Every 15 minutes to eligible RHX6900 holders.",
   },
   {
     question: "Do I need to stake or claim?",
     answer:
-      "No. Eligibility is based on holding at least 1,000,000 RHX6900. Distributions are designed to arrive automatically.",
+      "No. Hold at least 1,000,000 RHX6900 to qualify.",
   },
   {
     question: "How do hold bonuses work?",
     answer:
-      "Wallets that continuously remain above the holder gate earn higher distribution weight, from 1.5x after one day to 10x after six months.",
+      "Continuous holders earn 1.5x after one day, up to 10x after six months.",
   },
 ];
 
@@ -376,7 +376,7 @@ export default function Home() {
           <div className="section-intro reveal">
             <span className="section-number">01 / HOLDINGS</span>
             <h2>CURRENT TREASURY HOLDINGS</h2>
-            <p>Five Robinhood ecosystem assets. Equal conviction. Twenty percent each.</p>
+            <p>Five coins. 20% each.</p>
           </div>
 
           <div className="holdings-grid" aria-label="Current treasury holdings">
@@ -395,9 +395,9 @@ export default function Home() {
                   <strong>{coin.weight}</strong>
                 </div>
                 <div className="holding-metrics">
-                  <span><small>24H</small><b>LIVE</b></span>
-                  <span><small>MARKET CAP</small><b>CONNECTING</b></span>
-                  <span><small>LAST PURCHASED</small><b>AWAITING</b></span>
+                  <span><small>24H</small><b>AWAITING DATA</b></span>
+                  <span><small>MARKET CAP</small><b>AWAITING DATA</b></span>
+                  <span><small>LAST PURCHASED</small><b>NONE YET</b></span>
                 </div>
                 <div className="micro-chart" aria-label={`${coin.name} live chart connecting`}>
                   {coin.trend.map((height, barIndex) => (
@@ -417,17 +417,16 @@ export default function Home() {
         <div className="scene-backdrop" aria-hidden="true" />
         <div className="section-shell treasury-shell">
           <div className="section-intro centered reveal">
-            <span className="section-number">02 / THE MACHINE</span>
-            <h2>FEES BECOME HOLDINGS.</h2>
-            <p>One automated treasury flow. Visible from acquisition to distribution.</p>
+            <span className="section-number">02 / TREASURY</span>
+            <h2>WHERE THE FEES GO.</h2>
           </div>
 
           <div className="treasury-flow reveal" aria-label="Treasury money flow">
             {[
-              [CircleDollarSign, "CREATOR FEES", "Protocol revenue enters"],
-              [Vault, "TREASURY", "Capital accumulates"],
-              [Coins, "AUTO BUY", "Five memecoins acquired"],
-              [WalletCards, "DISTRIBUTION", "Sent every 15 minutes"],
+              [CircleDollarSign, "CREATOR FEES", "Fees in"],
+              [Vault, "TREASURY", "Funds held"],
+              [Coins, "AUTO BUY", "Coins bought"],
+              [WalletCards, "AIRDROP", "Every 15 minutes"],
             ].map(([Icon, title, description], index) => {
               const FlowIcon = Icon as typeof CircleDollarSign;
               return (
@@ -458,8 +457,8 @@ export default function Home() {
         <div className="scene-backdrop" aria-hidden="true" />
         <div className="section-shell airdrop-shell">
           <div className="section-intro centered reveal">
-            <span className="section-number">03 / LIVE ROUND</span>
-            <h2>THE NEXT DISTRIBUTION IS FORMING.</h2>
+            <span className="section-number">03 / AIRDROPS</span>
+            <h2>NEXT AIRDROP.</h2>
           </div>
 
           <div className="countdown-layout reveal">
@@ -476,8 +475,8 @@ export default function Home() {
             </div>
 
             <div className="round-details">
-              <div><span>Current Round Value</span><strong>CONNECTING</strong></div>
-              <div><span>Eligible Wallets</span><strong>SCANNING</strong></div>
+              <div><span>Current Round Value</span><strong>AWAITING DATA</strong></div>
+              <div><span>Eligible Wallets</span><strong>AWAITING DATA</strong></div>
               <div><span>Coins Being Distributed</span><strong>5 ASSETS</strong></div>
               <div><span>Holder Gate</span><strong>1M+ RHX6900</strong></div>
             </div>
@@ -503,7 +502,6 @@ export default function Home() {
           <div className="section-intro reveal">
             <span className="section-number">04 / PROTOCOL</span>
             <h2>PROOF, NOT PROMISES.</h2>
-            <p>Live treasury data will populate here as the protocol begins acquiring and distributing assets.</p>
           </div>
 
           <div className="stats-grid reveal">
@@ -530,8 +528,7 @@ export default function Home() {
         <div className="scene-backdrop" aria-hidden="true" />
         <div className="section-shell">
           <div className="section-intro reveal">
-            <span className="section-number">05 / CULTURE</span>
-            <h2>THE MEME ARCHIVE NEVER CLOSES.</h2>
+            <h2>STOP TRADING. START MEMING.</h2>
           </div>
 
           <div className="archive-belt reveal" aria-label="RHX6900 meme archive">
@@ -541,7 +538,6 @@ export default function Home() {
                   {memeArt.map((src, index) => (
                     <figure key={`${sequence}-${src}`}>
                       <img src={src} alt={sequence === 0 ? `RHX6900 meme ${index + 1}` : ""} loading="lazy" />
-                      <figcaption>RHX6900 / {String(index + 1).padStart(2, "0")}</figcaption>
                     </figure>
                   ))}
                 </div>
@@ -554,8 +550,7 @@ export default function Home() {
       <section className="faq-scene" id="faq">
         <div className="section-shell faq-shell">
           <div className="section-intro centered reveal">
-            <span className="section-number">06 / QUESTIONS</span>
-            <h2>KNOW WHAT YOU HOLD.</h2>
+            <h2>FAQ</h2>
           </div>
 
           <div className="faq-list reveal">
@@ -581,7 +576,7 @@ export default function Home() {
           <div className="footer-links">
             <a href="https://x.com/rhx6900_" target="_blank" rel="noreferrer">X</a>
             <a href="https://t.me/rhx6900" target="_blank" rel="noreferrer">TELEGRAM</a>
-            <a href="#top">RETURN TO THE ALTAR</a>
+            <a href="#top">TOP</a>
           </div>
         </div>
       </footer>

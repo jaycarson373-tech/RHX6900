@@ -36,13 +36,14 @@ test("server-renders the RHX6900 treasury experience", async () => {
   assert.match(html, /BELIEVE IN SOMETHING/);
   assert.match(html, /Protocol fees continuously acquire/);
   assert.match(html, /CURRENT TREASURY HOLDINGS/);
-  assert.match(html, /FEES BECOME HOLDINGS/);
+  assert.match(html, /WHERE THE FEES GO/);
   assert.match(html, /CREATOR FEES/);
   assert.match(html, /AUTO BUY/);
   assert.match(html, /NEXT AIRDROP/);
-  assert.match(html, /THE NEXT DISTRIBUTION IS FORMING/);
+  assert.match(html, /NEXT AIRDROP/);
   assert.match(html, /PROOF, NOT PROMISES/);
-  assert.match(html, /THE MEME ARCHIVE NEVER CLOSES/);
+  assert.match(html, /STOP TRADING\. START MEMING\./);
+  assert.doesNotMatch(html, /THE MEME ARCHIVE NEVER CLOSES|RETURN TO THE ALTAR|THE MACHINE|DISTRIBUTION IS FORMING/i);
   assert.match(html, /CONSECUTIVE HOLD BONUS/);
   assert.match(html, /6 months/i);
   assert.match(html, /10x/i);
