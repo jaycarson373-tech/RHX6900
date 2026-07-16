@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "RMI6900 | Robinhood Meme Index 6900";
+const siteTitle = "RHX6900 | Robinhood Meme Index 6900";
 const siteDescription =
-  "A black-screen AI6900-inspired Robinhood Meme Index for RMI6900: meme rails, RWA rails, holder airdrops, and live receipts.";
+  "A black-screen AI6900-inspired Robinhood Meme Index for RHX6900: meme rails, RWA rails, holder airdrops, and live receipts.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -37,13 +37,13 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: siteTitle,
       description:
-        "Hold RMI6900 and follow the RHX6900 neon coin dashboard with meme rails, RWA rails, live receipts, and a conveyor belt.",
+        "Hold RHX6900 and follow the RHX6900 neon coin dashboard with meme rails, RWA rails, live receipts, and a conveyor belt.",
       images: [
         {
           url: "/rhx6900-logo.jpg",
           width: 1254,
           height: 1254,
-          alt: "RHX6900 neon coin logo for RMI6900",
+          alt: "RHX6900 neon coin logo for RHX6900",
         },
       ],
     },

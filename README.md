@@ -1,98 +1,80 @@
-# vinext-starter
+# RHX6900
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+RHX6900 is a Robinhood Meme Index site plus a Railway-ready Solana airdrop worker.
 
-## Prerequisites
+The worker is built for the RH holder loop:
 
-- Node.js `>=22.13.0`
+- every 15 minutes, snapshot holders of the RHX6900 source token;
+- require at least `1,000,000` source tokens for eligibility;
+- use one active RH meme coin reward mint at a time;
+- compute proportional holder payouts;
+- write dry-run, planned, settled, and failed payout receipts to Supabase;
+- keep live buys and live sends disabled until env gates are explicitly flipped.
 
-## Quick Start
+## Site
 
 ```bash
 npm install
 npm run dev
-npm run build
+npm test
 ```
 
-This starter does not use `wrangler.jsonc`.
+## Worker
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run worker:build
+npm run worker:dev
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+Railway uses `railway.json`:
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```bash
+npm run worker:build
+npm run worker:start
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## Environment
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Copy `.env.example` and fill in live values.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+```bash
+PROJECT_NAME=RHX6900
+SOURCE_SYMBOL=RHX6900
+ACTIVE_REWARD_SYMBOL=<RH_MEME_SYMBOL>
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+REWARD_MODE=token
+HELIUS_RPC_URL=<HELIUS_RPC_URL>
+SOURCE_TOKEN_MINT=<RHX6900_SOURCE_TOKEN_MINT>
+ACTIVE_REWARD_TOKEN_MINT=<ACTIVE_RH_MEME_REWARD_MINT>
+TREASURY_WALLET_SECRET=<BASE58_OR_JSON_SECRET>
 
-## Useful Commands
+SUPABASE_URL=<SUPABASE_URL>
+SUPABASE_SERVICE_ROLE=<SUPABASE_SERVICE_ROLE_KEY>
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+CLAIM_ENABLED=false
+BUY_ENABLED=false
+AIRDROP_ENABLED=false
 
-## Learn More
+EPOCH_MINUTES=15
+ELIGIBILITY_MIN=1000000
+MAX_WALLETS_PER_EPOCH=200
+MAX_HOLDER_PCT=5
+EXCLUDE_WALLETS=
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+SWAP_BALANCE_BPS=10000
+SWAP_SLIPPAGE_BPS=300
+SIDE_WALLET_BPS=0
+SIDE_WALLET_PUBLIC_KEY=
+
+MIN_SOL_RESERVE=0.4
+AIRDROP_SOL_RESERVE=0.4
+AIRDROP_BATCH_SIZE=4
+AIRDROP_REWARD_BPS=10000
+PRIORITY_FEE_SOL=0.000001
+MIN_REWARD_RAW_TO_AIRDROP=1
+HOLDER_STREAK_BONUS_ENABLED=false
+```
+
+Run `supabase/migrations/001_rhx_airdrop.sql` before starting the worker.
+
+Keep `CLAIM_ENABLED`, `BUY_ENABLED`, and `AIRDROP_ENABLED` false until the live treasury, source mint, active reward mint, Supabase tables, and dry-run logs are verified.

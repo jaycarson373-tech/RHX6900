@@ -18,7 +18,7 @@ type AirdropStep = {
 
 const basket: BasketCoin[] = [
   {
-    symbol: "RMI6900",
+    symbol: "RHX6900",
     name: "Robinhood Meme Index 6900",
     lane: "Core",
     allocation: "22%",
@@ -134,46 +134,46 @@ const basket: BasketCoin[] = [
 const steps: AirdropStep[] = [
   {
     number: "01",
-    title: "RMI6900 holders accumulate",
-    body: "Wallet balances define the holder set for each index airdrop cycle.",
+    title: "RHX6900 holders accumulate",
+    body: "Wallets holding at least 1,000,000 RHX6900 enter each holder snapshot.",
     tag: "SNAPSHOT",
   },
   {
     number: "02",
-    title: "The meme index basket is routed",
-    body: "Treasury flow is split across coins we are in, RWA plays, reserves, and high-beta meme rails.",
-    tag: "CUSTOM INDEX",
+    title: "One RH meme coin goes active",
+    body: "The reward mint can rotate, but each 15-minute epoch sends one configured RH meme coin.",
+    tag: "ACTIVE REWARD",
   },
   {
     number: "03",
-    title: "Coins land in holder wallets",
-    body: "Airdrops are designed to send basket exposure straight to holders instead of locking it inside an app.",
+    title: "Rewards land in holder wallets",
+    body: "The worker computes proportional payouts and records dry-run or settled receipts.",
     tag: "AIRDROP",
   },
   {
     number: "04",
-    title: "The basket keeps evolving",
-    body: "Allocations can rotate as new RWA assets, Solana coins, and conviction plays become worth adding.",
-    tag: "REBALANCE",
+    title: "The RH meme slot can rotate",
+    body: "Changing the active reward mint updates the next coin without rewriting the worker.",
+    tag: "ROTATION",
   },
 ];
 
 const lanes = [
   { label: "RWA sleeve", value: "29%", copy: "ONDO, LINK, CFG, PYTH" },
-  { label: "Core reserves", value: "31%", copy: "RMI6900, BTC, ETH, SOL" },
+  { label: "Core reserves", value: "31%", copy: "RHX6900, BTC, ETH, SOL" },
   { label: "Meme conveyor", value: "25%", copy: "WIF, BONK, PEPE, POPCAT" },
   { label: "Execution cash", value: "3%", copy: "USDC routing buffer" },
 ];
 
 const dashboardStats = [
-  { label: "50% meme rail", value: "Coded", detail: "attention buys the belt" },
-  { label: "50% index rail", value: "RWA", detail: "assets route to holders" },
-  { label: "Next epoch", value: "06:90", detail: "snapshot loop preview" },
-  { label: "Receipts", value: "Live", detail: "everything stays on-screen" },
+  { label: "Epoch loop", value: "15m", detail: "Railway worker cadence" },
+  { label: "Holder gate", value: "1M+", detail: "RHX6900 minimum balance" },
+  { label: "Reward slot", value: "1x", detail: "one RH meme coin active" },
+  { label: "Safety", value: "Dry", detail: "live sends gated by env" },
 ];
 
 const dashboardFeed = [
-  { asset: "RMI6900", route: "Index core", amount: "22.0%", status: "Coded" },
+  { asset: "RHX6900", route: "Index core", amount: "22.0%", status: "Coded" },
   { asset: "ONDO", route: "RWA rail", amount: "8.0%", status: "Queued" },
   { asset: "WIF", route: "Meme rail", amount: "3.0%", status: "Live" },
   { asset: "BONK", route: "Meme rail", amount: "3.0%", status: "Live" },
@@ -182,23 +182,23 @@ const dashboardFeed = [
 
 const engineCards = [
   ["Signal Scan", "The AI-style index watches meme flow, holder density, and RWA rails before each cycle."],
-  ["Split Rails", "The loop stays readable: one rail feeds meme-index energy, one rail keeps hard assets moving."],
-  ["Route Basket", "RMI buys the basket we are in instead of hiding the index behind vague treasury language."],
-  ["Airdrop Holders", "Holder exposure is meant to land wallet-native, epoch by epoch, with claimless energy."],
+  ["15m Epochs", "The Railway worker wakes every 15 minutes, snapshots RHX holders, and creates an idempotent payout round."],
+  ["1M+ Holder Gate", "Only wallets above the 1,000,000 RHX6900 threshold are eligible for that round."],
+  ["Active RH Meme", "The reward slot points at one configured meme coin mint at a time, so rotations stay clean."],
   ["Receipts", "The dashboard keeps the cycle visible so the meme machine feels coded, not hand-waved."],
 ];
 
 const receiptRows = [
-  { time: "00:06:90", wallet: "RMI...6900", asset: "WIF", amount: "3.0%", tx: "Queued" },
+  { time: "00:06:90", wallet: "RHX...6900", asset: "WIF", amount: "3.0%", tx: "Queued" },
   { time: "00:05:12", wallet: "HOOD...MEME", asset: "ONDO", amount: "8.0%", tx: "Routed" },
   { time: "00:04:44", wallet: "AI...RAIL", asset: "LINK", amount: "7.0%", tx: "Receipt" },
-  { time: "00:03:33", wallet: "BEL...IEVE", asset: "RMI", amount: "22.0%", tx: "Core" },
+  { time: "00:03:33", wallet: "BEL...IEVE", asset: "RHX", amount: "22.0%", tx: "Core" },
 ];
 
 const terminalLines = [
-  "RMI engine awake...",
-  "Scanning meme rail...",
-  "Balancing RWA sleeve...",
+  "RHX engine awake...",
+  "Snapshotting 1M+ holders...",
+  "Loading active RH meme coin...",
   "Writing holder receipts...",
 ];
 
@@ -249,8 +249,8 @@ const memeCoins = [
 
 const faqs = [
   {
-    q: "What is RMI6900?",
-    a: "RMI6900 is positioned as a holder-first Robinhood Meme Index token: hold it, and the index mechanics can reward holders with airdropped exposure to the basket.",
+    q: "What is RHX6900?",
+    a: "RHX6900 is positioned as a holder-first Robinhood Meme Index token: hold 1,000,000+ tokens and the worker can include your wallet in each 15-minute RH meme coin airdrop epoch.",
   },
   {
     q: "Is this basket final?",
@@ -258,7 +258,7 @@ const faqs = [
   },
   {
     q: "Do holders need to stake?",
-    a: "The intended product promise is wallet-native holder airdrops. If staking, claims, or epoch rules are added later, those rules should be shown here before launch.",
+    a: "No. The current worker model snapshots wallet balances directly, then computes proportional holder payouts for the active RH meme coin.",
   },
   {
     q: "Why include RWA coins?",
@@ -285,11 +285,11 @@ export default function Home() {
     <main>
       <header className="site-header">
         <div className="header-shell">
-          <a className="brand-pill" href="#top" aria-label="RMI6900 home">
+          <a className="brand-pill" href="#top" aria-label="RHX6900 home">
             <span className="brand-mark" aria-hidden="true">
               <img src="/favicon.png" alt="" />
             </span>
-            <span>RMI6900</span>
+            <span>RHX6900</span>
           </a>
 
           <nav className="topnav" aria-label="Primary navigation">
@@ -313,7 +313,7 @@ export default function Home() {
               <img src="/rhx6900-logo.jpg" alt={logoAlt} />
             </div>
             <div className="eyebrow">/ ROBINHOOD MEME INDEX 6900 /</div>
-            <h1>RMI6900</h1>
+            <h1>RHX6900</h1>
             <div className="manifesto-line">Stop indexing. Believe in memes.</div>
             <p className="hero-lede">
               Robinhood Meme Index 6900 is the custom holder airdrop index for
@@ -340,32 +340,32 @@ export default function Home() {
               <img src="/icon-512.png" alt="" />
             </div>
 
-            <div className="hero-terminal" aria-label="RMI6900 index dashboard">
+            <div className="hero-terminal" aria-label="RHX6900 index dashboard">
               <div className="browser-bar">
                 <span />
                 <span />
                 <span />
-                <strong>rhx6900.rmi</strong>
+                <strong>rhx6900.rhx</strong>
               </div>
               <div className="terminal-content">
                 <div className="terminal-logo-strip">
                   <img src="/rhx6900-logo.jpg" alt={logoAlt} />
                   <div>
                     <span>Ticker rail</span>
-                    <strong>RHX signal / RMI index</strong>
+                    <strong>RHX signal / RH meme slot</strong>
                   </div>
                 </div>
 
               <div className="terminal-total">
                 <span>Projected index pool</span>
-                <strong>RHX/RMI</strong>
+                <strong>RHX/RH MEME</strong>
                 <em>black-screen neon coin engine</em>
               </div>
 
               <div className="terminal-metrics">
                 <div>
                   <span>Next cycle</span>
-                  <strong>Epoch 01</strong>
+                  <strong>15 min</strong>
                 </div>
                 <div>
                   <span>Basket assets</span>
@@ -447,12 +447,12 @@ export default function Home() {
           <div className="section-head">
             <div>
               <div className="eyebrow">/ DASHBOARD /</div>
-              <h2>Index-style dashboard for the RMI6900 machine.</h2>
+              <h2>Index-style dashboard for the RHX6900 machine.</h2>
             </div>
             <p>
               A holder-facing control room that brings back the AI6900 index
-              feel: rails, epochs, receipts, basket weights, and meme flow in
-              one scan.
+              feel: rails, epochs, receipts, holder gates, and one active RH
+              meme reward coin in one scan.
             </p>
           </div>
 
@@ -526,8 +526,8 @@ export default function Home() {
             </div>
             <p>
               The old loop made the mechanics obvious: rail, epoch, reward,
-              receipt. RMI keeps that same black-screen clarity and routes it
-              through a Robinhood meme basket.
+              receipt. RHX keeps that same black-screen clarity and routes it
+              through a 15-minute Robinhood meme airdrop worker.
             </p>
           </div>
 
@@ -548,7 +548,7 @@ export default function Home() {
             <article className="terminal-panel">
               <div className="terminal-head">
                 <span>Live activity</span>
-                <b>RMI: coded</b>
+                <b>RHX: coded</b>
               </div>
               <div className="terminal-feed">
                 {terminalLines.map((line, index) => (
@@ -594,7 +594,7 @@ export default function Home() {
               <h2>Built for holders, not a walled garden.</h2>
             </div>
             <p>
-              The old Index site promised direct distributions. RMI6900 keeps
+              The old Index site promised direct distributions. RHX6900 keeps
               that same clear mechanic and reskins it around a Robinhood meme crypto
               basket.
             </p>
@@ -665,7 +665,7 @@ export default function Home() {
             </div>
             <p>
               The meme sleeve is treated like a moving conveyor: high-beta
-              attention coins rotate through the RMI6900 index without hiding
+              attention coins rotate through the RHX6900 index without hiding
               the core RWA and reserve rails.
             </p>
           </div>
@@ -704,7 +704,7 @@ export default function Home() {
           <div className="section-head">
             <div>
               <div className="eyebrow">/ HOLDER AIRDROPS /</div>
-              <h2>Hold RMI6900. Receive the index.</h2>
+              <h2>Hold RHX6900. Receive the index.</h2>
             </div>
             <p>
               The public-facing flow should stay simple even while the contracts
@@ -775,11 +775,11 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="layout-rail">
-          <a className="brand-pill" href="#top" aria-label="RMI6900 home">
+          <a className="brand-pill" href="#top" aria-label="RHX6900 home">
             <span className="brand-mark" aria-hidden="true">
               <img src="/favicon.png" alt="" />
             </span>
-            <span>RMI6900</span>
+            <span>RHX6900</span>
           </a>
           <p>
             Draft allocations shown for site launch. Final airdrop mechanics

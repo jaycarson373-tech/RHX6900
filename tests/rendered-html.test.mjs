@@ -11,7 +11,7 @@ async function render() {
 
   return worker.fetch(
     new Request("http://localhost/", {
-      headers: { accept: "text/html", host: "rmi6900.test" },
+      headers: { accept: "text/html", host: "rhx6900.test" },
     }),
     {
       ASSETS: {
@@ -25,26 +25,28 @@ async function render() {
   );
 }
 
-test("server-renders the RMI6900 index site", async () => {
+test("server-renders the RHX6900 index site", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>RMI6900 \| Robinhood Meme Index 6900<\/title>/i);
-  assert.match(html, /RMI6900/);
+  assert.match(html, /<title>RHX6900 \| Robinhood Meme Index 6900<\/title>/i);
+  assert.match(html, /RHX6900/);
   assert.match(html, /Robinhood Meme Index 6900/);
   assert.match(html, /Stop indexing\. Believe in memes\./);
   assert.match(html, /AI INDEX ENGINE/);
   assert.match(html, /Like AI6900, but pointed at the meme index/);
   assert.match(html, /Launch receipts/);
-  assert.match(html, /RMI engine awake/);
+  assert.match(html, /RHX engine awake/);
+  assert.match(html, /Snapshotting 1M\+ holders/);
+  assert.match(html, /15-minute Robinhood meme airdrop worker/);
   assert.match(html, /Holder airdrops/);
   assert.match(html, /Coins we are in, plus RWA/);
   assert.match(html, /Index-style dashboard/);
   assert.match(html, /Meme coins ride the belt/);
   assert.match(html, /rhx6900-logo\.jpg/);
-  assert.match(html, /RHX signal \/ RMI index/);
+  assert.match(html, /RHX signal \/ RH meme slot/);
   assert.match(html, /PEPE/);
   assert.match(html, /SPX6900/);
   assert.match(html, /ONDO/);
