@@ -6,6 +6,8 @@ type BasketCoin = {
   lane: string;
   allocation: string;
   thesis: string;
+  contract: string;
+  image: string;
   color: string;
 };
 
@@ -24,133 +26,63 @@ type HolderBonus = {
 
 const basket: BasketCoin[] = [
   {
-    symbol: "RHX6900",
-    name: "Robinhood Index 6900",
-    lane: "Core",
+    symbol: "WISHBONE",
+    name: "Wishbone",
+    lane: "Robinhood",
     allocation: "20%",
-    thesis: "The token that makes holders eligible for automatic RHX6900 distributions.",
-    color: "#e8ff17",
+    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    contract: "0x77581054581B9c525E7dd7a0155DE43867532d03",
+    image: "/coins/wishbone.jpg",
+    color: "#efff00",
   },
   {
     symbol: "TENDIES",
     name: "Tendies",
-    lane: "Meme",
-    allocation: "10%",
-    thesis: "The first Robinhood ecosystem coin active in RHX6900.",
-    color: "#fff04a",
+    lane: "Robinhood",
+    allocation: "20%",
+    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    contract: "0x45242320DBB855EeA8Fd36804C6487E10E97FCF9",
+    image: "/coins/tendies.jpg",
+    color: "#efff00",
   },
   {
-    symbol: "SOL",
-    name: "Solana",
-    lane: "Infra",
-    allocation: "10%",
-    thesis: "High-throughput settlement exposure for fast-moving ecosystem assets.",
-    color: "#62dca3",
+    symbol: "CASHCAT",
+    name: "Cashcat",
+    lane: "Robinhood",
+    allocation: "20%",
+    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    contract: "0x020bfC650A365f8BB26819deAAbF3E21291018b4",
+    image: "/coins/cashcat.jpg",
+    color: "#efff00",
   },
   {
-    symbol: "ETH",
-    name: "Ethereum",
-    lane: "Infra",
-    allocation: "8%",
-    thesis: "Deep liquidity exposure for tokenized markets and on-chain settlement.",
-    color: "#7d8cff",
+    symbol: "HOODRAT",
+    name: "Hoodrat",
+    lane: "Robinhood",
+    allocation: "20%",
+    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    contract: "0x8e62F281f282686fCa6dCB39288069a93fC23F1c",
+    image: "/coins/hoodrat.jpg",
+    color: "#efff00",
   },
   {
-    symbol: "BTC",
-    name: "Bitcoin",
-    lane: "Reserve",
-    allocation: "8%",
-    thesis: "Digital reserve exposure for the RHX6900 treasury basket.",
-    color: "#f7a531",
-  },
-  {
-    symbol: "ONDO",
-    name: "Ondo",
-    lane: "RWA",
-    allocation: "8%",
-    thesis: "Tokenized treasury exposure with strong relevance to real-world assets.",
-    color: "#2d6cdf",
-  },
-  {
-    symbol: "LINK",
-    name: "Chainlink",
-    lane: "RWA",
-    allocation: "7%",
-    thesis: "Data and cross-chain infrastructure for tokenized markets.",
-    color: "#3157d5",
-  },
-  {
-    symbol: "PENDLE",
-    name: "Pendle",
-    lane: "Yield",
-    allocation: "6%",
-    thesis: "Yield-market exposure for on-chain rate activity.",
-    color: "#21a0a0",
-  },
-  {
-    symbol: "PYTH",
-    name: "Pyth Network",
-    lane: "Data",
-    allocation: "5%",
-    thesis: "Low-latency market data for active on-chain assets.",
-    color: "#8c54ff",
-  },
-  {
-    symbol: "JUP",
-    name: "Jupiter",
-    lane: "Solana",
-    allocation: "5%",
-    thesis: "Liquidity routing exposure for fast Solana market flow.",
-    color: "#f08734",
-  },
-  {
-    symbol: "RENDER",
-    name: "Render",
-    lane: "AI",
-    allocation: "4%",
-    thesis: "AI infrastructure exposure with real network demand.",
-    color: "#d73a2f",
-  },
-  {
-    symbol: "WIF",
-    name: "dogwifhat",
-    lane: "Meme",
-    allocation: "3%",
-    thesis: "High-beta culture exposure for the meme rotation.",
-    color: "#b5895a",
-  },
-  {
-    symbol: "BONK",
-    name: "Bonk",
-    lane: "Meme",
-    allocation: "3%",
-    thesis: "Solana-native meme liquidity and holder density.",
-    color: "#f0be35",
-  },
-  {
-    symbol: "CFG",
-    name: "Centrifuge",
-    lane: "RWA",
-    allocation: "2%",
-    thesis: "Private-credit and real-world asset financing exposure.",
-    color: "#2fbf71",
-  },
-  {
-    symbol: "USDC",
-    name: "USD Coin",
-    lane: "Cash",
-    allocation: "1%",
-    thesis: "Dry powder for purchases, routing, and distribution execution.",
-    color: "#2775ca",
+    symbol: "JUGGERNAUT",
+    name: "Juggernaut",
+    lane: "Robinhood",
+    allocation: "20%",
+    thesis: "Equal-weight Robinhood ecosystem exposure.",
+    contract: "0xD7321801CAae694090694Ff55A9323139F043B88",
+    image: "/coins/juggernaut.jpg",
+    color: "#efff00",
   },
 ];
 
 const steps: AirdropStep[] = [
   {
     number: "01",
-    title: "Discover",
-    body: "Strong Robinhood ecosystem coins are continuously reviewed. New assets may be added daily based on liquidity, volume, momentum, relevance, and risk.",
-    tag: "REVIEW",
+    title: "Index",
+    body: "Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut each hold an equal 20% target weight.",
+    tag: "5 COINS",
   },
   {
     number: "02",
@@ -167,7 +99,7 @@ const steps: AirdropStep[] = [
   {
     number: "04",
     title: "Verify",
-    body: "Coin additions, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain.",
+    body: "Index composition, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain.",
     tag: "ON-CHAIN",
   },
 ];
@@ -181,16 +113,16 @@ const holderBonuses: HolderBonus[] = [
 ];
 
 const lanes = [
-  { label: "Active Coins", value: "15", copy: "Coins currently active in RHX6900" },
+  { label: "Active Coins", value: "5", copy: "Coins currently active in RHX6900" },
   { label: "Next Airdrop", value: "15m", copy: "Automatic holder distributions" },
-  { label: "Latest Coin Added", value: "TENDIES", copy: "First live ecosystem coin" },
+  { label: "Index Weight", value: "20%", copy: "Equal target weight per coin" },
   { label: "Eligible Holders", value: "1M+", copy: "Minimum RHX6900 balance" },
 ];
 
 const dashboardStats = [
   { label: "Active Coins", value: String(basket.length), detail: "currently active" },
   { label: "Next Airdrop", value: "15m", detail: "automatic distribution" },
-  { label: "Latest Coin Added", value: "TENDIES", detail: "first active coin" },
+  { label: "Index Weight", value: "20%", detail: "equal weight per coin" },
   { label: "Eligible Holders", value: "1M+", detail: "minimum RHX6900 balance" },
 ];
 
@@ -202,10 +134,10 @@ const dashboardFeed = [
 ];
 
 const engineCards = [
-  ["Discover", "Strong Robinhood ecosystem coins are continuously reviewed for liquidity, volume, momentum, relevance, and risk."],
+  ["Index", "Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut each hold an equal 20% target weight."],
   ["Accumulate", "Protocol fees are used to purchase selected coins currently active within RHX6900."],
   ["Distribute", "Every 15 minutes, accumulated assets are distributed proportionally to eligible RHX6900 holders."],
-  ["Verify", "Coin additions, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain."],
+  ["Verify", "Index composition, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain."],
 ];
 
 const receiptRows = [
@@ -261,8 +193,8 @@ const faqs = [
     a: "No. RHX6900 is designed for automatic distributions. Eligible holders do not need to stake or manually claim each round.",
   },
   {
-    q: "How are new coins added?",
-    a: "New coins are reviewed daily based on liquidity, volume, momentum, relevance, and risk as the Robinhood ecosystem evolves.",
+    q: "Which coins are in RHX6900?",
+    a: "The current RHX6900 index is Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut, weighted equally at 20% each.",
   },
   {
     q: "Can holders verify activity?",
@@ -328,10 +260,10 @@ export default function Home() {
             <h1>RHX6900</h1>
             <div className="manifesto-line">STOP TRADING. BELIEVE IN SOMETHING.</div>
             <p className="hero-lede">
-              RHX6900 uses protocol fees to continuously acquire selected
-              Robinhood ecosystem coins. Every 15 minutes, the accumulated
-              assets are airdropped directly to eligible RHX6900 holders. New
-              coins are reviewed and added daily as the ecosystem evolves.
+              RHX6900 tracks Wishbone, Tendies, Cashcat, Hoodrat, and
+              Juggernaut at an equal 20% weight. Protocol fees acquire the five
+              active coins, and accumulated assets are airdropped directly to
+              eligible RHX6900 holders every 15 minutes.
             </p>
             <div className="hero-actions" aria-label="Primary actions">
               <a className="button button-dark" href="#airdrops">
@@ -342,9 +274,9 @@ export default function Home() {
               </a>
             </div>
             <div className="hero-notes" aria-label="RHX6900 utility">
-              <span>FEES BUY THE ECOSYSTEM</span>
+              <span>5 ACTIVE COINS</span>
+              <span>20% EACH</span>
               <span>AIRDROPS EVERY 15 MINUTES</span>
-              <span>NEW COINS ADDED DAILY</span>
             </div>
           </div>
 
@@ -387,13 +319,13 @@ export default function Home() {
               </div>
 
               <div className="allocation-chart" aria-label="Allocation bars">
-                {basket.slice(0, 11).map((coin, index) => (
+                {basket.map((coin) => (
                   <span
                     key={coin.symbol}
                     style={
                       {
                         "--coin-accent": coin.color,
-                        "--bar-height": `${26 + ((index * 17) % 52)}%`,
+                        "--bar-height": "58%",
                       } as CSSProperties
                     }
                   />
@@ -414,7 +346,7 @@ export default function Home() {
                           style={statStyle(coin.color)}
                           aria-hidden="true"
                         >
-                          {coin.symbol.slice(0, 2)}
+                          <img src={coin.image} alt="" />
                         </span>
                         <span>
                           <b>{coin.symbol}</b>
@@ -443,7 +375,7 @@ export default function Home() {
                         style={statStyle(coin.color)}
                         aria-label={coin.symbol}
                       >
-                        {coin.symbol.slice(0, 1)}
+                        <img src={coin.image} alt="" />
                       </span>
                     ))}
                   </div>
@@ -487,13 +419,13 @@ export default function Home() {
                   <b>RHX6900</b>
                 </div>
                 <div className="dashboard-chart">
-                  {basket.slice(0, 12).map((coin, index) => (
+                  {basket.map((coin) => (
                     <div className="dashboard-bar" key={coin.symbol}>
                       <span
                         style={
                           {
                             "--coin-accent": coin.color,
-                            "--bar-height": `${30 + ((index * 19) % 56)}%`,
+                            "--bar-height": "68%",
                           } as CSSProperties
                         }
                       />
@@ -502,10 +434,9 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="dashboard-heat">
-                  <span>RWA assets</span>
-                  <span>Core reserves</span>
-                  <span>Meme coins</span>
-                  <span>Dry powder</span>
+                  {basket.map((coin) => (
+                    <span key={coin.symbol}>{coin.name}</span>
+                  ))}
                 </div>
               </article>
 
@@ -535,12 +466,12 @@ export default function Home() {
           <div className="section-head">
             <div>
               <div className="eyebrow">/ HOW RHX6900 WORKS /</div>
-              <h2>RHX6900 is not one coin.</h2>
+              <h2>Five coins. One equal-weight index.</h2>
             </div>
             <p>
-              RHX6900 is a growing basket of Robinhood ecosystem assets,
-              continuously accumulated through protocol fees and distributed to
-              holders.
+              RHX6900 holds five Robinhood ecosystem coins at a 20% target
+              weight each, accumulated through protocol fees and distributed
+              to eligible holders.
             </p>
           </div>
 
@@ -645,17 +576,17 @@ export default function Home() {
               <h2>CURRENT RHX6900 COINS</h2>
             </div>
             <p>
-              The active Robinhood ecosystem coins currently being accumulated
-              by RHX6900. New assets are reviewed and may be added daily.
+              The five Robinhood ecosystem coins currently active in RHX6900.
+              Every coin has an equal 20% target weight.
             </p>
           </div>
 
           <div className="basket-table">
             <div className="basket-row basket-row-head">
               <span>Asset</span>
-              <span>Lane</span>
-              <span>Allocation</span>
-              <span>Why it belongs</span>
+              <span>Contract</span>
+              <span>Weight</span>
+              <span>Role</span>
             </div>
             {basket.map((coin) => (
               <article className="basket-row" key={coin.symbol}>
@@ -665,14 +596,14 @@ export default function Home() {
                     style={statStyle(coin.color)}
                     aria-hidden="true"
                   >
-                    {coin.symbol.slice(0, 2)}
+                    <img src={coin.image} alt="" />
                   </span>
                   <span>
                     <b>{coin.symbol}</b>
                     <em>{coin.name}</em>
                   </span>
                 </div>
-                <span className="lane-pill">{coin.lane}</span>
+                <code className="contract-address">{coin.contract}</code>
                 <strong>{coin.allocation}</strong>
                 <p>{coin.thesis}</p>
               </article>
@@ -714,8 +645,8 @@ export default function Home() {
               <h3>Longer holds hit harder.</h3>
               <p>
                 Wallets that keep the 1M+ RHX6900 gate intact across consecutive
-                snapshots earn boosted airdrop weight when TENDIES and future
-                Robinhood ecosystem assets are accumulated by RHX6900.
+                snapshots earn boosted airdrop weight when the five active
+                Robinhood ecosystem coins are accumulated by RHX6900.
               </p>
             </div>
             <div className="holder-bonus-grid">
@@ -735,23 +666,20 @@ export default function Home() {
         <div className="layout-rail">
           <div className="rebalance-panel">
             <div>
-              <div className="eyebrow">/ DAILY REVIEW /</div>
-              <h2>New coins can be added as the ecosystem evolves.</h2>
+              <div className="eyebrow">/ INDEX COMPOSITION /</div>
+              <h2>Five coins. Twenty percent each.</h2>
               <p>
-                RHX6900 reviews coins daily for liquidity, volume, momentum,
-                relevance, and risk. The goal is simple: keep the active coin
-                list aligned with the Robinhood ecosystem.
+                RHX6900 keeps the index clear and equal: Wishbone, Tendies,
+                Cashcat, Hoodrat, and Juggernaut at a 20% target weight each.
               </p>
             </div>
-            <div className="rebalance-stack" aria-label="Rebalance priorities">
-              {["Conviction coins", "RWA assets", "Holder rewards", "Meme momentum"].map(
-                (item, index) => (
-                  <span key={item}>
-                    <b>{String(index + 1).padStart(2, "0")}</b>
-                    {item}
-                  </span>
-                ),
-              )}
+            <div className="rebalance-stack" aria-label="RHX6900 index coins">
+              {basket.map((coin, index) => (
+                <span key={coin.symbol}>
+                  <b>{String(index + 1).padStart(2, "0")}</b>
+                  {coin.name} / {coin.allocation}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -766,7 +694,7 @@ export default function Home() {
             </div>
             <p>
               Culture moves the ecosystem. The RHX6900 meme feed runs around
-              the clock while new Robinhood ecosystem coins are reviewed daily.
+              the clock beside the five-coin equal-weight index.
             </p>
           </div>
 

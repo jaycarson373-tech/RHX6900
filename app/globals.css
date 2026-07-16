@@ -664,6 +664,15 @@ main > * {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0;
+  overflow: hidden;
+}
+
+.coin-avatar img,
+.wallet-icons img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .coin-row b,
@@ -730,6 +739,7 @@ main > * {
   color: #ffffff;
   font-size: 11px;
   font-weight: 900;
+  overflow: hidden;
 }
 
 .section {
@@ -813,12 +823,21 @@ main > * {
 
 .basket-row {
   display: grid;
-  grid-template-columns: minmax(220px, 1.2fr) 120px 120px minmax(280px, 1.5fr);
+  grid-template-columns: minmax(210px, 0.9fr) minmax(270px, 1.35fr) 90px minmax(220px, 1fr);
   align-items: center;
   gap: 18px;
   min-height: 72px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--color-line);
+}
+
+.contract-address {
+  min-width: 0;
+  color: var(--color-neon);
+  font-family: var(--font-data);
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .basket-row:last-child {
@@ -2669,4 +2688,96 @@ main::before {
   .holder-bonus-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* RHX6900 two-tone interface: neon yellow on black. */
+:root {
+  --color-ink: #050505;
+  --color-muted: #efff00;
+  --color-soft: #efff00;
+  --color-line: rgba(239, 255, 0, 0.18);
+  --color-line-strong: rgba(239, 255, 0, 0.42);
+  --color-page: #050505;
+  --color-panel: #050505;
+  --color-panel-soft: #050505;
+  --color-panel-warm: #050505;
+  --color-green: #efff00;
+  --color-gold: #efff00;
+  --color-blue: #efff00;
+}
+
+body {
+  background: #050505;
+  color: var(--color-neon);
+}
+
+main :where(h1, h2, h3, p, span, strong, b, em, small, summary, code, i) {
+  color: var(--color-neon) !important;
+}
+
+main :where(h1, h2, h3) {
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+
+main :where(p, summary) {
+  font-family: var(--font-sans);
+}
+
+.header-shell,
+.hero-terminal,
+.dashboard-shell,
+.dashboard-chart-card,
+.dashboard-feed,
+.basket-table,
+.basket-row,
+.faq-list,
+.lane-card,
+.process-card,
+.engine-card,
+.terminal-panel,
+.receipt-table,
+.holder-bonus-panel,
+.holder-bonus-card,
+.rebalance-panel,
+.meme-gallery-shell,
+.portfolio-panel,
+.wallet-panel,
+.coin-row {
+  background: #050505;
+  color: var(--color-neon);
+}
+
+.button-dark,
+.manifesto-line,
+.brand-pill {
+  background: var(--color-neon);
+  color: #050505 !important;
+}
+
+.button-light,
+.header-socials a,
+.lane-pill,
+.hero-notes span,
+.feed-item i,
+.process-card b {
+  border-color: rgba(239, 255, 0, 0.5);
+  background: #050505;
+  color: var(--color-neon) !important;
+}
+
+.allocation-chart span,
+.dashboard-bar span,
+.conveyor-rollers span,
+.meme-gallery-belt span {
+  background: var(--color-neon);
+}
+
+.contract-address {
+  color: var(--color-neon) !important;
+}
+
+::selection {
+  background: var(--color-neon);
+  color: #050505;
 }

@@ -35,9 +35,9 @@ test("server-renders the RHX6900 index site", async () => {
   assert.match(html, /RHX6900/);
   assert.match(html, /Robinhood Index 6900/);
   assert.match(html, /STOP TRADING\. BELIEVE IN SOMETHING\./);
-  assert.match(html, /RHX6900 uses protocol fees/);
+  assert.match(html, /RHX6900 tracks Wishbone/);
   assert.match(html, /HOW RHX6900 WORKS/);
-  assert.match(html, /RHX6900 is not one coin/);
+  assert.match(html, /Five coins\. One equal-weight index/);
   assert.match(html, /PROOF, NOT PROMISES/);
   assert.match(html, /Awaiting first purchase/);
   assert.match(html, /Awaiting first distribution/);
@@ -46,17 +46,27 @@ test("server-renders the RHX6900 index site", async () => {
   assert.match(html, /RHX6900 live dashboard/);
   assert.match(html, /rhx6900-logo\.jpg/);
   assert.match(html, /RHX6900 live flow/);
-  assert.match(html, /FEES BUY THE ECOSYSTEM/);
+  assert.match(html, /5 ACTIVE COINS/);
   assert.match(html, /Hold RHX6900\. Receive the ecosystem/);
   assert.match(html, /THE RHX6900 MEME CONVEYOR/);
   assert.match(html, /CONSECUTIVE HOLD BONUS/);
   assert.match(html, /6 months/);
   assert.match(html, /10x/);
+  assert.match(html, /WISHBONE/);
   assert.match(html, /TENDIES/);
+  assert.match(html, /CASHCAT/);
+  assert.match(html, /HOODRAT/);
+  assert.match(html, /JUGGERNAUT/);
+  assert.match(html, /0x77581054581B9c525E7dd7a0155DE43867532d03/);
+  assert.match(html, /0x45242320DBB855EeA8Fd36804C6487E10E97FCF9/);
+  assert.match(html, /0x020bfC650A365f8BB26819deAAbF3E21291018b4/);
+  assert.match(html, /0x8e62F281f282686fCa6dCB39288069a93fC23F1c/);
+  assert.match(html, /0xD7321801CAae694090694Ff55A9323139F043B88/);
+  assert.match(html, /coins\/wishbone\.jpg/);
+  assert.match(html, /coins\/juggernaut\.jpg/);
   assert.match(html, /rhx-meme-anime-blonde\.jpg/);
   assert.match(html, /rhx-meme-moon\.jpg/);
-  assert.match(html, /ONDO/);
-  assert.match(html, /Centrifuge/);
+  assert.doesNotMatch(html, /ONDO|Centrifuge|PENDLE|USDC/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|SkeletonPreview/i);
 });
 
@@ -81,4 +91,5 @@ test("removes disposable starter dependencies and imports", async () => {
   assert.match(css, /#efff00/);
   assert.match(css, /hero-logo-lockup/);
   assert.match(css, /terminal-logo-strip/);
+  assert.match(css, /RHX6900 two-tone interface/);
 });

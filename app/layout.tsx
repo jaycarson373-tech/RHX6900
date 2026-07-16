@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 const siteTitle = "RHX6900 | Robinhood Index 6900";
 const siteDescription =
-  "RHX6900 uses protocol fees to acquire selected Robinhood ecosystem coins and airdrop accumulated assets to eligible holders every 15 minutes.";
+  "RHX6900 tracks Wishbone, Tendies, Cashcat, Hoodrat, and Juggernaut at an equal 20% weight, with holder airdrops every 15 minutes.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
