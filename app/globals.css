@@ -1621,6 +1621,266 @@ body {
     #050505;
 }
 
+.hero,
+.section,
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero {
+  --section-bg: url("/rhx-bg-logo-market.jpg");
+  --section-bg-position: center;
+}
+
+.dashboard-section {
+  --section-bg: url("/rhx-bg-orbital-city.jpg");
+  --section-bg-position: center;
+}
+
+.engine-section,
+.receipts-section {
+  --section-bg: url("/rhx-bg-neon-road.jpg");
+  --section-bg-position: center;
+}
+
+.rules-section,
+.basket-section {
+  --section-bg: url("/rhx-bg-bull-market.jpg");
+  --section-bg-position: center;
+}
+
+.meme-section {
+  --section-bg: url("/rhx-bg-rocket-market.jpg");
+  --section-bg-position: center;
+}
+
+.airdrops-section {
+  --section-bg: url("/rhx-bg-logo-market.jpg");
+  --section-bg-position: center;
+}
+
+.rebalance-section {
+  --section-bg: url("/rhx-bg-orbital-city.jpg");
+  --section-bg-position: center;
+}
+
+.faq-section,
+.site-footer {
+  --section-bg: url("/rhx-bg-neon-road.jpg");
+  --section-bg-position: center bottom;
+}
+
+.hero::before,
+.section::before,
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: var(--section-bg);
+  background-position: var(--section-bg-position);
+  background-size: cover;
+  opacity: 0.67;
+  filter: saturate(1.16) contrast(1.04);
+  transform: scale(1.045) translate3d(-0.4%, -0.35%, 0);
+  animation: rhxBgDrift 26s ease-in-out infinite alternate;
+}
+
+.hero::after,
+.section::after,
+.site-footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(720px 280px at 50% 14%, rgba(239, 255, 0, 0.18), transparent 72%),
+    linear-gradient(180deg, rgba(3, 4, 0, 0.56), rgba(3, 4, 0, 0.82) 56%, rgba(3, 4, 0, 0.92));
+}
+
+.hero-body,
+.section > *,
+.site-footer > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-shell,
+.conveyor-shell,
+.rebalance-panel,
+.terminal-panel,
+.receipt-table {
+  backdrop-filter: blur(12px) saturate(1.12);
+  animation: rhxPanelFloat 9s ease-in-out infinite;
+}
+
+.dashboard-shell,
+.receipt-table {
+  animation-delay: -2.6s;
+}
+
+.conveyor-shell,
+.terminal-panel {
+  animation-delay: -5.1s;
+}
+
+.rebalance-panel {
+  animation-delay: -6.8s;
+}
+
+.hero-terminal,
+.dashboard-shell,
+.basket-table,
+.faq-list {
+  background:
+    linear-gradient(145deg, rgba(15, 15, 16, 0.74), rgba(5, 5, 5, 0.68)),
+    rgba(5, 5, 5, 0.62);
+}
+
+.portfolio-panel,
+.dashboard-chart-card,
+.dashboard-feed,
+.coin-row,
+.basket-row,
+.dashboard-stat,
+.lane-card,
+.process-card,
+.meme-card,
+.engine-card,
+.terminal-panel,
+.receipt-table {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.048), transparent),
+    rgba(5, 5, 5, 0.66);
+  backdrop-filter: blur(10px) saturate(1.1);
+}
+
+.hero-logo-lockup,
+.brand-mark,
+.coin-halo img {
+  animation: rhxNeonBreathe 5.8s ease-in-out infinite;
+}
+
+.allocation-chart span,
+.dashboard-bar span,
+.conveyor-rollers span {
+  animation: rhxBarGlow 6.4s ease-in-out infinite;
+}
+
+.engine-card,
+.lane-card,
+.process-card,
+.basket-row,
+.dashboard-stat,
+.feed-item,
+.meme-card {
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.engine-card:hover,
+.lane-card:hover,
+.process-card:hover,
+.basket-row:hover,
+.dashboard-stat:hover,
+.feed-item:hover,
+.meme-card:hover {
+  border-color: rgba(239, 255, 0, 0.42);
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.34),
+    0 0 26px rgba(239, 255, 0, 0.16);
+  transform: translateY(-2px);
+}
+
+main::before {
+  animation: rhxScanline 16s linear infinite;
+}
+
+@keyframes rhxBgDrift {
+  from {
+    transform: scale(1.045) translate3d(-0.4%, -0.35%, 0);
+  }
+
+  to {
+    transform: scale(1.075) translate3d(0.45%, 0.35%, 0);
+  }
+}
+
+@keyframes rhxPanelFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes rhxNeonBreathe {
+  0%,
+  100% {
+    filter: saturate(1) brightness(1);
+  }
+
+  50% {
+    filter: saturate(1.14) brightness(1.08);
+  }
+}
+
+@keyframes rhxBarGlow {
+  0%,
+  100% {
+    filter: brightness(0.92) saturate(1);
+  }
+
+  50% {
+    filter: brightness(1.15) saturate(1.18);
+  }
+}
+
+@keyframes rhxScanline {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 0 84px, 84px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main::before,
+  .hero::before,
+  .section::before,
+  .site-footer::before,
+  .dashboard-shell,
+  .conveyor-shell,
+  .rebalance-panel,
+  .terminal-panel,
+  .receipt-table,
+  .hero-logo-lockup,
+  .brand-mark,
+  .coin-halo img,
+  .allocation-chart span,
+  .dashboard-bar span,
+  .conveyor-rollers span {
+    animation: none;
+  }
+
+  .hero::before,
+  .section::before,
+  .site-footer::before {
+    transform: scale(1.045);
+  }
+}
+
 @media (max-width: 1080px) {
   .hero-body {
     grid-template-columns: minmax(0, 1fr);

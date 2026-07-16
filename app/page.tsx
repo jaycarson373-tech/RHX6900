@@ -586,7 +586,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="rules">
+      <section className="section rules-section" id="rules">
         <div className="layout-rail">
           <div className="section-head">
             <div>
@@ -612,7 +612,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section flush-top" id="basket">
+      <section className="section flush-top basket-section" id="basket">
         <div className="layout-rail">
           <div className="section-head">
             <div>
@@ -699,7 +699,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section flush-top" id="airdrops">
+      <section className="section flush-top airdrops-section" id="airdrops">
         <div className="layout-rail">
           <div className="section-head">
             <div>
@@ -727,7 +727,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section flush-top">
+      <section className="section flush-top rebalance-section">
         <div className="layout-rail">
           <div className="rebalance-panel">
             <div>
@@ -753,7 +753,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section flush-top" id="faq">
+      <section className="section flush-top faq-section" id="faq">
         <div className="layout-readable">
           <div className="section-head centered">
             <div>
