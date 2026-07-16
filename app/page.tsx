@@ -117,6 +117,8 @@ const memeArt = [
   "/memes/rhx-meme-well-done.jpg",
   "/memes/rhx-meme-moon.jpg",
   "/memes/rhx-meme-tendies.jpg",
+  "/memes/rhx-meme-cathedral.jpg",
+  "/memes/rhx-meme-chair-closeup.jpg",
 ];
 
 const feathers = Array.from({ length: 26 }, (_, index) => ({

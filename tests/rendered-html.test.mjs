@@ -61,6 +61,8 @@ test("server-renders the RHX6900 treasury experience", async () => {
   assert.match(html, /coins\/juggernaut\.jpg/);
   assert.match(html, /rhx-meme-anime-blonde\.jpg/);
   assert.match(html, /rhx-meme-moon\.jpg/);
+  assert.match(html, /rhx-meme-cathedral\.jpg/);
+  assert.match(html, /rhx-meme-chair-closeup\.jpg/);
   assert.match(html, /og\.png/);
   assert.doesNotMatch(html, /Robinhood Index 6900|CURRENT RHX6900 COINS/i);
   assert.doesNotMatch(html, /ONDO|Centrifuge|PENDLE|USDC/);
