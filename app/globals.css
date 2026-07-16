@@ -111,7 +111,8 @@ main > * {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  width: min(100%, var(--site-rail));
+  width: auto;
+  max-width: var(--site-rail);
   min-height: 64px;
   margin: 0 auto;
   padding: 4px;
@@ -126,7 +127,8 @@ main > * {
 }
 
 .brand-pill,
-.header-cta,
+.brand-logo-link,
+.header-socials a,
 .button {
   display: inline-flex;
   align-items: center;
@@ -149,14 +151,28 @@ main > * {
   box-shadow: inset 0 0 0 1px rgba(24, 24, 21, 0.16);
 }
 
+.brand-logo-link {
+  width: 56px;
+  height: 56px;
+  min-height: 56px;
+  flex: 0 0 56px;
+  border: 1px solid rgba(239, 255, 0, 0.72);
+  border-radius: var(--radius-md);
+  background: #050505;
+  box-shadow:
+    0 0 26px rgba(239, 255, 0, 0.28),
+    inset 0 1px rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
 .brand-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 100%;
+  height: 100%;
   border: 2px solid #050505;
-  border-radius: 50%;
+  border-radius: var(--radius-md);
   flex: 0 0 auto;
   overflow: hidden;
   background: #050505;
@@ -178,6 +194,7 @@ main > * {
   justify-content: center;
   gap: clamp(18px, 3vw, 34px);
   min-width: 0;
+  margin: 0 auto;
   color: var(--color-muted);
   font-family: var(--font-data);
   font-size: 12px;
@@ -193,11 +210,32 @@ main > * {
   text-shadow: 0 0 16px rgba(232, 255, 23, 0.68);
 }
 
-.header-cta {
-  padding: 0 22px;
-  background: var(--color-ink);
+.header-socials {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.header-socials a {
+  width: 52px;
+  min-height: 52px;
+  border: 1px solid rgba(239, 255, 0, 0.58);
+  background: rgba(239, 255, 0, 0.1);
   color: var(--color-neon);
-  box-shadow: inset 0 0 0 1px rgba(232, 255, 23, 0.26);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.28),
+    0 0 18px rgba(239, 255, 0, 0.12);
+  transition:
+    transform 0.16s ease,
+    background 0.16s ease,
+    color 0.16s ease;
+}
+
+.header-socials a:hover {
+  transform: translateY(-1px);
+  background: var(--color-neon);
+  color: #050505;
 }
 
 .hero {
@@ -225,7 +263,7 @@ main > * {
   aspect-ratio: 1;
   margin-bottom: 18px;
   border: 3px solid #050505;
-  border-radius: 50%;
+  border-radius: var(--radius-md);
   overflow: hidden;
   background: #050505;
   box-shadow:
@@ -303,7 +341,7 @@ main > * {
 }
 
 .button:hover,
-.header-cta:hover {
+.header-socials a:hover {
   transform: translateY(-1px);
 }
 
@@ -331,10 +369,11 @@ main > * {
   display: inline-flex;
   align-items: center;
   min-height: 28px;
+  border: 1px solid rgba(232, 255, 23, 0.26);
   border-radius: var(--radius-sm);
   padding: 0 10px;
-  background: rgba(232, 255, 23, 0.2);
-  color: #485000;
+  background: rgba(232, 255, 23, 0.13);
+  color: #f8ffe7;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -439,7 +478,7 @@ main > * {
   width: 64px;
   height: 64px;
   border: 2px solid #050505;
-  border-radius: 50%;
+  border-radius: var(--radius-md);
   flex: 0 0 auto;
   object-fit: cover;
   box-shadow: 0 0 18px rgba(239, 255, 0, 0.48);
@@ -795,6 +834,10 @@ main > * {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+.asset-cell > span:last-child {
   min-width: 0;
 }
 
@@ -1373,7 +1416,7 @@ main > * {
   text-align: right;
 }
 
-/* AI6900-inspired black-screen index treatment */
+/* RHX6900 neon market treatment */
 body {
   background:
     radial-gradient(900px 520px at 18% 4%, rgba(239, 255, 0, 0.16), transparent 60%),
@@ -1568,40 +1611,81 @@ body {
   padding-top: 0;
 }
 
+.engine-section::after {
+  background:
+    radial-gradient(620px 220px at 42% 16%, rgba(239, 255, 0, 0.12), transparent 70%),
+    linear-gradient(180deg, rgba(3, 4, 0, 0.72), rgba(3, 4, 0, 0.9) 52%, rgba(3, 4, 0, 0.96));
+}
+
+.engine-section .section-head {
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+.engine-section .section-head h2 {
+  max-width: 650px;
+  font-size: clamp(34px, 4.2vw, 58px);
+  line-height: 1.02;
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(239, 255, 0, 0.18);
+}
+
+.engine-section .section-head p {
+  max-width: 420px;
+  margin-top: 22px;
+  color: rgba(247, 247, 239, 0.78);
+  font-weight: 600;
+}
+
 .engine-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 
 .engine-card {
-  min-height: 196px;
-  border: 1px solid rgba(232, 255, 23, 0.18);
+  position: relative;
+  min-height: 178px;
+  border: 1px solid rgba(232, 255, 23, 0.28);
   border-radius: var(--radius-md);
-  padding: 22px;
+  padding: 20px;
   background:
-    linear-gradient(145deg, rgba(15, 15, 16, 0.9), rgba(5, 5, 5, 0.82)),
+    linear-gradient(145deg, rgba(15, 15, 16, 0.94), rgba(5, 5, 5, 0.9)),
     #050505;
   box-shadow:
-    0 22px 70px rgba(0, 0, 0, 0.34),
+    0 20px 58px rgba(0, 0, 0, 0.46),
+    0 0 22px rgba(239, 255, 0, 0.08),
     inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.engine-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 18px;
+  left: 18px;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: var(--color-neon);
+  box-shadow: 0 0 18px rgba(239, 255, 0, 0.42);
 }
 
 .engine-card small {
   color: var(--color-neon);
   font-family: var(--font-data);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .engine-card p {
-  margin: 30px 0 0;
-  color: rgba(247, 247, 239, 0.78);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.5;
+  margin: 34px 0 0;
+  color: rgba(247, 247, 239, 0.84);
+  font-size: clamp(13px, 1.08vw, 15px);
+  font-weight: 650;
+  line-height: 1.45;
 }
 
 .receipts-layout {
@@ -2038,18 +2122,21 @@ main::before {
     min-height: 60px;
   }
 
-  .brand-pill {
-    min-height: 50px;
-    padding: 0 16px;
+  .brand-logo-link {
+    width: 52px;
+    height: 52px;
+    min-height: 52px;
+    flex-basis: 52px;
   }
 
   .topnav {
     display: none;
   }
 
-  .header-cta {
-    min-height: 50px;
-    padding: 0 16px;
+  .header-socials a {
+    width: 48px;
+    min-height: 48px;
+    font-size: 11px;
   }
 
   .hero {
@@ -2070,6 +2157,25 @@ main::before {
 
   .section-head p {
     margin-top: 16px;
+  }
+
+  .engine-section .section-head h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 8vw, 48px);
+  }
+
+  .engine-section .section-head p {
+    max-width: 100%;
+    margin-top: 14px;
+  }
+
+  .engine-card {
+    min-height: 154px;
+    padding: 18px;
+  }
+
+  .engine-card p {
+    margin-top: 24px;
   }
 
   .terminal-grid,
@@ -2147,12 +2253,104 @@ main::before {
 }
 
 @media (max-width: 560px) {
-  .header-cta {
-    display: none;
+  :root {
+    --section-x: 14px;
+    --section-y: 60px;
+  }
+
+  .site-header {
+    padding-right: var(--section-x);
+    padding-left: var(--section-x);
+    pointer-events: none;
   }
 
   .header-shell {
+    width: auto;
+    max-width: none;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .brand-logo-link {
+    position: fixed;
+    top: 14px;
+    left: var(--section-x);
+    z-index: 60;
+    width: 50px;
+    height: 50px;
+    min-height: 50px;
+    flex-basis: 50px;
+    pointer-events: auto;
+  }
+
+  .header-socials {
+    position: fixed;
+    top: 17px;
+    right: clamp(var(--section-x), 22vw, 112px);
+    z-index: 60;
+    display: grid;
+    grid-template-columns: repeat(2, 44px);
+    gap: 6px;
+    justify-content: end;
+    min-width: 94px;
+    pointer-events: auto;
+  }
+
+  .header-socials a {
+    width: 44px;
+    min-height: 44px;
+    font-size: 10px;
+  }
+
+  .hero-body {
+    width: min(100%, 390px);
+    padding-top: 34px;
+    margin-right: auto;
+    margin-left: 0;
+  }
+
+  .layout-rail,
+  .layout-readable {
+    width: 100%;
+    max-width: 362px;
+    margin-right: auto;
+    margin-left: 0;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .hero-logo-lockup {
+    width: 92px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 14vw, 56px);
+    line-height: 0.96;
+    transform: none;
+    -webkit-text-stroke: 1px #050505;
+    text-shadow:
+      3px 4px 0 #000000,
+      0 0 22px rgba(239, 255, 0, 0.64);
+  }
+
+  .manifesto-line {
+    width: 100%;
+    min-height: 42px;
     justify-content: center;
+    padding: 0 10px;
+    font-size: 11px;
+    transform: none;
+  }
+
+  .hero-lede {
+    font-size: 16px;
   }
 
   .hero-actions {
@@ -2161,20 +2359,87 @@ main::before {
     max-width: 340px;
   }
 
+  .button {
+    width: 100%;
+    min-width: 0;
+  }
+
   .hero-notes span {
     flex: 1 1 100%;
+    min-height: 30px;
+    justify-content: center;
   }
 
   .terminal-content {
     padding: 12px;
   }
 
+  .hero-terminal,
+  .dashboard-shell,
+  .basket-table,
+  .conveyor-shell,
+  .holder-bonus-panel,
+  .rebalance-panel,
+  .faq-list,
+  .terminal-panel,
+  .receipt-table {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .terminal-logo-strip {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .terminal-logo-strip img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .terminal-logo-strip strong {
+    font-size: 16px;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
   .terminal-total strong {
-    font-size: 36px;
+    font-size: clamp(30px, 11vw, 36px);
+    overflow-wrap: anywhere;
+  }
+
+  .terminal-metrics div {
+    padding: 12px 8px;
+  }
+
+  .terminal-metrics span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .terminal-metrics strong {
     font-size: 18px;
+  }
+
+  .allocation-chart {
+    height: 54px;
+    gap: 3px;
+  }
+
+  .coin-row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .coin-row strong {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .wallet-icons {
+    flex-wrap: wrap;
   }
 
   .dashboard-topline {
@@ -2199,8 +2464,37 @@ main::before {
     justify-self: start;
   }
 
+  .basket-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .basket-row .lane-pill,
+  .basket-row strong {
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: start;
+  }
+
+  .basket-row p {
+    grid-column: auto;
+  }
+
+  .asset-cell {
+    align-items: start;
+  }
+
+  .asset-cell em {
+    white-space: normal;
+  }
+
   .engine-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .engine-card {
+    min-height: 0;
   }
 
   .lane-grid {

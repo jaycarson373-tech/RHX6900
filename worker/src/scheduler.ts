@@ -1,6 +1,7 @@
 import { runEpoch } from "./epoch.js";
 import { config } from "./config.js";
 import { msUntilNextEpoch } from "./time.js";
+import { createServer } from "node:http";
 
 console.log(`${config.projectName} worker started. Schedule: every ${config.epochMinutes} minutes.`);
 console.log(
@@ -19,6 +20,25 @@ async function loop() {
   setTimeout(loop, waitMs);
 }
 
+function startHealthServer() {
+  const port = process.env.PORT ? Number(process.env.PORT) : 0;
+  if (!Number.isInteger(port) || port <= 0) return;
+
+  createServer((request, response) => {
+    response.writeHead(200, { "content-type": "application/json" });
+    response.end(
+      JSON.stringify({
+        ok: true,
+        service: config.projectName,
+        rewardSymbol: config.rewardSymbol,
+        path: request.url ?? "/"
+      })
+    );
+  }).listen(port, "0.0.0.0", () => {
+    console.log(`Health server listening on 0.0.0.0:${port}`);
+  });
+}
+
 function scheduleFirstRun() {
   console.log("First epoch run starting immediately.");
   loop().catch((error) => {
@@ -27,4 +47,5 @@ function scheduleFirstRun() {
   });
 }
 
+startHealthServer();
 scheduleFirstRun();

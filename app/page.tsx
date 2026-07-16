@@ -25,10 +25,10 @@ type HolderBonus = {
 const basket: BasketCoin[] = [
   {
     symbol: "RHX6900",
-    name: "Robinhood Meme Index 6900",
+    name: "Robinhood Index 6900",
     lane: "Core",
     allocation: "20%",
-    thesis: "Holder alignment, meme energy, and the distribution rail.",
+    thesis: "The token that makes holders eligible for automatic RHX6900 distributions.",
     color: "#e8ff17",
   },
   {
@@ -36,7 +36,7 @@ const basket: BasketCoin[] = [
     name: "Tendies",
     lane: "Meme",
     allocation: "10%",
-    thesis: "The first live coin added to the RHX6900 index and reward rail.",
+    thesis: "The first Robinhood ecosystem coin active in RHX6900.",
     color: "#fff04a",
   },
   {
@@ -44,7 +44,7 @@ const basket: BasketCoin[] = [
     name: "Solana",
     lane: "Infra",
     allocation: "10%",
-    thesis: "High-throughput settlement for consumer crypto and token rails.",
+    thesis: "High-throughput settlement exposure for fast-moving ecosystem assets.",
     color: "#62dca3",
   },
   {
@@ -52,7 +52,7 @@ const basket: BasketCoin[] = [
     name: "Ethereum",
     lane: "Infra",
     allocation: "8%",
-    thesis: "Base liquidity layer for tokenization, DeFi, and RWA issuance.",
+    thesis: "Deep liquidity exposure for tokenized markets and on-chain settlement.",
     color: "#7d8cff",
   },
   {
@@ -60,7 +60,7 @@ const basket: BasketCoin[] = [
     name: "Bitcoin",
     lane: "Reserve",
     allocation: "8%",
-    thesis: "Digital reserve asset and volatility anchor for the index.",
+    thesis: "Digital reserve exposure for the RHX6900 treasury basket.",
     color: "#f7a531",
   },
   {
@@ -68,7 +68,7 @@ const basket: BasketCoin[] = [
     name: "Ondo",
     lane: "RWA",
     allocation: "8%",
-    thesis: "Tokenized treasury exposure and institutional RWA rails.",
+    thesis: "Tokenized treasury exposure with strong relevance to real-world assets.",
     color: "#2d6cdf",
   },
   {
@@ -76,7 +76,7 @@ const basket: BasketCoin[] = [
     name: "Chainlink",
     lane: "RWA",
     allocation: "7%",
-    thesis: "Oracle, CCIP, and proof infrastructure for tokenized markets.",
+    thesis: "Data and cross-chain infrastructure for tokenized markets.",
     color: "#3157d5",
   },
   {
@@ -84,7 +84,7 @@ const basket: BasketCoin[] = [
     name: "Pendle",
     lane: "Yield",
     allocation: "6%",
-    thesis: "Rate markets and fixed-yield crypto primitives.",
+    thesis: "Yield-market exposure for on-chain rate activity.",
     color: "#21a0a0",
   },
   {
@@ -92,7 +92,7 @@ const basket: BasketCoin[] = [
     name: "Pyth Network",
     lane: "Data",
     allocation: "5%",
-    thesis: "Low-latency price data for on-chain assets and RWA markets.",
+    thesis: "Low-latency market data for active on-chain assets.",
     color: "#8c54ff",
   },
   {
@@ -100,7 +100,7 @@ const basket: BasketCoin[] = [
     name: "Jupiter",
     lane: "Solana",
     allocation: "5%",
-    thesis: "Liquidity routing, launch infrastructure, and Solana flow.",
+    thesis: "Liquidity routing exposure for fast Solana market flow.",
     color: "#f08734",
   },
   {
@@ -108,7 +108,7 @@ const basket: BasketCoin[] = [
     name: "Render",
     lane: "AI",
     allocation: "4%",
-    thesis: "Decentralized GPU narrative with real network demand.",
+    thesis: "AI infrastructure exposure with real network demand.",
     color: "#d73a2f",
   },
   {
@@ -116,7 +116,7 @@ const basket: BasketCoin[] = [
     name: "dogwifhat",
     lane: "Meme",
     allocation: "3%",
-    thesis: "High-beta culture coin exposure for the degen sleeve.",
+    thesis: "High-beta culture exposure for the meme rotation.",
     color: "#b5895a",
   },
   {
@@ -124,7 +124,7 @@ const basket: BasketCoin[] = [
     name: "Bonk",
     lane: "Meme",
     allocation: "3%",
-    thesis: "Solana-native meme liquidity and holder network.",
+    thesis: "Solana-native meme liquidity and holder density.",
     color: "#f0be35",
   },
   {
@@ -132,7 +132,7 @@ const basket: BasketCoin[] = [
     name: "Centrifuge",
     lane: "RWA",
     allocation: "2%",
-    thesis: "Private credit and real-world asset financing primitives.",
+    thesis: "Private-credit and real-world asset financing exposure.",
     color: "#2fbf71",
   },
   {
@@ -140,7 +140,7 @@ const basket: BasketCoin[] = [
     name: "USD Coin",
     lane: "Cash",
     allocation: "1%",
-    thesis: "Dry powder for rebalance, routing, and airdrop execution.",
+    thesis: "Dry powder for purchases, routing, and distribution execution.",
     color: "#2775ca",
   },
 ];
@@ -148,27 +148,27 @@ const basket: BasketCoin[] = [
 const steps: AirdropStep[] = [
   {
     number: "01",
-    title: "RHX6900 holders accumulate",
-    body: "Wallets holding at least 1,000,000 RHX6900 enter each holder snapshot.",
-    tag: "SNAPSHOT",
+    title: "Discover",
+    body: "Strong Robinhood ecosystem coins are continuously reviewed. New assets may be added daily based on liquidity, volume, momentum, relevance, and risk.",
+    tag: "REVIEW",
   },
   {
     number: "02",
-    title: "Tendies goes active first",
-    body: "The first configured index coin is TENDIES, with future RH meme coins able to rotate into the reward slot.",
-    tag: "ACTIVE REWARD",
+    title: "Accumulate",
+    body: "Protocol fees are used to purchase selected coins currently active within RHX6900.",
+    tag: "PURCHASE",
   },
   {
     number: "03",
-    title: "Rewards land in holder wallets",
-    body: "The worker computes proportional payouts and records dry-run or settled receipts.",
+    title: "Distribute",
+    body: "Every 15 minutes, accumulated assets are distributed proportionally to eligible RHX6900 holders.",
     tag: "AIRDROP",
   },
   {
     number: "04",
-    title: "The RH meme slot can rotate",
-    body: "Changing the active reward mint updates the next coin without rewriting the worker.",
-    tag: "ROTATION",
+    title: "Verify",
+    body: "Coin additions, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain.",
+    tag: "ON-CHAIN",
   },
 ];
 
@@ -181,47 +181,43 @@ const holderBonuses: HolderBonus[] = [
 ];
 
 const lanes = [
-  { label: "RWA sleeve", value: "22%", copy: "ONDO, LINK, CFG, PYTH" },
-  { label: "Core reserves", value: "46%", copy: "RHX6900, BTC, ETH, SOL" },
-  { label: "Meme conveyor", value: "25%", copy: "TENDIES, WIF, BONK, SPX" },
-  { label: "Execution cash", value: "1%", copy: "USDC routing buffer" },
+  { label: "Active Coins", value: "15", copy: "Coins currently active in RHX6900" },
+  { label: "Next Airdrop", value: "15m", copy: "Automatic holder distributions" },
+  { label: "Latest Coin Added", value: "TENDIES", copy: "First live ecosystem coin" },
+  { label: "Eligible Holders", value: "1M+", copy: "Minimum RHX6900 balance" },
 ];
 
 const dashboardStats = [
-  { label: "Epoch loop", value: "15m", detail: "Railway worker cadence" },
-  { label: "Holder gate", value: "1M+", detail: "RHX6900 minimum balance" },
-  { label: "Reward slot", value: "TENDIES", detail: "first active index coin" },
-  { label: "Hold bonus", value: "10x", detail: "six-month streak max" },
+  { label: "Active Coins", value: String(basket.length), detail: "currently active" },
+  { label: "Next Airdrop", value: "15m", detail: "automatic distribution" },
+  { label: "Latest Coin Added", value: "TENDIES", detail: "first active coin" },
+  { label: "Eligible Holders", value: "1M+", detail: "minimum RHX6900 balance" },
 ];
 
 const dashboardFeed = [
-  { asset: "RHX6900", route: "Index core", amount: "20.0%", status: "Coded" },
-  { asset: "TENDIES", route: "First coin", amount: "10.0%", status: "Live" },
-  { asset: "ONDO", route: "RWA rail", amount: "8.0%", status: "Queued" },
-  { asset: "WIF", route: "Meme rail", amount: "3.0%", status: "Live" },
-  { asset: "LINK", route: "Oracle rail", amount: "7.0%", status: "Receipt" },
+  { asset: "Assets Accumulated", route: "Awaiting first purchase", amount: "Live", status: "On-chain" },
+  { asset: "Assets Distributed", route: "Awaiting first distribution", amount: "0", status: "Pending" },
+  { asset: "Treasury Wallet", route: "Live data connecting", amount: "Public", status: "Soon" },
+  { asset: "Latest Transaction", route: "Transaction not yet available", amount: "--", status: "Pending" },
 ];
 
 const engineCards = [
-  ["Signal Scan", "The AI-style index watches meme flow, holder density, and RWA rails before each cycle."],
-  ["15m Epochs", "The Railway worker wakes every 15 minutes, snapshots RHX holders, and creates an idempotent payout round."],
-  ["1M+ Holder Gate", "Only wallets above the 1,000,000 RHX6900 threshold are eligible for that round."],
-  ["Active RH Meme", "The reward slot points at one configured meme coin mint at a time, so rotations stay clean."],
-  ["Receipts", "The dashboard keeps the cycle visible so the meme machine feels coded, not hand-waved."],
+  ["Discover", "Strong Robinhood ecosystem coins are continuously reviewed for liquidity, volume, momentum, relevance, and risk."],
+  ["Accumulate", "Protocol fees are used to purchase selected coins currently active within RHX6900."],
+  ["Distribute", "Every 15 minutes, accumulated assets are distributed proportionally to eligible RHX6900 holders."],
+  ["Verify", "Coin additions, treasury purchases, airdrop rounds, balances, and transaction receipts are publicly tracked on-chain."],
 ];
 
 const receiptRows = [
-  { time: "00:06:90", wallet: "RHX...6900", asset: "TENDIES", amount: "10.0%", tx: "Live" },
-  { time: "00:05:12", wallet: "HOOD...MEME", asset: "ONDO", amount: "8.0%", tx: "Routed" },
-  { time: "00:04:44", wallet: "AI...RAIL", asset: "LINK", amount: "7.0%", tx: "Receipt" },
-  { time: "00:03:33", wallet: "BEL...IEVE", asset: "RHX", amount: "20.0%", tx: "Core" },
+  { time: "Pending", wallet: "Eligible holders", asset: "Live data connecting", amount: "Awaiting first distribution", tx: "Transaction not yet available" },
+  { time: "Pending", wallet: "Treasury wallet", asset: "Awaiting first purchase", amount: "No completed rounds yet", tx: "On-chain soon" },
 ];
 
 const terminalLines = [
-  "RHX engine awake...",
-  "Snapshotting 1M+ holders...",
-  "Loading TENDIES as first index coin...",
-  "Writing holder receipts...",
+  "Live data connecting...",
+  "Awaiting first purchase...",
+  "Awaiting first distribution...",
+  "Transaction not yet available...",
 ];
 
 const memeCoins = [
@@ -229,7 +225,7 @@ const memeCoins = [
     symbol: "TENDIES",
     name: "Tendies",
     allocation: "10%",
-    copy: "First coin added to the RHX6900 index and active reward rail.",
+    copy: "First Robinhood ecosystem coin active in RHX6900.",
     color: "#fff04a",
   },
   {
@@ -257,7 +253,7 @@ const memeCoins = [
     symbol: "POPCAT",
     name: "Popcat",
     allocation: "2%",
-    copy: "High-beta Solana meme momentum sleeve.",
+    copy: "High-beta Solana meme momentum for the current rotation.",
     color: "#f2a2c4",
   },
   {
@@ -271,7 +267,7 @@ const memeCoins = [
     symbol: "SPX",
     name: "SPX6900",
     allocation: "2%",
-    copy: "Index-adjacent meme reflexivity for the 6900 lane.",
+    copy: "6900 culture exposure for the Robinhood ecosystem rotation.",
     color: "#e8ff17",
   },
 ];
@@ -279,27 +275,36 @@ const memeCoins = [
 const faqs = [
   {
     q: "What is RHX6900?",
-    a: "RHX6900 is positioned as a holder-first Robinhood Meme Index token: hold 1,000,000+ tokens and the worker can include your wallet in each 15-minute RH meme coin airdrop epoch.",
+    a: "RHX6900 is a Robinhood ecosystem protocol that uses fees to acquire selected coins and automatically airdrop the accumulated assets to eligible holders.",
   },
   {
-    q: "Is this basket final?",
-    a: "No. This page presents a launch-ready draft basket. The data is structured so the token list, allocations, and thesis copy can be updated quickly as the real index rules settle.",
+    q: "How do airdrops work?",
+    a: "Every 15 minutes, assets accumulated during the previous round are distributed proportionally to eligible RHX6900 holders.",
   },
   {
-    q: "Do holders need to stake?",
-    a: "No. The current worker model snapshots wallet balances directly, then computes proportional holder payouts for the active RH meme coin.",
+    q: "Do holders need to stake or claim?",
+    a: "No. RHX6900 is designed for automatic distributions. Eligible holders do not need to stake or manually claim each round.",
   },
   {
-    q: "Why include RWA coins?",
-    a: "The Robinhood Meme Index works best when the basket is not only meme beta. RWA coins add a tokenized markets sleeve alongside Solana flow, reserves, and culture coins.",
+    q: "How are new coins added?",
+    a: "New coins are reviewed daily based on liquidity, volume, momentum, relevance, and risk as the Robinhood ecosystem evolves.",
+  },
+  {
+    q: "Can holders verify activity?",
+    a: "Yes. Active coins, treasury purchases, balances, completed airdrops, eligible holders, and transaction receipts are tracked on-chain.",
   },
 ];
 
 const navLinks = [
   { label: "Dashboard", href: "#dashboard" },
-  { label: "Engine", href: "#engine" },
-  { label: "Basket", href: "#basket" },
+  { label: "How It Works", href: "#engine" },
+  { label: "Coins", href: "#basket" },
   { label: "Memes", href: "#memes" },
+];
+
+const socialLinks = [
+  { label: "X", href: "https://x.com/rhx6900_", aria: "Open RHX6900 on X" },
+  { label: "TG", href: "https://t.me/rhx6900", aria: "Open RHX6900 on Telegram" },
 ];
 
 const statStyle = (accent: string): CSSProperties =>
@@ -314,11 +319,10 @@ export default function Home() {
     <main>
       <header className="site-header">
         <div className="header-shell">
-          <a className="brand-pill" href="#top" aria-label="RHX6900 home">
+          <a className="brand-logo-link" href="#top" aria-label="RHX6900 home">
             <span className="brand-mark" aria-hidden="true">
-              <img src="/favicon.png" alt="" />
+              <img src="/rhx6900-logo.jpg" alt="" />
             </span>
-            <span>RHX6900</span>
           </a>
 
           <nav className="topnav" aria-label="Primary navigation">
@@ -329,9 +333,13 @@ export default function Home() {
             ))}
           </nav>
 
-          <a className="header-cta" href="#basket">
-            View index
-          </a>
+          <div className="header-socials" aria-label="Social links">
+            {socialLinks.map((link) => (
+              <a key={link.label} href={link.href} aria-label={link.aria} target="_blank" rel="noreferrer">
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
       </header>
 
@@ -341,26 +349,27 @@ export default function Home() {
             <div className="hero-logo-lockup">
               <img src="/rhx6900-logo.jpg" alt={logoAlt} />
             </div>
-            <div className="eyebrow">/ ROBINHOOD MEME INDEX 6900 /</div>
+            <div className="eyebrow">ROBINHOOD INDEX 6900</div>
             <h1>RHX6900</h1>
-            <div className="manifesto-line">Stop indexing. Believe in memes.</div>
+            <div className="manifesto-line">STOP TRADING. BELIEVE IN SOMETHING.</div>
             <p className="hero-lede">
-              Robinhood Meme Index 6900 is the custom holder airdrop index for
-              coins we are in, real-world asset plays, Solana flow, AI-index
-              signal, and high-conviction meme beta. First coin in: Tendies.
+              RHX6900 uses protocol fees to continuously acquire selected
+              Robinhood ecosystem coins. Every 15 minutes, the accumulated
+              assets are airdropped directly to eligible RHX6900 holders. New
+              coins are reviewed and added daily as the ecosystem evolves.
             </p>
             <div className="hero-actions" aria-label="Primary actions">
               <a className="button button-dark" href="#airdrops">
-                Holder airdrops
+                Airdrops every 15 minutes
               </a>
               <a className="button button-light" href="#basket">
-                Index basket
+                Current coins
               </a>
             </div>
-            <div className="hero-notes" aria-label="Index highlights">
-              <span>TENDIES live</span>
-              <span>Wallet-native rewards</span>
-              <span>RWA sleeve</span>
+            <div className="hero-notes" aria-label="RHX6900 utility">
+              <span>FEES BUY THE ECOSYSTEM</span>
+              <span>AIRDROPS EVERY 15 MINUTES</span>
+              <span>NEW COINS ADDED DAILY</span>
             </div>
           </div>
 
@@ -369,7 +378,7 @@ export default function Home() {
               <img src="/icon-512.png" alt="" />
             </div>
 
-            <div className="hero-terminal" aria-label="RHX6900 index dashboard">
+            <div className="hero-terminal" aria-label="RHX6900 live dashboard">
               <div className="browser-bar">
                 <span />
                 <span />
@@ -380,15 +389,15 @@ export default function Home() {
                 <div className="terminal-logo-strip">
                   <img src="/rhx6900-logo.jpg" alt={logoAlt} />
                   <div>
-                    <span>Ticker rail</span>
-                    <strong>RHX signal / TENDIES slot</strong>
+                    <span>Live panel</span>
+                    <strong>RHX6900 live flow</strong>
                   </div>
                 </div>
 
               <div className="terminal-total">
-                <span>Projected index pool</span>
-                <strong>RHX/RH MEME</strong>
-                <em>TENDIES is the first active index coin</em>
+                <span>Assets Accumulated</span>
+                <strong>Live</strong>
+                <em>Awaiting first purchase</em>
               </div>
 
               <div className="terminal-metrics">
@@ -397,7 +406,7 @@ export default function Home() {
                   <strong>15 min</strong>
                 </div>
                 <div>
-                  <span>Basket assets</span>
+                  <span>Active Coins</span>
                   <strong>{basket.length}</strong>
                 </div>
               </div>
@@ -448,9 +457,9 @@ export default function Home() {
                     <b>Airdrop</b>
                   </div>
                   <div className="wallet-balance">
-                    <span>Estimated claimless flow</span>
-                    <strong>+14 assets</strong>
-                    <em>sent by snapshot share</em>
+                    <span>Assets Distributed</span>
+                    <strong>0</strong>
+                    <em>Awaiting first distribution</em>
                   </div>
                   <div className="wallet-icons" aria-label="Wallet assets">
                     {basket.slice(0, 5).map((coin) => (
@@ -476,12 +485,12 @@ export default function Home() {
           <div className="section-head">
             <div>
               <div className="eyebrow">/ DASHBOARD /</div>
-              <h2>Index-style dashboard for the RHX6900 machine.</h2>
+              <h2>RHX6900 live dashboard.</h2>
             </div>
             <p>
-              A holder-facing control room that brings back the AI6900 index
-              feel: rails, epochs, receipts, holder gates, and one active RH
-              meme reward coin in one scan.
+              Track active coins, treasury purchases, balances, completed
+              airdrops, eligible holders, and transaction receipts as RHX6900
+              goes live on-chain.
             </p>
           </div>
 
@@ -499,8 +508,8 @@ export default function Home() {
             <div className="dashboard-body">
               <article className="dashboard-chart-card">
                 <div className="panel-head">
-                  <span>Basket conveyor</span>
-                  <b>Weights</b>
+                  <span>Active Coins</span>
+                  <b>RHX6900</b>
                 </div>
                 <div className="dashboard-chart">
                   {basket.slice(0, 12).map((coin, index) => (
@@ -518,9 +527,9 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="dashboard-heat">
-                  <span>RWA rails</span>
+                  <span>RWA assets</span>
                   <span>Core reserves</span>
-                  <span>Meme belt</span>
+                  <span>Meme coins</span>
                   <span>Dry powder</span>
                 </div>
               </article>
@@ -550,13 +559,13 @@ export default function Home() {
         <div className="layout-rail">
           <div className="section-head">
             <div>
-              <div className="eyebrow">/ AI INDEX ENGINE /</div>
-              <h2>Like AI6900, but pointed at the meme index.</h2>
+              <div className="eyebrow">/ HOW RHX6900 WORKS /</div>
+              <h2>RHX6900 is not one coin.</h2>
             </div>
             <p>
-              The old loop made the mechanics obvious: rail, epoch, reward,
-              receipt. RHX keeps that same black-screen clarity and routes it
-              through a 15-minute Robinhood meme airdrop worker.
+              RHX6900 is a growing basket of Robinhood ecosystem assets,
+              continuously accumulated through protocol fees and distributed to
+              holders.
             </p>
           </div>
 
@@ -573,11 +582,23 @@ export default function Home() {
 
       <section className="section flush-top receipts-section">
         <div className="layout-rail">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">/ TRANSPARENCY /</div>
+              <h2>PROOF, NOT PROMISES.</h2>
+            </div>
+            <p>
+              Track active coins, treasury purchases, balances, completed
+              airdrops, eligible holders, and transaction receipts directly
+              on-chain.
+            </p>
+          </div>
+
           <div className="receipts-layout">
             <article className="terminal-panel">
               <div className="terminal-head">
-                <span>Live activity</span>
-                <b>RHX: coded</b>
+                <span>Live data</span>
+                <b>Connecting</b>
               </div>
               <div className="terminal-feed">
                 {terminalLines.map((line, index) => (
@@ -591,8 +612,8 @@ export default function Home() {
 
             <article className="receipt-table">
               <div className="terminal-head">
-                <span>Launch receipts</span>
-                <b>Epoch 01</b>
+                <span>Latest Transaction</span>
+                <b>Pending</b>
               </div>
               <div className="receipt-row receipt-head">
                 <span>Time</span>
@@ -619,13 +640,13 @@ export default function Home() {
         <div className="layout-rail">
           <div className="section-head">
             <div>
-              <div className="eyebrow">/ INDEX RULES /</div>
-              <h2>Built for holders, not a walled garden.</h2>
+              <div className="eyebrow">/ ELIGIBILITY /</div>
+              <h2>Hold RHX6900. Receive the ecosystem.</h2>
             </div>
             <p>
-              The old Index site promised direct distributions. RHX6900 keeps
-              that same clear mechanic and reskins it around a Robinhood meme crypto
-              basket.
+              RHX6900 keeps the rules simple: fees acquire ecosystem assets,
+              eligible holders receive them automatically, and each round can be
+              verified on-chain.
             </p>
           </div>
 
@@ -645,12 +666,12 @@ export default function Home() {
         <div className="layout-rail">
           <div className="section-head">
             <div>
-              <div className="eyebrow">/ BASKET /</div>
-              <h2>Coins we are in, plus RWA.</h2>
+              <div className="eyebrow">/ CURRENT COINS /</div>
+              <h2>CURRENT RHX6900 COINS</h2>
             </div>
             <p>
-              A launch draft that mixes Robinhood meme culture, core crypto assets,
-              real-world asset rails, Solana flow, and meme-market upside.
+              The active Robinhood ecosystem coins currently being accumulated
+              by RHX6900. New assets are reviewed and may be added daily.
             </p>
           </div>
 
@@ -689,17 +710,17 @@ export default function Home() {
         <div className="layout-rail">
           <div className="section-head">
             <div>
-              <div className="eyebrow">/ MEME CONVEYOR /</div>
-              <h2>Meme coins ride the belt.</h2>
+              <div className="eyebrow">/ MEME COINS /</div>
+              <h2>Meme coins are reviewed daily.</h2>
             </div>
             <p>
-              The meme sleeve is treated like a moving conveyor: high-beta
-              attention coins rotate through the RHX6900 index without hiding
-              the core RWA and reserve rails.
+              The meme allocation brings culture, liquidity, and momentum into
+              RHX6900. Tendies is the first Robinhood ecosystem coin active in
+              the current rotation.
             </p>
           </div>
 
-          <div className="conveyor-shell" aria-label="Meme coin conveyor belt">
+          <div className="conveyor-shell" aria-label="Meme coin rotation">
             <div className="conveyor-track">
               {[...memeCoins, ...memeCoins].map((coin, index) => (
                 <article
@@ -733,11 +754,12 @@ export default function Home() {
           <div className="section-head">
             <div>
               <div className="eyebrow">/ HOLDER AIRDROPS /</div>
-              <h2>Hold RHX6900. Receive the index.</h2>
+              <h2>EVERY 15 MINUTES, HOLDERS RECEIVE THE ECOSYSTEM.</h2>
             </div>
             <p>
-              The public-facing flow should stay simple even while the contracts
-              and keeper logic evolve behind it.
+              Hold RHX6900 and remain eligible for automatic distributions. No
+              staking and no claiming. Each round distributes the assets
+              accumulated during the previous 15 minutes.
             </p>
           </div>
 
@@ -761,7 +783,7 @@ export default function Home() {
               <p>
                 Wallets that keep the 1M+ RHX6900 gate intact across consecutive
                 snapshots earn boosted airdrop weight when TENDIES and future
-                RH meme rewards route through the index.
+                Robinhood ecosystem assets are accumulated by RHX6900.
               </p>
             </div>
             <div className="holder-bonus-grid">
@@ -781,16 +803,16 @@ export default function Home() {
         <div className="layout-rail">
           <div className="rebalance-panel">
             <div>
-              <div className="eyebrow">/ REBALANCE LOGIC /</div>
-              <h2>Robinhood Meme Index, not passive dust.</h2>
+              <div className="eyebrow">/ DAILY REVIEW /</div>
+              <h2>New coins can be added as the ecosystem evolves.</h2>
               <p>
-                The basket can be tuned around current conviction: more RWA when
-                tokenized markets are leading, more Solana beta when flow moves
-                on-chain, more reserves when volatility gets stupid.
+                RHX6900 reviews coins daily for liquidity, volume, momentum,
+                relevance, and risk. The goal is simple: keep the active coin
+                list aligned with the Robinhood ecosystem.
               </p>
             </div>
             <div className="rebalance-stack" aria-label="Rebalance priorities">
-              {["Conviction coins", "RWA rails", "Holder rewards", "Degen sleeve"].map(
+              {["Conviction coins", "RWA assets", "Holder rewards", "Meme momentum"].map(
                 (item, index) => (
                   <span key={item}>
                     <b>{String(index + 1).padStart(2, "0")}</b>
@@ -825,15 +847,14 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="layout-rail">
-          <a className="brand-pill" href="#top" aria-label="RHX6900 home">
+          <a className="brand-logo-link" href="#top" aria-label="RHX6900 home">
             <span className="brand-mark" aria-hidden="true">
-              <img src="/favicon.png" alt="" />
+              <img src="/rhx6900-logo.jpg" alt="" />
             </span>
-            <span>RHX6900</span>
           </a>
           <p>
-            Draft allocations shown for site launch. Final airdrop mechanics
-            should match the deployed contracts before public release.
+            RHX6900 tracks active coins, treasury purchases, eligible holders,
+            completed airdrops, and transaction receipts directly on-chain.
           </p>
         </div>
       </footer>

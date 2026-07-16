@@ -1,6 +1,6 @@
 # RHX6900
 
-RHX6900 is a Robinhood Meme Index site plus a Railway-ready Solana airdrop worker.
+RHX6900 is a Robinhood Index 6900 site plus a Railway-ready Solana airdrop worker.
 
 The worker is built for the RH holder loop:
 
@@ -8,6 +8,7 @@ The worker is built for the RH holder loop:
 - require at least `1,000,000` source tokens for eligibility;
 - use one active RH meme coin reward mint at a time;
 - compute proportional holder payouts;
+- boost consecutive 1M+ holders at 1 day, 1 week, 1 month, 3 months, and 6 months;
 - write dry-run, planned, settled, and failed payout receipts to Supabase;
 - keep live buys and live sends disabled until env gates are explicitly flipped.
 
@@ -40,7 +41,7 @@ Copy `.env.example` and fill in live values.
 ```bash
 PROJECT_NAME=RHX6900
 SOURCE_SYMBOL=RHX6900
-ACTIVE_REWARD_SYMBOL=<RH_MEME_SYMBOL>
+ACTIVE_REWARD_SYMBOL=TENDIES
 
 REWARD_MODE=token
 HELIUS_RPC_URL=<HELIUS_RPC_URL>
@@ -72,7 +73,7 @@ AIRDROP_BATCH_SIZE=4
 AIRDROP_REWARD_BPS=10000
 PRIORITY_FEE_SOL=0.000001
 MIN_REWARD_RAW_TO_AIRDROP=1
-HOLDER_STREAK_BONUS_ENABLED=false
+HOLDER_STREAK_BONUS_ENABLED=true
 ```
 
 Run `supabase/migrations/001_rhx_airdrop.sql` before starting the worker.
