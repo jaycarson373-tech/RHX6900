@@ -81,7 +81,7 @@ if (sideWalletBps > 0 && !sideWalletPublicKey) {
 export const config = {
   projectName: process.env.PROJECT_NAME ?? "RHX6900",
   sourceSymbol: process.env.SOURCE_SYMBOL ?? "RHX6900",
-  rewardSymbol: process.env.ACTIVE_REWARD_SYMBOL ?? process.env.REWARD_SYMBOL ?? "RH-MEME",
+  rewardSymbol: process.env.ACTIVE_REWARD_SYMBOL ?? process.env.REWARD_SYMBOL ?? "TENDIES",
   heliusRpcUrl: required("HELIUS_RPC_URL"),
   sourceTokenMint: publicKeyEnv("SOURCE_TOKEN_MINT"),
   rewardMode,
@@ -99,7 +99,7 @@ export const config = {
   maxWalletsPerEpoch: Math.max(1, intEnv("MAX_WALLETS_PER_EPOCH", 200)),
   maxHolderPct: numberEnv("MAX_HOLDER_PCT", 5),
   excludeWallets: optionalWallets("EXCLUDE_WALLETS"),
-  holderStreakBonusEnabled: boolEnv("HOLDER_STREAK_BONUS_ENABLED", false),
+  holderStreakBonusEnabled: boolEnv("HOLDER_STREAK_BONUS_ENABLED", true),
 
   swapBalanceBps,
   sideWalletBps,

@@ -15,6 +15,13 @@ type HolderStateRow = {
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+const HOLD_BONUS_LADDER = [
+  { minDays: 180, multiplierBps: 100_000 },
+  { minDays: 90, multiplierBps: 50_000 },
+  { minDays: 30, multiplierBps: 30_000 },
+  { minDays: 7, multiplierBps: 20_000 },
+  { minDays: 1, multiplierBps: 15_000 }
+];
 
 function parseRaw(value: unknown) {
   try {
@@ -24,12 +31,12 @@ function parseRaw(value: unknown) {
   }
 }
 
-function holdMultiplierBps(eligibleSince: string | null | undefined, nowMs: number) {
+export function holdMultiplierBps(eligibleSince: string | null | undefined, nowMs: number) {
   if (!config.holderStreakBonusEnabled) return 10_000;
 
   const startedAt = eligibleSince ? Date.parse(eligibleSince) : nowMs;
   const heldDays = Number.isFinite(startedAt) ? Math.max(0, Math.floor((nowMs - startedAt) / DAY_MS)) : 0;
-  return 10_000 + heldDays * 1_000;
+  return HOLD_BONUS_LADDER.find((bonus) => heldDays >= bonus.minDays)?.multiplierBps ?? 10_000;
 }
 
 function isMissingHolderStateTable(error: unknown) {
@@ -81,6 +88,7 @@ export async function applyHolderState(epochId: string, eligibleHolders: Holder[
           source_balance: current.uiBalance.toString(),
           source_balance_raw: current.rawBalance.toString(),
           highest_source_balance_raw: state.highest_source_balance_raw ?? state.source_balance_raw ?? "0",
+          eligible_since: null,
           permanently_ineligible: true,
           ineligible_reason: "holder_pct_at_or_above_max",
           ineligible_at: now,
@@ -97,6 +105,7 @@ export async function applyHolderState(epochId: string, eligibleHolders: Holder[
           source_balance: current?.uiBalance.toString() ?? state.source_balance ?? "0",
           source_balance_raw: current?.rawBalance.toString() ?? state.source_balance_raw ?? "0",
           highest_source_balance_raw: state.highest_source_balance_raw ?? state.source_balance_raw ?? "0",
+          eligible_since: null,
           last_seen_at: now,
           last_epoch_id: epochId,
           updated_at: now,
@@ -115,6 +124,7 @@ export async function applyHolderState(epochId: string, eligibleHolders: Holder[
             parseRaw(state.highest_source_balance_raw) > current.rawBalance
               ? state.highest_source_balance_raw ?? current.rawBalance.toString()
               : current.rawBalance.toString(),
+          eligible_since: null,
           last_seen_at: now,
           last_epoch_id: epochId,
           updated_at: now,
@@ -134,6 +144,7 @@ export async function applyHolderState(epochId: string, eligibleHolders: Holder[
         source_balance: holder.uiBalance.toString(),
         source_balance_raw: holder.rawBalance.toString(),
         highest_source_balance_raw: holder.rawBalance.toString(),
+        eligible_since: null,
         permanently_ineligible: true,
         ineligible_reason: "holder_pct_at_or_above_max",
         ineligible_at: now,

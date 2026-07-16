@@ -13,7 +13,7 @@
     "worker:dev": "tsx worker/src/scheduler.ts",
     "worker:build": "tsc -p worker/tsconfig.json",
     "worker:start": "node worker/dist/scheduler.js",
-    "test": "npm run build && npm run worker:build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && npm run worker:build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "check": "npm run typecheck && npm run worker:build && npm run build"
