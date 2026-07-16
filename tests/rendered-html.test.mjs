@@ -34,10 +34,13 @@ test("server-renders the RHX6900 treasury experience", async () => {
   assert.match(html, /<title>RHX6900 \| Robinhood Ecosystem Treasury<\/title>/i);
   assert.match(html, /STOP TRADING/);
   assert.match(html, /BELIEVE IN SOMETHING/);
-  assert.match(html, /Protocol fees continuously acquire/);
+  assert.match(html, /A 2% swap fee buys/);
   assert.match(html, /CURRENT TREASURY HOLDINGS/);
   assert.match(html, /WHERE THE FEES GO/);
-  assert.match(html, /CREATOR FEES/);
+  assert.match(html, /SWAP FEE/);
+  assert.match(html, /DEXSCREENER/);
+  assert.match(html, /FLAP\.SH/);
+  assert.doesNotMatch(html, /creator fees|protocol fees/i);
   assert.match(html, /AUTO BUY/);
   assert.match(html, /NEXT AIRDROP/);
   assert.match(html, /NEXT AIRDROP/);

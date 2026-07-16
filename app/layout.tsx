@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 const siteTitle = "RHX6900 | Robinhood Ecosystem Treasury";
 const siteDescription =
-  "Protocol fees continuously acquire selected Robinhood ecosystem memecoins. Every 15 minutes, they are distributed to eligible RHX6900 holders.";
+  "A 2% swap fee buys selected Robinhood ecosystem memecoins. Every 15 minutes, they are distributed to eligible RHX6900 holders.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();

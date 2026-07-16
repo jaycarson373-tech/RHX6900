@@ -144,7 +144,7 @@ const faqs = [
   {
     question: "What is RHX6900?",
     answer:
-      "RHX6900 uses creator fees to buy Robinhood ecosystem memecoins and airdrop them to eligible holders.",
+      "RHX6900 uses a 2% swap fee to buy Robinhood ecosystem memecoins and airdrop them to eligible holders.",
   },
   {
     question: "What does the treasury hold?",
@@ -420,9 +420,9 @@ export default function Home() {
             <span>BELIEVE IN SOMETHING.</span>
           </h1>
           <p className="hero-copyline">
-            Protocol fees continuously acquire the strongest Robinhood ecosystem memecoins.
+            A 2% swap fee buys Robinhood ecosystem memecoins.
             <br />
-            Every 15 minutes they are distributed to RHX6900 holders.
+            Every 15 minutes they go to RHX6900 holders.
           </p>
           <div className="hero-actions">
             <a className="primary-button" href="#holdings">
@@ -527,7 +527,7 @@ export default function Home() {
 
           <div className="treasury-flow reveal" aria-label="Treasury money flow">
             {[
-              [CircleDollarSign, "CREATOR FEES", "Fees in"],
+              [CircleDollarSign, "SWAP FEE", "2% in"],
               [Vault, "TREASURY", "Funds held"],
               [Coins, "AUTO BUY", "Coins bought"],
               [WalletCards, "AIRDROP", "Every 15 minutes"],
@@ -681,6 +681,8 @@ export default function Home() {
           <div className="footer-links">
             <a href="https://x.com/rhx6900_" target="_blank" rel="noreferrer">X</a>
             <a href="https://t.me/rhx6900" target="_blank" rel="noreferrer">TELEGRAM</a>
+            <a href="https://dexscreener.com/robinhood" target="_blank" rel="noreferrer">DEXSCREENER</a>
+            <a href="https://flap.sh" target="_blank" rel="noreferrer">FLAP.SH</a>
             <a href="#top">TOP</a>
           </div>
         </div>
