@@ -121,14 +121,6 @@ const memeArt = [
   "/memes/rhx-meme-chair-closeup.jpg",
 ];
 
-const feathers = Array.from({ length: 26 }, (_, index) => ({
-  x: (index * 37) % 100,
-  delay: (index * 1.7) % 14,
-  duration: 14 + (index % 7) * 2.1,
-  drift: -70 + (index % 8) * 20,
-  scale: 0.45 + (index % 5) * 0.16,
-}));
-
 const particles = Array.from({ length: 42 }, (_, index) => ({
   x: (index * 43) % 100,
   y: (index * 29) % 100,
@@ -316,23 +308,6 @@ export default function Home() {
             />
           ))}
         </div>
-        <div className="feather-field" aria-hidden="true">
-          {feathers.map((feather, index) => (
-            <i
-              key={index}
-              style={
-                {
-                  "--x": `${feather.x}%`,
-                  "--delay": `${feather.delay}s`,
-                  "--duration": `${feather.duration}s`,
-                  "--drift": `${feather.drift}px`,
-                  "--scale": feather.scale,
-                } as CSSProperties
-              }
-            />
-          ))}
-        </div>
-
         <div className="hero-content">
           <div className="hero-emblem">
             <span className="emblem-ring" aria-hidden="true" />

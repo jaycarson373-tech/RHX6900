@@ -187,8 +187,7 @@ main {
 .hero-background,
 .hero-rays,
 .fog,
-.particle-field,
-.feather-field {
+.particle-field {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -277,38 +276,6 @@ main {
   box-shadow: 0 0 10px var(--neon);
   opacity: 0;
   animation: particlePulse 5s var(--delay) ease-in-out infinite;
-}
-
-.feather-field {
-  z-index: -1;
-  overflow: hidden;
-}
-
-.feather-field i {
-  position: absolute;
-  top: -12%;
-  left: var(--x);
-  width: 7px;
-  height: 34px;
-  border: 1px solid rgba(239, 255, 0, 0.82);
-  border-radius: 100% 0 100% 0;
-  background: rgba(239, 255, 0, 0.12);
-  box-shadow: 0 0 14px rgba(239, 255, 0, 0.5);
-  opacity: 0;
-  transform: scale(var(--scale)) rotate(26deg);
-  animation: featherFall var(--duration) var(--delay) linear infinite;
-}
-
-.feather-field i::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  bottom: -7px;
-  left: 50%;
-  width: 1px;
-  background: var(--neon);
-  transform: rotate(-8deg);
-  transform-origin: top;
 }
 
 .hero-content {
@@ -1465,12 +1432,6 @@ main {
 @keyframes particlePulse {
   0%, 100% { opacity: 0; transform: scale(0.4); }
   45% { opacity: 0.82; transform: scale(1); }
-}
-
-@keyframes featherFall {
-  0% { opacity: 0; transform: translate3d(0, -8vh, 0) scale(var(--scale)) rotate(18deg); }
-  10% { opacity: 0.72; }
-  100% { opacity: 0; transform: translate3d(var(--drift), 116vh, 0) scale(var(--scale)) rotate(390deg); }
 }
 
 @keyframes emblemPulse {
