@@ -220,55 +220,30 @@ const terminalLines = [
   "Transaction not yet available...",
 ];
 
-const memeCoins = [
+const memeArt = [
   {
-    symbol: "TENDIES",
-    name: "Tendies",
-    allocation: "10%",
-    copy: "First Robinhood ecosystem coin active in RHX6900.",
-    color: "#fff04a",
+    src: "/memes/rhx-meme-anime-blonde.jpg",
+    alt: "RHX6900 neon market meme with a blonde anime character",
   },
   {
-    symbol: "WIF",
-    name: "dogwifhat",
-    allocation: "3%",
-    copy: "Solana meme beta with deep cultural liquidity.",
-    color: "#c8965a",
+    src: "/memes/rhx-meme-anime-red.jpg",
+    alt: "RHX6900 neon market meme with a red-haired anime character",
   },
   {
-    symbol: "BONK",
-    name: "Bonk",
-    allocation: "3%",
-    copy: "Solana-native community flow and distribution density.",
-    color: "#f0be35",
+    src: "/memes/rhx-meme-chair.jpg",
+    alt: "RHX6900 market meme with a holder seated in front of neon charts",
   },
   {
-    symbol: "PEPE",
-    name: "Pepe",
-    allocation: "2%",
-    copy: "Ethereum meme benchmark for pure attention markets.",
-    color: "#74d65d",
+    src: "/memes/rhx-meme-well-done.jpg",
+    alt: "RHX6900 well done holder meme",
   },
   {
-    symbol: "POPCAT",
-    name: "Popcat",
-    allocation: "2%",
-    copy: "High-beta Solana meme momentum for the current rotation.",
-    color: "#f2a2c4",
+    src: "/memes/rhx-meme-moon.jpg",
+    alt: "RHX6900 moon landing meme",
   },
   {
-    symbol: "MOG",
-    name: "Mog Coin",
-    allocation: "2%",
-    copy: "Culture coin exposure for aggressive rotations.",
-    color: "#8f78ff",
-  },
-  {
-    symbol: "SPX",
-    name: "SPX6900",
-    allocation: "2%",
-    copy: "6900 culture exposure for the Robinhood ecosystem rotation.",
-    color: "#e8ff17",
+    src: "/memes/rhx-meme-tendies.jpg",
+    alt: "RHX6900 and Tendies neon anime meme",
   },
 ];
 
@@ -706,49 +681,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section flush-top meme-section" id="memes">
-        <div className="layout-rail">
-          <div className="section-head">
-            <div>
-              <div className="eyebrow">/ MEME COINS /</div>
-              <h2>Meme coins are reviewed daily.</h2>
-            </div>
-            <p>
-              The meme allocation brings culture, liquidity, and momentum into
-              RHX6900. Tendies is the first Robinhood ecosystem coin active in
-              the current rotation.
-            </p>
-          </div>
-
-          <div className="conveyor-shell" aria-label="Meme coin rotation">
-            <div className="conveyor-track">
-              {[...memeCoins, ...memeCoins].map((coin, index) => (
-                <article
-                  className="meme-card"
-                  key={`${coin.symbol}-${index}`}
-                  style={statStyle(coin.color)}
-                >
-                  <span className="coin-avatar" aria-hidden="true">
-                    {coin.symbol.slice(0, 2)}
-                  </span>
-                  <div>
-                    <b>{coin.symbol}</b>
-                    <em>{coin.name}</em>
-                  </div>
-                  <strong>{coin.allocation}</strong>
-                  <p>{coin.copy}</p>
-                </article>
-              ))}
-            </div>
-            <div className="conveyor-rollers" aria-hidden="true">
-              {Array.from({ length: 16 }).map((_, index) => (
-                <span key={index} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="section flush-top airdrops-section" id="airdrops">
         <div className="layout-rail">
           <div className="section-head">
@@ -820,6 +752,55 @@ export default function Home() {
                   </span>
                 ),
               )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section flush-top meme-section" id="memes">
+        <div className="layout-rail">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">/ MEME TRANSMISSION /</div>
+              <h2>THE RHX6900 MEME CONVEYOR.</h2>
+            </div>
+            <p>
+              Culture moves the ecosystem. The RHX6900 meme feed runs around
+              the clock while new Robinhood ecosystem coins are reviewed daily.
+            </p>
+          </div>
+
+          <div className="meme-gallery-shell" aria-label="RHX6900 meme conveyor">
+            <div className="meme-gallery-track">
+              {[0, 1].map((sequence) => (
+                <div
+                  className="meme-gallery-sequence"
+                  key={sequence}
+                  aria-hidden={sequence === 1}
+                >
+                  {memeArt.map((item, index) => (
+                    <figure
+                      className="meme-gallery-card"
+                      key={`${sequence}-${item.src}`}
+                    >
+                      <img
+                        src={item.src}
+                        alt={sequence === 0 ? item.alt : ""}
+                        loading="lazy"
+                      />
+                      <figcaption>
+                        <span>RHX6900</span>
+                        <b>{String(index + 1).padStart(2, "0")}</b>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="meme-gallery-belt" aria-hidden="true">
+              {Array.from({ length: 20 }).map((_, index) => (
+                <span key={index} />
+              ))}
             </div>
           </div>
         </div>

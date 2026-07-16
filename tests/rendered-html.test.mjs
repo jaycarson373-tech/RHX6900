@@ -48,13 +48,13 @@ test("server-renders the RHX6900 index site", async () => {
   assert.match(html, /RHX6900 live flow/);
   assert.match(html, /FEES BUY THE ECOSYSTEM/);
   assert.match(html, /Hold RHX6900\. Receive the ecosystem/);
-  assert.match(html, /Meme coins are reviewed daily/);
+  assert.match(html, /THE RHX6900 MEME CONVEYOR/);
   assert.match(html, /CONSECUTIVE HOLD BONUS/);
   assert.match(html, /6 months/);
   assert.match(html, /10x/);
   assert.match(html, /TENDIES/);
-  assert.match(html, /PEPE/);
-  assert.match(html, /SPX6900/);
+  assert.match(html, /rhx-meme-anime-blonde\.jpg/);
+  assert.match(html, /rhx-meme-moon\.jpg/);
   assert.match(html, /ONDO/);
   assert.match(html, /Centrifuge/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|SkeletonPreview/i);
@@ -74,7 +74,7 @@ test("removes disposable starter dependencies and imports", async () => {
   assert.match(css, /hero-terminal/);
   assert.match(css, /basket-table/);
   assert.match(css, /dashboard-shell/);
-  assert.match(css, /conveyor-track/);
+  assert.match(css, /meme-gallery-track/);
   assert.match(css, /engine-grid/);
   assert.match(css, /terminal-panel/);
   assert.match(css, /header-socials/);
