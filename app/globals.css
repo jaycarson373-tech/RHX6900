@@ -94,7 +94,7 @@ main {
   right: max(var(--gutter), calc((100vw - var(--rail)) / 2));
   left: max(var(--gutter), calc((100vw - var(--rail)) / 2));
   display: grid;
-  grid-template-columns: auto auto 1fr auto;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 26px;
   min-height: 62px;
@@ -103,62 +103,6 @@ main {
   background: rgba(0, 0, 0, 0.74);
   box-shadow: 0 0 48px rgba(239, 255, 0, 0.08), inset 0 1px rgba(239, 255, 0, 0.08);
   backdrop-filter: blur(20px) saturate(1.2);
-}
-
-.header-contract {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-width: 0;
-  height: 40px;
-  border: 1px solid var(--line);
-  padding: 0 12px;
-  overflow: hidden;
-  background: rgba(239, 255, 0, 0.045);
-  color: var(--neon);
-  cursor: pointer;
-  font-family: var(--mono);
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
-}
-
-.header-contract:hover,
-.header-contract:focus-visible {
-  border-color: var(--line-strong);
-  background: var(--neon);
-  color: var(--black);
-  outline: none;
-}
-
-.header-contract code {
-  overflow: hidden;
-  color: inherit;
-  font-family: inherit;
-  font-size: 8px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.contract-label {
-  flex: 0 0 auto;
-  font-family: var(--display);
-  font-size: 9px;
-  font-weight: 900;
-}
-
-.contract-short {
-  display: none;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 .header-brand {
@@ -1606,10 +1550,6 @@ main {
 }
 
 @media (max-width: 1180px) {
-  .site-header { gap: 14px; }
-  .header-contract { padding-inline: 10px; }
-  .header-contract code { max-width: 190px; }
-  .site-nav { gap: 18px; }
   .hero-title { font-size: 66px; }
   .holdings-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .holding-card { grid-column: span 2; }
@@ -1623,12 +1563,9 @@ main {
 
 @media (max-width: 860px) {
   :root { --gutter: 18px; }
-  .site-header { top: 12px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; min-height: 56px; }
+  .site-header { top: 12px; min-height: 56px; }
   .header-brand span, .site-nav { display: none; }
   .header-brand img { width: 46px; height: 46px; }
-  .header-contract { width: 100%; height: 44px; padding-inline: 8px; }
-  .contract-full { display: none; }
-  .contract-short { display: inline; }
   .header-socials { justify-self: end; }
   .header-socials a { min-width: 44px; height: 44px; padding: 0 10px; }
   .hero-scene { min-height: 100svh; padding-top: 98px; padding-bottom: 70px; }
@@ -1684,10 +1621,7 @@ main {
 
 @media (max-width: 560px) {
   :root { --gutter: 14px; }
-  .site-header { right: 14px; left: 14px; gap: 6px; border-color: rgba(239, 255, 0, 0.38); }
-  .header-contract { gap: 5px; }
-  .header-socials { gap: 4px; }
-  .header-socials a { min-width: 40px; padding-inline: 8px; }
+  .site-header { right: 14px; left: 14px; border-color: rgba(239, 255, 0, 0.38); }
   .hero-background { background-position: 50% center; }
   .hero-content { align-self: center; }
   .hero-emblem { width: 88px; height: 88px; margin-bottom: 16px; }

@@ -35,7 +35,6 @@ test("server-renders the RHX6900 treasury experience", async () => {
   assert.match(html, /STOP TRADING/);
   assert.match(html, /BELIEVE IN SOMETHING/);
   assert.match(html, /A 2% swap fee buys/);
-  assert.match(html, /0x561ed1eff029efebad8d7cae73d9e04c15ed7777/);
   assert.match(html, /CURRENT TREASURY HOLDINGS/);
   assert.match(html, /WHERE THE FEES GO/);
   assert.match(html, /SWAP FEE/);
