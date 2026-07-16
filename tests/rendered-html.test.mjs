@@ -46,7 +46,12 @@ test("server-renders the RHX6900 index site", async () => {
   assert.match(html, /Index-style dashboard/);
   assert.match(html, /Meme coins ride the belt/);
   assert.match(html, /rhx6900-logo\.jpg/);
-  assert.match(html, /RHX signal \/ RH meme slot/);
+  assert.match(html, /RHX signal \/ TENDIES slot/);
+  assert.match(html, /First coin in: Tendies/);
+  assert.match(html, /CONSECUTIVE HOLD BONUS/);
+  assert.match(html, /6 months/);
+  assert.match(html, /10x/);
+  assert.match(html, /TENDIES/);
   assert.match(html, /PEPE/);
   assert.match(html, /SPX6900/);
   assert.match(html, /ONDO/);

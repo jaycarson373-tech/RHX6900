@@ -16,20 +16,34 @@ type AirdropStep = {
   tag: string;
 };
 
+type HolderBonus = {
+  window: string;
+  multiplier: string;
+  copy: string;
+};
+
 const basket: BasketCoin[] = [
   {
     symbol: "RHX6900",
     name: "Robinhood Meme Index 6900",
     lane: "Core",
-    allocation: "22%",
+    allocation: "20%",
     thesis: "Holder alignment, meme energy, and the distribution rail.",
     color: "#e8ff17",
+  },
+  {
+    symbol: "TENDIES",
+    name: "Tendies",
+    lane: "Meme",
+    allocation: "10%",
+    thesis: "The first live coin added to the RHX6900 index and reward rail.",
+    color: "#fff04a",
   },
   {
     symbol: "SOL",
     name: "Solana",
     lane: "Infra",
-    allocation: "12%",
+    allocation: "10%",
     thesis: "High-throughput settlement for consumer crypto and token rails.",
     color: "#62dca3",
   },
@@ -37,7 +51,7 @@ const basket: BasketCoin[] = [
     symbol: "ETH",
     name: "Ethereum",
     lane: "Infra",
-    allocation: "10%",
+    allocation: "8%",
     thesis: "Base liquidity layer for tokenization, DeFi, and RWA issuance.",
     color: "#7d8cff",
   },
@@ -45,7 +59,7 @@ const basket: BasketCoin[] = [
     symbol: "BTC",
     name: "Bitcoin",
     lane: "Reserve",
-    allocation: "9%",
+    allocation: "8%",
     thesis: "Digital reserve asset and volatility anchor for the index.",
     color: "#f7a531",
   },
@@ -117,7 +131,7 @@ const basket: BasketCoin[] = [
     symbol: "CFG",
     name: "Centrifuge",
     lane: "RWA",
-    allocation: "3%",
+    allocation: "2%",
     thesis: "Private credit and real-world asset financing primitives.",
     color: "#2fbf71",
   },
@@ -125,7 +139,7 @@ const basket: BasketCoin[] = [
     symbol: "USDC",
     name: "USD Coin",
     lane: "Cash",
-    allocation: "3%",
+    allocation: "1%",
     thesis: "Dry powder for rebalance, routing, and airdrop execution.",
     color: "#2775ca",
   },
@@ -140,8 +154,8 @@ const steps: AirdropStep[] = [
   },
   {
     number: "02",
-    title: "One RH meme coin goes active",
-    body: "The reward mint can rotate, but each 15-minute epoch sends one configured RH meme coin.",
+    title: "Tendies goes active first",
+    body: "The first configured index coin is TENDIES, with future RH meme coins able to rotate into the reward slot.",
     tag: "ACTIVE REWARD",
   },
   {
@@ -158,25 +172,33 @@ const steps: AirdropStep[] = [
   },
 ];
 
+const holderBonuses: HolderBonus[] = [
+  { window: "1 day", multiplier: "1.5x", copy: "First streak bonus for continuous RHX6900 holders." },
+  { window: "1 week", multiplier: "2x", copy: "Seven straight days unlock a stronger reward share." },
+  { window: "1 month", multiplier: "3x", copy: "Monthly conviction earns triple airdrop weight." },
+  { window: "3 months", multiplier: "5x", copy: "Quarter-long holders get serious priority." },
+  { window: "6 months", multiplier: "10x", copy: "Maximum diamond-hand multiplier for the strongest streaks." },
+];
+
 const lanes = [
-  { label: "RWA sleeve", value: "29%", copy: "ONDO, LINK, CFG, PYTH" },
-  { label: "Core reserves", value: "31%", copy: "RHX6900, BTC, ETH, SOL" },
-  { label: "Meme conveyor", value: "25%", copy: "WIF, BONK, PEPE, POPCAT" },
-  { label: "Execution cash", value: "3%", copy: "USDC routing buffer" },
+  { label: "RWA sleeve", value: "22%", copy: "ONDO, LINK, CFG, PYTH" },
+  { label: "Core reserves", value: "46%", copy: "RHX6900, BTC, ETH, SOL" },
+  { label: "Meme conveyor", value: "25%", copy: "TENDIES, WIF, BONK, SPX" },
+  { label: "Execution cash", value: "1%", copy: "USDC routing buffer" },
 ];
 
 const dashboardStats = [
   { label: "Epoch loop", value: "15m", detail: "Railway worker cadence" },
   { label: "Holder gate", value: "1M+", detail: "RHX6900 minimum balance" },
-  { label: "Reward slot", value: "1x", detail: "one RH meme coin active" },
-  { label: "Safety", value: "Dry", detail: "live sends gated by env" },
+  { label: "Reward slot", value: "TENDIES", detail: "first active index coin" },
+  { label: "Hold bonus", value: "10x", detail: "six-month streak max" },
 ];
 
 const dashboardFeed = [
-  { asset: "RHX6900", route: "Index core", amount: "22.0%", status: "Coded" },
+  { asset: "RHX6900", route: "Index core", amount: "20.0%", status: "Coded" },
+  { asset: "TENDIES", route: "First coin", amount: "10.0%", status: "Live" },
   { asset: "ONDO", route: "RWA rail", amount: "8.0%", status: "Queued" },
   { asset: "WIF", route: "Meme rail", amount: "3.0%", status: "Live" },
-  { asset: "BONK", route: "Meme rail", amount: "3.0%", status: "Live" },
   { asset: "LINK", route: "Oracle rail", amount: "7.0%", status: "Receipt" },
 ];
 
@@ -189,20 +211,27 @@ const engineCards = [
 ];
 
 const receiptRows = [
-  { time: "00:06:90", wallet: "RHX...6900", asset: "WIF", amount: "3.0%", tx: "Queued" },
+  { time: "00:06:90", wallet: "RHX...6900", asset: "TENDIES", amount: "10.0%", tx: "Live" },
   { time: "00:05:12", wallet: "HOOD...MEME", asset: "ONDO", amount: "8.0%", tx: "Routed" },
   { time: "00:04:44", wallet: "AI...RAIL", asset: "LINK", amount: "7.0%", tx: "Receipt" },
-  { time: "00:03:33", wallet: "BEL...IEVE", asset: "RHX", amount: "22.0%", tx: "Core" },
+  { time: "00:03:33", wallet: "BEL...IEVE", asset: "RHX", amount: "20.0%", tx: "Core" },
 ];
 
 const terminalLines = [
   "RHX engine awake...",
   "Snapshotting 1M+ holders...",
-  "Loading active RH meme coin...",
+  "Loading TENDIES as first index coin...",
   "Writing holder receipts...",
 ];
 
 const memeCoins = [
+  {
+    symbol: "TENDIES",
+    name: "Tendies",
+    allocation: "10%",
+    copy: "First coin added to the RHX6900 index and active reward rail.",
+    color: "#fff04a",
+  },
   {
     symbol: "WIF",
     name: "dogwifhat",
@@ -318,7 +347,7 @@ export default function Home() {
             <p className="hero-lede">
               Robinhood Meme Index 6900 is the custom holder airdrop index for
               coins we are in, real-world asset plays, Solana flow, AI-index
-              signal, and high-conviction meme beta.
+              signal, and high-conviction meme beta. First coin in: Tendies.
             </p>
             <div className="hero-actions" aria-label="Primary actions">
               <a className="button button-dark" href="#airdrops">
@@ -329,9 +358,9 @@ export default function Home() {
               </a>
             </div>
             <div className="hero-notes" aria-label="Index highlights">
+              <span>TENDIES live</span>
               <span>Wallet-native rewards</span>
               <span>RWA sleeve</span>
-              <span>Neon meme belt</span>
             </div>
           </div>
 
@@ -352,14 +381,14 @@ export default function Home() {
                   <img src="/rhx6900-logo.jpg" alt={logoAlt} />
                   <div>
                     <span>Ticker rail</span>
-                    <strong>RHX signal / RH meme slot</strong>
+                    <strong>RHX signal / TENDIES slot</strong>
                   </div>
                 </div>
 
               <div className="terminal-total">
                 <span>Projected index pool</span>
                 <strong>RHX/RH MEME</strong>
-                <em>black-screen neon coin engine</em>
+                <em>TENDIES is the first active index coin</em>
               </div>
 
               <div className="terminal-metrics">
@@ -723,6 +752,27 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="holder-bonus-panel" aria-label="Consecutive holder bonus multipliers">
+            <div>
+              <div className="eyebrow">/ CONSECUTIVE HOLD BONUS /</div>
+              <h3>Longer holds hit harder.</h3>
+              <p>
+                Wallets that keep the 1M+ RHX6900 gate intact across consecutive
+                snapshots earn boosted airdrop weight when TENDIES and future
+                RH meme rewards route through the index.
+              </p>
+            </div>
+            <div className="holder-bonus-grid">
+              {holderBonuses.map((bonus) => (
+                <article className="holder-bonus-card" key={bonus.window}>
+                  <span>{bonus.window}</span>
+                  <strong>{bonus.multiplier}</strong>
+                  <p>{bonus.copy}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
