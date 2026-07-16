@@ -310,7 +310,6 @@ export default function Home() {
         </div>
         <div className="hero-content">
           <div className="hero-emblem">
-            <span className="emblem-ring" aria-hidden="true" />
             <img src="/rhx6900-logo.jpg" alt="RHX6900" />
           </div>
           <div className="hero-kicker">Robinhood Ecosystem Treasury</div>
