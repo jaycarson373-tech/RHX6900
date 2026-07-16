@@ -6,7 +6,9 @@ import {
   Activity,
   ArrowDown,
   CircleDollarSign,
+  Check,
   Coins,
+  Copy,
   Send,
   ShieldCheck,
   Timer,
@@ -30,6 +32,8 @@ type DexPair = {
   fdv?: number;
   liquidity?: { usd?: number };
 };
+
+const RHX_CONTRACT = "0x561ed1eff029efebad8d7cae73d9e04c15ed7777";
 
 const holdings: TreasuryCoin[] = [
   {
@@ -215,6 +219,13 @@ export default function Home() {
   const rootRef = useRef<HTMLElement>(null);
   const [secondsLeft, setSecondsLeft] = useState(900);
   const [marketCaps, setMarketCaps] = useState<Record<string, number>>({});
+  const [contractCopied, setContractCopied] = useState(false);
+
+  const copyContract = async () => {
+    await navigator.clipboard.writeText(RHX_CONTRACT);
+    setContractCopied(true);
+    window.setTimeout(() => setContractCopied(false), 1600);
+  };
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -371,6 +382,21 @@ export default function Home() {
           <img src="/rhx6900-logo.jpg" alt="" />
           <span>RHX6900</span>
         </a>
+
+        <button
+          className="header-contract"
+          type="button"
+          onClick={copyContract}
+          aria-label={`Copy RHX6900 contract address ${RHX_CONTRACT}`}
+        >
+          <span className="contract-label">CA</span>
+          <code className="contract-full">{RHX_CONTRACT}</code>
+          <code className="contract-short">0x561e...7777</code>
+          {contractCopied ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
+          <span className="sr-only" aria-live="polite">
+            {contractCopied ? "Contract address copied" : ""}
+          </span>
+        </button>
 
         <nav className="site-nav" aria-label="Primary navigation">
           <a href="#holdings">Holdings</a>
