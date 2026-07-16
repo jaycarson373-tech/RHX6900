@@ -615,6 +615,69 @@ main {
   font-size: 20px;
 }
 
+.treasury-ticker {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  height: 58px;
+  overflow: hidden;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  background: #000000;
+  box-shadow: 0 0 28px rgba(239, 255, 0, 0.1);
+}
+
+.treasury-ticker::before,
+.treasury-ticker::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  pointer-events: none;
+}
+
+.treasury-ticker::before { left: 0; background: linear-gradient(90deg, #000, transparent); }
+.treasury-ticker::after { right: 0; background: linear-gradient(270deg, #000, transparent); }
+
+.treasury-ticker-track,
+.treasury-ticker-sequence,
+.treasury-ticker-brand,
+.treasury-ticker-coin,
+.treasury-ticker-total {
+  display: flex;
+  align-items: center;
+}
+
+.treasury-ticker-track {
+  width: max-content;
+  height: 100%;
+  animation: treasuryTickerMove 48s linear infinite;
+}
+
+.treasury-ticker-sequence { flex: 0 0 auto; height: 100%; }
+
+.treasury-ticker-brand,
+.treasury-ticker-coin,
+.treasury-ticker-total {
+  height: 100%;
+  gap: 8px;
+  border-right: 1px solid var(--line);
+  padding: 0 18px;
+  font-family: var(--mono);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.treasury-ticker-brand { font-family: var(--display); font-weight: 900; }
+.treasury-ticker-brand img,
+.treasury-ticker-coin img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.treasury-ticker-coin b { font-size: 9px; }
+.treasury-ticker-coin small { color: var(--muted); font-size: 8px; }
+.treasury-ticker-total { color: var(--muted); }
+.treasury-ticker-total b { color: var(--neon); }
+
 .holdings-grid {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -1332,51 +1395,19 @@ main {
   isolation: isolate;
   display: grid;
   place-items: center;
-  min-height: 720px;
+  min-height: min(720px, 56.25vw);
   overflow: hidden;
   border-top: 1px solid var(--line);
   padding: 120px var(--gutter) 60px;
-  background:
-    radial-gradient(circle at 50% 82%, rgba(239, 255, 0, 0.28), transparent 20%),
-    radial-gradient(circle at 50% 45%, rgba(239, 255, 0, 0.08), transparent 42%),
-    #000000;
+  background: url("/rhx-footer-cathedral.jpg") center / cover no-repeat, #000000;
 }
 
-.city-silhouette {
-  position: absolute;
-  z-index: -2;
-  right: -2%;
-  bottom: 0;
-  left: -2%;
-  display: flex;
-  align-items: end;
-  gap: 5px;
-  height: 250px;
-  opacity: 0.62;
-  filter: drop-shadow(0 0 12px rgba(239, 255, 0, 0.2));
-  animation: cityDrift 20s ease-in-out infinite alternate;
-}
-
-.city-silhouette i {
-  position: relative;
-  flex: 1;
-  min-width: 24px;
-  border: 1px solid rgba(239, 255, 0, 0.3);
-  border-bottom: 0;
-  background:
-    repeating-linear-gradient(180deg, transparent 0 12px, rgba(239, 255, 0, 0.2) 13px 15px),
-    rgba(239, 255, 0, 0.03);
-}
-
-.city-silhouette i:nth-child(4n)::before {
+.site-footer::before {
   content: "";
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  width: 1px;
-  height: 30px;
-  background: var(--neon);
-  box-shadow: 0 0 12px var(--neon);
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.36)), radial-gradient(circle, transparent 16%, rgba(0, 0, 0, 0.54) 100%);
 }
 
 .footer-glow {
@@ -1508,6 +1539,11 @@ main {
   to { transform: translateX(calc(-50% - 6px)); }
 }
 
+@keyframes treasuryTickerMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @keyframes cityDrift {
   from { transform: translateX(-1.5%); }
   to { transform: translateX(1.5%); }
@@ -1631,7 +1667,7 @@ main {
   .faq-list summary { min-height: 76px; font-size: 13px; line-height: 1.35; }
   .faq-list summary span { width: 42px; }
   .faq-list p { margin-left: 42px; font-size: 13px; }
-  .site-footer { min-height: 650px; padding-top: 100px; }
+  .site-footer { min-height: 520px; padding-top: 100px; background-position: center; }
   .footer-content > img { width: 92px; height: 92px; }
   .footer-content h2 { font-size: 36px; }
   .footer-links { display: grid; gap: 16px; }
@@ -1647,4 +1683,7 @@ main {
   .archive-belt { overflow-x: auto; }
   .archive-sequence[aria-hidden="true"] { display: none; }
   .archive-track { padding: 0 16px; transform: none !important; }
+  .treasury-ticker { overflow-x: auto; }
+  .treasury-ticker-sequence[aria-hidden="true"] { display: none; }
+  .treasury-ticker-track { animation: none !important; }
 }

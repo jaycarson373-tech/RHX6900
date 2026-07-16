@@ -1,81 +1,69 @@
 # RHX6900
 
-RHX6900 is a Robinhood Index 6900 site plus a Railway-ready Solana airdrop worker.
+RHX6900 is a Robinhood Ecosystem Treasury site with a Railway worker for Robinhood Chain mainnet.
 
-The worker is built for the RH holder loop:
+## Locked worker rules
 
-- every 15 minutes, snapshot holders of the RHX6900 source token;
-- require at least `2,500,000` source tokens for eligibility;
-- use one active RH meme coin reward mint at a time;
-- compute proportional holder payouts;
-- boost consecutive 2.5M+ holders at 1 day, 1 week, 1 month, 3 months, and 6 months;
-- write dry-run, planned, settled, and failed payout receipts to Supabase;
-- keep live buys and live sends disabled until env gates are explicitly flipped.
+- Robinhood Chain mainnet only (`chainId 4663`).
+- One treasury token is selected per 15-minute epoch.
+- The ten assets rotate evenly toward a 10% target each.
+- 80% of spendable treasury ETH is swapped after protecting estimated payout gas and the configured reserve.
+- Holders need at least `2,500,000 RHX6900`.
+- Wallets holding `4%` or more of RHX6900 supply are excluded.
+- Consecutive holder multipliers range from 1.5x after one day to 10x after six months.
+- Buys and payouts default to dry-run mode.
 
-## Site
+## Local checks
 
 ```bash
 npm install
-npm run dev
+npm run check
 npm test
 ```
 
-## Worker
+## Supabase
 
-```bash
-npm run worker:build
-npm run worker:dev
+Run both migrations in order:
+
+```text
+supabase/migrations/001_rhx_airdrop.sql
+supabase/migrations/002_robinhood_evm.sql
 ```
 
-Railway uses `railway.json`:
+Useful launch and audit queries are in `supabase/queries/airdrop_status.sql`.
+
+## Railway
+
+Railway uses `railway.json` and starts `worker/dist/evm/scheduler.js`.
+
+Required variables:
 
 ```bash
-npm run worker:build
-npm run worker:start
+ROBINHOOD_RPC_URL=
+TREASURY_PRIVATE_KEY=
+SOURCE_TOKEN_ADDRESS=
+ONEINCH_API_KEY=
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE=
 ```
 
-## Environment
-
-Copy `.env.example` and fill in live values.
+Optional variables:
 
 ```bash
-PROJECT_NAME=RHX6900
-SOURCE_SYMBOL=RHX6900
-ACTIVE_REWARD_SYMBOL=TENDIES
-
-REWARD_MODE=token
-HELIUS_RPC_URL=<HELIUS_RPC_URL>
-SOURCE_TOKEN_MINT=<RHX6900_SOURCE_TOKEN_MINT>
-ACTIVE_REWARD_TOKEN_MINT=<ACTIVE_RH_MEME_REWARD_MINT>
-TREASURY_WALLET_SECRET=<BASE58_OR_JSON_SECRET>
-
-SUPABASE_URL=<SUPABASE_URL>
-SUPABASE_SERVICE_ROLE=<SUPABASE_SERVICE_ROLE_KEY>
-
-CLAIM_ENABLED=false
-BUY_ENABLED=false
-AIRDROP_ENABLED=false
-
-EPOCH_MINUTES=15
-ELIGIBILITY_MIN=2500000
+BLOCKSCOUT_API_URL=https://robinhoodchain.blockscout.com/api/v2
 MAX_WALLETS_PER_EPOCH=200
-MAX_HOLDER_PCT=5
 EXCLUDE_WALLETS=
-
-SWAP_BALANCE_BPS=10000
-SWAP_SLIPPAGE_BPS=300
-SIDE_WALLET_BPS=0
-SIDE_WALLET_PUBLIC_KEY=
-
-MIN_SOL_RESERVE=0.4
-AIRDROP_SOL_RESERVE=0.4
-AIRDROP_BATCH_SIZE=4
-AIRDROP_REWARD_BPS=10000
-PRIORITY_FEE_SOL=0.000001
-MIN_REWARD_RAW_TO_AIRDROP=1
+MIN_ETH_RESERVE=0.02
+MIN_SWAP_ETH=0.001
+SWAP_SLIPPAGE_PCT=3
 HOLDER_STREAK_BONUS_ENABLED=true
 ```
 
-Run `supabase/migrations/001_rhx_airdrop.sql` before starting the worker.
+Launch in two stages:
 
-Keep `CLAIM_ENABLED`, `BUY_ENABLED`, and `AIRDROP_ENABLED` false until the live treasury, source mint, active reward mint, Supabase tables, and dry-run logs are verified.
+```bash
+BUY_ENABLED=false
+AIRDROP_ENABLED=false
+```
+
+Confirm the health endpoint, snapshot, 1inch quote, selected asset, exclusions, and Supabase dry-run rows. Then enable buying first, verify the purchase receipt, and only then enable airdrops.

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 process.env.HELIUS_RPC_URL ??= "https://example.invalid";
@@ -22,6 +23,25 @@ test("defaults the active reward symbol to Tendies", () => {
   assert.equal(config.rewardSymbol, "TENDIES");
   assert.equal(config.eligibilityMin, 2_500_000);
   assert.equal(config.rewardTokensPerCycle, 1);
+});
+
+test("locks the Robinhood Chain execution rules", async () => {
+  const [evmConfig, scheduler, snapshot, swap] = await Promise.all([
+    readFile(new URL("../worker/src/evm/config.ts", import.meta.url), "utf8"),
+    readFile(new URL("../worker/src/evm/scheduler.ts", import.meta.url), "utf8"),
+    readFile(new URL("../worker/src/evm/holders.ts", import.meta.url), "utf8"),
+    readFile(new URL("../worker/src/evm/swap.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(evmConfig, /chainId: 4663/);
+  assert.match(evmConfig, /epochMinutes: 15/);
+  assert.match(evmConfig, /swapBalanceBps: 8_000/);
+  assert.match(evmConfig, /eligibilityMin: 2_500_000/);
+  assert.match(evmConfig, /maxHolderPct: 4/);
+  assert.match(evmConfig, /rewardTokensPerCycle: 1/);
+  assert.match(snapshot, /holder\.holderPct >= config\.maxHolderPct/);
+  assert.match(swap, /config\.swapBalanceBps/);
+  assert.match(scheduler, /one token per cycle/i);
 });
 
 test("uses the RHX holder streak bonus ladder", () => {

@@ -77,8 +77,6 @@ export async function applyHolderState(epochId: string, eligibleHolders: Holder[
     for (const state of states) {
       if (state.permanently_ineligible) continue;
       const current = currentByWallet.get(state.wallet);
-      const previousRaw = parseRaw(state.source_balance_raw);
-
       const droppedBelowThreshold = !current || current.uiBalance < config.eligibilityMin;
       const atOrAboveHolderCap = current && current.holderPct >= config.maxHolderPct;
 

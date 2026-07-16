@@ -109,7 +109,9 @@ export async function snapshotTokenHolders(mint: PublicKey, label = "token"): Pr
 
   const balances = new Map<string, bigint>();
   for (const account of accounts) {
-    const parsed = (account.account.data as any).parsed?.info;
+    const parsed = (account.account.data as {
+      parsed?: { info?: { owner?: string; tokenAmount?: { amount?: string } } };
+    }).parsed?.info;
     if (!parsed?.owner || !parsed?.tokenAmount?.amount) continue;
     const owner = new PublicKey(parsed.owner);
     if (!PublicKey.isOnCurve(owner.toBytes())) continue;

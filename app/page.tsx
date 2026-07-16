@@ -159,7 +159,7 @@ const faqs = [
   {
     question: "Do I need to stake or claim?",
     answer:
-      "No. Hold at least 2,500,000 RHX6900 to qualify.",
+      "No. Hold at least 2,500,000 RHX6900 to qualify. Wallets at 4% or more of supply are excluded.",
   },
   {
     question: "How do hold bonuses work?",
@@ -190,8 +190,6 @@ const particles = Array.from({ length: 42 }, (_, index) => ({
   delay: (index * 0.8) % 9,
   size: 1 + (index % 3),
 }));
-
-const cityBlocks = Array.from({ length: 28 }, (_, index) => 26 + ((index * 47) % 150));
 
 function SceneSeal() {
   return (
@@ -495,6 +493,28 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="treasury-ticker" aria-label="RHX6900 treasury market caps">
+        <div className="treasury-ticker-track">
+          {[0, 1].map((sequence) => (
+            <div className="treasury-ticker-sequence" key={sequence} aria-hidden={sequence === 1}>
+              <span className="treasury-ticker-brand">
+                <img src="/icon-512.png" alt="" /> RHX6900
+              </span>
+              {holdings.map((coin) => (
+                <span className="treasury-ticker-coin" key={`${sequence}-${coin.symbol}`}>
+                  <img src={coin.image} alt="" />
+                  <b>{coin.symbol}</b>
+                  <small>{formatMarketCap(marketCaps[coin.contract.toLowerCase()])}</small>
+                </span>
+              ))}
+              <span className="treasury-ticker-total">
+                TOTAL <b>{formatMarketCap(totalMarketCap)}</b>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <SceneSeal />
 
       <section className="scene treasury-scene" id="treasury">
@@ -577,7 +597,7 @@ export default function Home() {
           </div>
           <div className="cycle-rule reveal">
             <strong>ONE TOKEN PER CYCLE</strong>
-            <p>To reduce gas, each 15-minute cycle distributes one treasury coin. Rotation targets 10% for each coin over time.</p>
+            <p>Each 15-minute cycle swaps 80% of spendable Robinhood Chain ETH into one treasury coin. Wallets holding 4% or more of RHX6900 supply are excluded.</p>
           </div>
         </div>
       </section>
@@ -653,9 +673,6 @@ export default function Home() {
       </section>
 
       <footer className="site-footer">
-        <div className="city-silhouette" aria-hidden="true">
-          {cityBlocks.map((height, index) => <i key={index} style={{ height }} />)}
-        </div>
         <div className="footer-glow" aria-hidden="true" />
         <div className="footer-content">
           <img src="/rhx6900-logo.jpg" alt="RHX6900" loading="lazy" />

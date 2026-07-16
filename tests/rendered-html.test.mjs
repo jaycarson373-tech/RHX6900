@@ -75,6 +75,7 @@ test("server-renders the RHX6900 treasury experience", async () => {
   assert.match(html, /coins\/arrow\.jpg/);
   assert.match(html, /coins\/wallet\.jpg/);
   assert.match(html, /TOTAL MARKET CAP/);
+  assert.match(html, /treasury-ticker/);
   assert.match(html, /ONE TOKEN PER CYCLE/);
   assert.match(html, /2\.5M\+ RHX6900/);
   assert.match(html, /rhx-meme-anime-blonde\.jpg/);
@@ -108,6 +109,8 @@ test("ships the redesigned motion and responsive presentation", async () => {
   assert.match(css, /treasury-flow/);
   assert.match(css, /countdown-orbit/);
   assert.match(css, /archive-track/);
+  assert.match(css, /treasuryTickerMove/);
+  assert.match(css, /rhx-footer-cathedral\.jpg/);
   assert.match(css, /scroll-snap-type/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /#efff00/);
