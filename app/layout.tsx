@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "RHX6900 | Robinhood Ecosystem Treasury";
+const siteTitle = "PALANTINU | Palantir Inu";
 const siteDescription =
-  "A 2% swap fee buys selected Robinhood ecosystem memecoins. Every 15 minutes, they are distributed to eligible RHX6900 holders.";
+  "A 3% swap tax acquires tokenized PLTR. Every 15 minutes, eligible PALANTINU holders receive the position.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -37,34 +37,17 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: siteTitle,
       description: siteDescription,
-      images: [
-        {
-          url: "/og.png",
-          width: 1672,
-          height: 941,
-          alt: "RHX6900 cathedral with the words Stop Trading. Believe in Something.",
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: siteTitle,
       description: siteDescription,
-      images: ["/og.png"],
-    },
-    icons: {
-      icon: [
-        { url: "/favicon.png", sizes: "64x64", type: "image/png" },
-        { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
-      ],
-      shortcut: "/favicon.png",
-      apple: "/apple-touch-icon.png",
     },
   };
 }
 
 export const viewport: Viewport = {
-  themeColor: "#efff00",
+  themeColor: "#050607",
 };
 
 export default function RootLayout({

@@ -34,7 +34,7 @@ function holderPercent(rawBalance: bigint, rawSupply: bigint) {
 
 async function blockscoutJson<T>(path: string): Promise<T> {
   const response = await fetch(`${config.blockscoutApiUrl}${path}`, {
-    headers: { accept: "application/json", "user-agent": "RHX6900-Airdrop/1.0" }
+    headers: { accept: "application/json", "user-agent": "PALANTINU-Airdrop/1.0" }
   });
   if (!response.ok) throw new Error(`Blockscout ${response.status}: ${await response.text()}`);
   return response.json() as Promise<T>;
@@ -106,4 +106,3 @@ export function selectRecipients(epochId: string, holders: Holder[]) {
     .slice(0, config.maxWalletsPerEpoch)
     .map(({ holder }) => holder);
 }
-

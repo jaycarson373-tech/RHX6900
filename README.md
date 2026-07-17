@@ -1,69 +1,38 @@
-# RHX6900
+# PALANTINU
 
-RHX6900 is a Robinhood Ecosystem Treasury site with a Railway worker for Robinhood Chain mainnet.
+Palantir Inu is a Robinhood Chain site and Railway worker designed to acquire one configured tokenized PLTR asset and distribute it to eligible PALANTINU holders every 15 minutes.
 
-## Locked worker rules
+## Execution rules
 
 - Robinhood Chain mainnet only (`chainId 4663`).
-- One treasury token is selected per 15-minute epoch.
-- The ten assets rotate evenly toward a 10% target each.
-- 80% of spendable treasury ETH is swapped after protecting estimated payout gas and the configured reserve.
-- Holders need at least `2,500,000 RHX6900`.
-- Wallets holding `4%` or more of RHX6900 supply are excluded.
-- Consecutive holder multipliers range from 1.5x after one day to 10x after six months.
-- Buys and payouts default to dry-run mode.
+- One configured PLTR token is targeted per epoch.
+- 80% of spendable treasury ETH is swapped after protecting payout gas and the configured reserve.
+- Holder eligibility minimum is configured with `ELIGIBILITY_MIN_TOKENS`.
+- Wallets holding `4%` or more of PALANTINU supply are excluded.
+- Project, LP, team, and fee wallets must be supplied through `EXCLUDE_WALLETS`.
+- `BUY_ENABLED` and `AIRDROP_ENABLED` default to `false`.
 
-## Local checks
+## Required Railway values
 
-```bash
-npm install
-npm run check
-npm test
-```
-
-## Supabase
-
-Run both migrations in order:
-
-```text
-supabase/migrations/001_rhx_airdrop.sql
-supabase/migrations/002_robinhood_evm.sql
-```
-
-Useful launch and audit queries are in `supabase/queries/airdrop_status.sql`.
-
-## Railway
-
-Railway uses `railway.json` and starts `worker/dist/evm/scheduler.js`.
-
-Required variables:
-
-```bash
+```env
 ROBINHOOD_RPC_URL=
 TREASURY_PRIVATE_KEY=
 SOURCE_TOKEN_ADDRESS=
+PLTR_TOKEN_ADDRESS=
 ONEINCH_API_KEY=
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE=
 ```
 
-Optional variables:
+Keep the private key and service-role key in Railway only. Do not commit or paste them into public channels.
 
-```bash
-BLOCKSCOUT_API_URL=https://robinhoodchain.blockscout.com/api/v2
-MAX_WALLETS_PER_EPOCH=200
-EXCLUDE_WALLETS=
-MIN_ETH_RESERVE=0.02
-MIN_SWAP_ETH=0.001
-SWAP_SLIPPAGE_PCT=3
-HOLDER_STREAK_BONUS_ENABLED=true
-```
+## Launch sequence
 
-Launch in two stages:
+1. Run the Supabase migrations.
+2. Configure the PALANTINU and tokenized PLTR addresses.
+3. Start with `BUY_ENABLED=false` and `AIRDROP_ENABLED=false`.
+4. Verify the health endpoint, holder snapshot, exclusions, 1inch quote, and dry-run database rows.
+5. Enable buying and verify one purchase receipt.
+6. Enable distributions only after the purchase path is confirmed.
 
-```bash
-BUY_ENABLED=false
-AIRDROP_ENABLED=false
-```
-
-Confirm the health endpoint, snapshot, 1inch quote, selected asset, exclusions, and Supabase dry-run rows. Then enable buying first, verify the purchase receipt, and only then enable airdrops.
+The 3% swap tax is token-contract behavior. The worker consumes treasury ETH; it does not create or enforce the tax itself.
